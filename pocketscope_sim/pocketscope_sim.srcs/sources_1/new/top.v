@@ -109,31 +109,39 @@ wire [7:0] dbg_dds_out   = dds_wave_out;
 wire [7:0] dbg_mod_signal = mod_signal_out;
 
 //=============================================================================
-// DAC Output — Bipolar ±1V with Digital Compensation
+// DAC Output — Bipolar ±3.3V with RMS Amplitude Control (0–2Vrms)
 //=============================================================================
 // DAC0832 bipolar configuration: Vout = Vref * (D - 128) / 128
-// EGO1 Vref ≈ 2.62V, full-scale output = ±2.62V.
-// Digital compensation maps amplitude=255 → ±1.0V output:
-//   AMPL_CAL = round(256 * 1.0V / 2.62V) ≈ 98
-//   0x80 = 0V; 0x80 ± 49 ≈ ±1V
+// EGO1 Vref = 3.3V (measured), full-scale output = ±3.3V (6.6Vpp).
+// Digital compensation maps amplitude=255 → 2Vrms (2.828V peak for sine):
+//   AMPL_CAL = round(256 * 2.90V / 3.30V) ≈ 225
+//   (2.90V > 2.828V compensates for integer truncation, ensuring ≥2Vrms)
+//   0x80 = 0V; amplitude=255 → ampl_eff≈223 → DAC output≈±2.83V peak
+// Actual Vrms depends on waveform:
+//   Sine:     max ≈ 2.00Vrms (≥ 2Vrms requirement met)
+//   Square:   max ≈ 2.83Vrms (≥ 2Vrms)
+//   Triangle: max ≈ 1.64Vrms (physical limit: Vrms = Vpeak/√3)
 
-localparam DAC_VREF_MV = 2620;   // DAC reference voltage (mV)
-localparam DAC_VOUT_MV = 1000;   // Desired max output magnitude (mV)
-localparam AMPL_CAL    = (DAC_VOUT_MV * 256) / DAC_VREF_MV;  // ≈ 98
+localparam DAC_VREF_MV = 3300;   // DAC reference voltage (mV, measured)
+localparam DAC_VOUT_MV = 2900;   // Target peak mV (slightly > 2828 for truncation)
+localparam AMPL_CAL    = (DAC_VOUT_MV * 256) / DAC_VREF_MV;  // ≈ 225
 
 // Scale UI amplitude (0-255) by compensation factor
 wire [15:0] ampl_scaled = amplitude * AMPL_CAL;
-wire [7:0]  ampl_eff    = ampl_scaled[15:8];   // effective amplitude: 0 ~ 98
+wire [7:0]  ampl_eff    = ampl_scaled[15:8];   // effective amplitude: 0 ~ 224
 
 // Select signal source: DDS direct or modulated
 wire [7:0] dac_data_raw;
 assign dac_data_raw = mod_enable ? mod_signal_out : dds_wave_out;
 
-// Bipolar amplitude scaling: preserve 0x80 (0V) center
-// dac_data_in = 128 + (dac_data_raw - 128) * ampl_eff / 256
-wire signed [8:0]  dac_dev  = $signed({1'b0, dac_data_raw}) - 9'sd128;
-wire signed [17:0] dac_prod = dac_dev * $signed({1'b0, ampl_eff});
-wire [7:0]         dac_data_in = 8'd128 + dac_prod[15:8];
+// Bipolar amplitude scaling with saturation (prevents wraparound distortion)
+// dac_data_in = saturate(128 + (dac_data_raw - 128) * ampl_eff / 256, 0, 255)
+wire signed [8:0]  dac_dev   = $signed({1'b0, dac_data_raw}) - 9'sd128;
+wire signed [17:0] dac_prod  = dac_dev * $signed({1'b0, ampl_eff});
+wire signed [9:0]  dac_sum   = $signed({dac_prod[16], dac_prod[16:8]}) + 10'sd128;
+wire [7:0]         dac_data_in = dac_sum[9] ? 8'd0 :        // negative → clamp to 0
+                                  dac_sum[8] ? 8'd255 :       // >255 → clamp to 255
+                                               dac_sum[7:0]; // 0–255 pass through
 
 wire dac_update;
 
