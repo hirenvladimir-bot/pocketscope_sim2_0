@@ -17,6 +17,10 @@ module dac0832_ctrl
     output wire          dac_xfer_n
 );
 
+    // DAC_ZERO: digital code that produces 0V at the analog output
+    // 0x80 (128) for bipolar DAC configuration
+    parameter DAC_ZERO = 8'h80;
+
     assign dac_ile   = 1'b1;
     assign dac_cs_n  = 1'b0;
     assign dac_wr2_n = 1'b0;
@@ -28,7 +32,7 @@ module dac0832_ctrl
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            dac_d      <= 8'h80;
+            dac_d      <= DAC_ZERO;
             dac_wr1_n  <= 1'b1;
             wr_cnt     <= 0;
             wr_active  <= 1'b0;

@@ -108,18 +108,34 @@ dds_core #(.PHASE_WIDTH(24), .LUT_ADDR_W(10), .LUT_DATA_W(8)) u_dds (
 wire [7:0] dbg_dds_out   = dds_wave_out;
 wire [7:0] dbg_mod_signal = mod_signal_out;
 
-// DAC output: modulated signal or amplitude-scaled DDS output
-wire [7:0] dac_data_in;
-wire       dac_update;
+//=============================================================================
+// DAC Output — Bipolar ±1V with Digital Compensation
+//=============================================================================
+// DAC0832 bipolar configuration: Vout = Vref * (D - 128) / 128
+// EGO1 Vref ≈ 2.62V, full-scale output = ±2.62V.
+// Digital compensation maps amplitude=255 → ±1.0V output:
+//   AMPL_CAL = round(256 * 1.0V / 2.62V) ≈ 98
+//   0x80 = 0V; 0x80 ± 49 ≈ ±1V
 
-// Bipolar amplitude scaling: preserve 0x80 (zero) center
-// Scale only the deviation from center, keep DC at 0x80
-wire signed [8:0]  dds_dev  = $signed({1'b0, dds_wave_out}) - 9'sd128;
-wire signed [8:0]  amp_s    = $signed({1'b0, amplitude});
-wire signed [17:0] dds_prod = dds_dev * amp_s;
-wire [7:0]         dds_amp  = 8'd128 + dds_prod[15:8];
+localparam DAC_VREF_MV = 2620;   // DAC reference voltage (mV)
+localparam DAC_VOUT_MV = 1000;   // Desired max output magnitude (mV)
+localparam AMPL_CAL    = (DAC_VOUT_MV * 256) / DAC_VREF_MV;  // ≈ 98
 
-assign dac_data_in = mod_enable ? mod_signal_out : dds_amp;
+// Scale UI amplitude (0-255) by compensation factor
+wire [15:0] ampl_scaled = amplitude * AMPL_CAL;
+wire [7:0]  ampl_eff    = ampl_scaled[15:8];   // effective amplitude: 0 ~ 98
+
+// Select signal source: DDS direct or modulated
+wire [7:0] dac_data_raw;
+assign dac_data_raw = mod_enable ? mod_signal_out : dds_wave_out;
+
+// Bipolar amplitude scaling: preserve 0x80 (0V) center
+// dac_data_in = 128 + (dac_data_raw - 128) * ampl_eff / 256
+wire signed [8:0]  dac_dev  = $signed({1'b0, dac_data_raw}) - 9'sd128;
+wire signed [17:0] dac_prod = dac_dev * $signed({1'b0, ampl_eff});
+wire [7:0]         dac_data_in = 8'd128 + dac_prod[15:8];
+
+wire dac_update;
 
 // DDS Y for sig-gen preview
 assign dds_y = 10'd479 - (({2'b0, dds_wave_out} * 10'd479) >> 8);
