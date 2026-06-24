@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date             : Wed Jun 24 17:38:44 2026
+| Date             : Wed Jun 24 18:15:47 2026
 | Host             : MOSS550W running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -53,13 +53,13 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.003 |        4 |       --- |             --- |
-| Slice Logic    |     0.008 |     3822 |       --- |             --- |
-|   LUT as Logic |     0.007 |     2137 |     20800 |           10.27 |
+| Slice Logic    |     0.008 |     3827 |       --- |             --- |
+|   LUT as Logic |     0.007 |     2180 |     20800 |           10.48 |
 |   CARRY4       |    <0.001 |      388 |      8150 |            4.76 |
-|   Register     |    <0.001 |      581 |     41600 |            1.40 |
+|   Register     |    <0.001 |      580 |     41600 |            1.39 |
 |   F7/F8 Muxes  |    <0.001 |       34 |     32600 |            0.10 |
 |   Others       |     0.000 |       31 |       --- |             --- |
-| Signals        |     0.008 |     2914 |       --- |             --- |
+| Signals        |     0.008 |     2919 |       --- |             --- |
 | Block RAM      |     0.001 |        1 |        50 |            2.00 |
 | DSPs           |    <0.001 |        2 |        90 |            2.22 |
 | I/O            |     0.008 |       65 |       210 |           30.95 |
@@ -149,7 +149,7 @@ Table of Contents
 |   u_dds  |     0.003 |
 |   u_mod  |     0.002 |
 |   u_ui   |     0.009 |
-|   u_xadc |     0.004 |
+|   u_xadc |     0.003 |
 +----------+-----------+
 
 

@@ -89,8 +89,8 @@ module ui_ctrl
         end
     end
 
-    // FTW = freq * 2^24 / 100e6 = freq * 0.16777216
-    wire [31:0] ftw_full = (freq_hz * 32'd16777) / 32'd10000;
+    // FTW = freq * 2^24 / 25e6 = freq * 0.67108864
+    wire [31:0] ftw_full = (freq_hz * 32'd16777) / 32'd25000;
     always @(posedge clk) frequency_ftw <= ftw_full[PHASE_WIDTH-1:0];
 
     // Main FSM
