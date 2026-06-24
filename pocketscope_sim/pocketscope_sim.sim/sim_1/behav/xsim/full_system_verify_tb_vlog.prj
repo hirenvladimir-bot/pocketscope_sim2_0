@@ -1,0 +1,25 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../FPGA/2025.1/Vivado/data/rsb/busdef" --include "../../../../pocketscope_sim.ip_user_files/ipstatic" \
+"../../../../pocketscope_sim.srcs/sources_1/new/char_gen.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/clk_div_25m.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/dac0832_ctrl.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/dds_core.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/kaleidoscope.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/lissajous_display.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/modulation.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/scroll_addr_gen.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/top.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/ui_ctrl.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/vga_ctrl.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/wave_analyzer.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/wave_ram_ch1.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/wave_ram_ch2.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/waveform_display.v" \
+"../../../../pocketscope_sim.srcs/sources_1/new/xadc_reader.v" \
+"../../../../pocketscope_sim.srcs/sim_1/new/full_system_verify_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,12 @@
+# XADC Simulation Stimulus
+# Column format: TIME CH2_CH1 CH2_CH0 CH1_CH1 CH1_CH0 VP VN
+# CH1 = AD2, CH2 = AD3
+# 1mV per LSB in unipolar mode
+
+# CH1: 1kHz sine, center 0.5V, amplitude 0.4V
+# CH2: 1kHz sine, center 0.5V, amplitude 0.3V, 90deg phase
+
+000000 500 500 750 500 0 0
+010000 500 500 751 501 0 0
+020000 500 500 753 503 0 0
+030000 500 500 755 506 0 0

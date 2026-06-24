@@ -1,0 +1,462 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Tue Jun 23 20:50:22 2026
+# Process ID         : 52548
+# Current directory  : C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1
+# Command line       : vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
+# Log file           : C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1/top.vds
+# Journal file       : C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1\vivado.jou
+# Running On         : MOSS550W
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) i9-14900HX
+# CPU Frequency      : 2419 MHz
+# CPU Physical cores : 24
+# CPU Logical cores  : 32
+# Host memory        : 34070 MB
+# Swap memory        : 12649 MB
+# Total Virtual      : 46719 MB
+# Available Virtual  : 6454 MB
+#-----------------------------------------------------------
+source top.tcl -notrace
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 658.258 ; gain = 206.672
+Command: read_checkpoint -auto_incremental -incremental C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/utils_1/imports/synth_1/top.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/utils_1/imports/synth_1/top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top top -part xc7a35tcsg324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcsg324-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 8112
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1343.961 ; gain = 494.543
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'top' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/top.v:9]
+INFO: [Synth 8-6157] synthesizing module 'clk_div_25m' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/clk_div_25m.v:6]
+INFO: [Synth 8-6157] synthesizing module 'BUFG' [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:2678]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:2678]
+INFO: [Synth 8-6155] done synthesizing module 'clk_div_25m' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/clk_div_25m.v:6]
+INFO: [Synth 8-6157] synthesizing module 'ui_ctrl' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/ui_ctrl.v:17]
+	Parameter PHASE_WIDTH bound to: 24 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'ui_ctrl' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/ui_ctrl.v:17]
+INFO: [Synth 8-6157] synthesizing module 'modulation' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/modulation.v:2]
+	Parameter PHASE_WIDTH bound to: 24 - type: integer 
+INFO: [Synth 8-3876] $readmem data file 'mod_lut.hex' is read successfully [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/modulation.v:17]
+INFO: [Synth 8-6155] done synthesizing module 'modulation' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/modulation.v:2]
+INFO: [Synth 8-6157] synthesizing module 'dds_core' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/dds_core.v:2]
+	Parameter PHASE_WIDTH bound to: 24 - type: integer 
+	Parameter LUT_ADDR_W bound to: 10 - type: integer 
+	Parameter LUT_DATA_W bound to: 8 - type: integer 
+INFO: [Synth 8-3876] $readmem data file 'sine_lut.hex' is read successfully [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/dds_core.v:31]
+INFO: [Synth 8-6155] done synthesizing module 'dds_core' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/dds_core.v:2]
+INFO: [Synth 8-6157] synthesizing module 'dac0832_ctrl' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/dac0832_ctrl.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'dac0832_ctrl' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/dac0832_ctrl.v:6]
+INFO: [Synth 8-6157] synthesizing module 'xadc_reader' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/xadc_reader.v:20]
+	Parameter SIM_MODE bound to: 0 - type: integer 
+	Parameter USE_4053 bound to: 1 - type: integer 
+	Parameter SINGLE_CH_ADDR bound to: 7'b0010010 
+	Parameter SETTLE_CYCLES bound to: 10 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'XADC' [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:164403]
+	Parameter INIT_40 bound to: 16'b0001000000000000 
+	Parameter INIT_41 bound to: 16'b0010000000000000 
+	Parameter INIT_42 bound to: 16'b0000100000000000 
+	Parameter SIM_MONITOR_FILE bound to: xadc_stimulus.txt - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'XADC' (0#1) [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:164403]
+INFO: [Synth 8-6155] done synthesizing module 'xadc_reader' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/xadc_reader.v:20]
+INFO: [Synth 8-6157] synthesizing module 'scroll_addr_gen' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/scroll_addr_gen.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'scroll_addr_gen' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/scroll_addr_gen.v:5]
+INFO: [Synth 8-6157] synthesizing module 'wave_ram_ch1' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/wave_ram_ch1.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'wave_ram_ch1' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/wave_ram_ch1.v:23]
+INFO: [Synth 8-6157] synthesizing module 'wave_ram_ch2' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/wave_ram_ch2.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'wave_ram_ch2' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/wave_ram_ch2.v:23]
+INFO: [Synth 8-6157] synthesizing module 'vga_ctrl' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/vga_ctrl.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'vga_ctrl' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/vga_ctrl.v:23]
+INFO: [Synth 8-6157] synthesizing module 'wave_analyzer' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/wave_analyzer.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'wave_analyzer' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/wave_analyzer.v:4]
+INFO: [Synth 8-6157] synthesizing module 'waveform_display' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/waveform_display.v:8]
+INFO: [Synth 8-6157] synthesizing module 'char_gen' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/char_gen.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'char_gen' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/char_gen.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'waveform_display' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/waveform_display.v:8]
+INFO: [Synth 8-6157] synthesizing module 'lissajous_display' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/lissajous_display.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'lissajous_display' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/lissajous_display.v:6]
+INFO: [Synth 8-6157] synthesizing module 'kaleidoscope' [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/kaleidoscope.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'kaleidoscope' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/kaleidoscope.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'top' (0#1) [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/top.v:9]
+WARNING: [Synth 8-6014] Unused sequential element hw_mode.active_ch_reg was removed.  [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/xadc_reader.v:153]
+WARNING: [Synth 8-6014] Unused sequential element near_mid_reg was removed.  [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/wave_analyzer.v:83]
+WARNING: [Synth 8-6014] Unused sequential element rot_cos_reg was removed.  [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/kaleidoscope.v:85]
+WARNING: [Synth 8-6014] Unused sequential element rot_sin_reg was removed.  [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/kaleidoscope.v:86]
+WARNING: [Synth 8-6014] Unused sequential element hold_ch1_reg was removed.  [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/kaleidoscope.v:97]
+WARNING: [Synth 8-6014] Unused sequential element hold_ch2_reg was removed.  [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/kaleidoscope.v:98]
+WARNING: [Synth 8-7129] Port ch1_data[7] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[6] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[5] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[4] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[3] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[2] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[1] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[0] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[7] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[6] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[5] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[4] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[3] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[2] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[1] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[0] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module char_gen is either unconnected or has no load
+WARNING: [Synth 8-7129] Port char_code[7] in module char_gen is either unconnected or has no load
+WARNING: [Synth 8-7129] Port char_code[6] in module char_gen is either unconnected or has no load
+WARNING: [Synth 8-7129] Port meas_valid in module waveform_display is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1463.934 ; gain = 614.516
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1463.934 ; gain = 614.516
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1463.934 ; gain = 614.516
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1463.934 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/constrs_1/new/pocketscope.xdc]
+Finished Parsing XDC File [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/constrs_1/new/pocketscope.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/constrs_1/new/pocketscope.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1559.570 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1559.570 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1559.570 ; gain = 710.152
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1559.570 ; gain = 710.152
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1559.570 ; gain = 710.152
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1559.570 ; gain = 710.152
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   33 Bit       Adders := 1     
+	   2 Input   32 Bit       Adders := 4     
+	   2 Input   24 Bit       Adders := 2     
+	   2 Input   20 Bit       Adders := 5     
+	   2 Input   16 Bit       Adders := 3     
+	   2 Input   14 Bit       Adders := 6     
+	   2 Input   11 Bit       Adders := 3     
+	   2 Input   10 Bit       Adders := 16    
+	   2 Input    9 Bit       Adders := 5     
+	   2 Input    8 Bit       Adders := 8     
+	   3 Input    8 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 2     
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    2 Bit       Adders := 1     
++---Registers : 
+	               24 Bit    Registers := 2     
+	               20 Bit    Registers := 5     
+	               16 Bit    Registers := 8     
+	               14 Bit    Registers := 6     
+	               10 Bit    Registers := 12    
+	                8 Bit    Registers := 13    
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 2     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 5     
+	                1 Bit    Registers := 34    
++---RAMs : 
+	               8K Bit	(1024 X 8 bit)          RAMs := 2     
++---Muxes : 
+	   2 Input   24 Bit        Muxes := 2     
+	   4 Input   24 Bit        Muxes := 1     
+	   2 Input   20 Bit        Muxes := 5     
+	   2 Input   11 Bit        Muxes := 3     
+	   2 Input   10 Bit        Muxes := 5     
+	   2 Input    9 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 11    
+	   4 Input    8 Bit        Muxes := 1     
+	   3 Input    8 Bit        Muxes := 1     
+	 513 Input    8 Bit        Muxes := 1     
+	   3 Input    7 Bit        Muxes := 2     
+	   2 Input    5 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 32    
+	   3 Input    4 Bit        Muxes := 3     
+	   5 Input    4 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 3     
+	   2 Input    3 Bit        Muxes := 1     
+	   3 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 6     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 14    
+	   4 Input    1 Bit        Muxes := 1     
+	   8 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP ftw_full0, operation Mode is: A*(B:0x4189).
+DSP Report: operator ftw_full0 is absorbed into DSP ftw_full0.
+DSP Report: Generating DSP fm_dev2, operation Mode is: A*B.
+DSP Report: operator fm_dev2 is absorbed into DSP fm_dev2.
+WARNING: [Synth 8-3917] design top has port dac_ile driven by constant 1
+WARNING: [Synth 8-3917] design top has port dac_cs_n driven by constant 0
+WARNING: [Synth 8-3917] design top has port dac_wr2_n driven by constant 0
+WARNING: [Synth 8-3917] design top has port dac_xfer_n driven by constant 0
+WARNING: [Synth 8-7129] Port ch1_data[7] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[6] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[5] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[4] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[3] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[2] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[1] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch1_data[0] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[7] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[6] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[5] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[4] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[3] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[2] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[1] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ch2_data[0] in module kaleidoscope is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module char_gen is either unconnected or has no load
+WARNING: [Synth 8-7129] Port char_code[7] in module char_gen is either unconnected or has no load
+WARNING: [Synth 8-7129] Port char_code[6] in module char_gen is either unconnected or has no load
+WARNING: [Synth 8-7129] Port meas_valid in module waveform_display is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:33 ; elapsed = 00:00:36 . Memory (MB): peak = 1962.574 ; gain = 1113.156
+---------------------------------------------------------------------------------
+ Sort Area is  fm_dev2_2 : 0 0 : 848 848 : Used 1 time 0
+ Sort Area is  ftw_full0_0 : 0 0 : 720 720 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++------------+------------+---------------+----------------+
+|Module Name | RTL Object | Depth x Width | Implemented As | 
++------------+------------+---------------+----------------+
+|modulation  | mod_lut    | 64x8          | LUT            | 
+|dds_core    | sine_lut   | 1024x8        | LUT            | 
+|modulation  | p_0_out    | 64x8          | LUT            | 
++------------+------------+---------------+----------------+
+
+
+Block RAM: Preliminary Mapping Report (see note below)
++------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object        | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|top         | u_ram_ch1/ram_reg | 1 K x 8(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
+|top         | u_ram_ch2/ram_reg | 1 K x 8(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping  | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|ui_ctrl     | A*(B:0x4189) | 16     | 15     | -      | -      | 31     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|modulation  | A*B          | 14     | 9      | -      | -      | 23     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:45 ; elapsed = 00:00:50 . Memory (MB): peak = 1962.574 ; gain = 1113.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:46 ; elapsed = 00:00:54 . Memory (MB): peak = 1962.574 ; gain = 1113.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object        | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|top         | u_ram_ch1/ram_reg | 1 K x 8(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
+|top         | u_ram_ch2/ram_reg | 1 K x 8(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance u_ram_ch1/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance u_ram_ch2/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:50 ; elapsed = 00:00:59 . Memory (MB): peak = 1962.574 ; gain = 1113.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:57 ; elapsed = 00:01:09 . Memory (MB): peak = 1998.262 ; gain = 1148.844
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:57 ; elapsed = 00:01:09 . Memory (MB): peak = 1998.262 ; gain = 1148.844
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:57 ; elapsed = 00:01:09 . Memory (MB): peak = 1998.262 ; gain = 1148.844
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:57 ; elapsed = 00:01:09 . Memory (MB): peak = 1998.262 ; gain = 1148.844
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:57 ; elapsed = 00:01:09 . Memory (MB): peak = 1998.262 ; gain = 1148.844
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:57 ; elapsed = 00:01:09 . Memory (MB): peak = 1998.262 ; gain = 1148.844
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|modulation  | A*B         | 13     | 8      | -      | -      | 23     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ui_ctrl     | A*B         | 14     | 15     | -      | -      | 31     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |BUFG     |     2|
+|2     |CARRY4   |   387|
+|3     |DSP48E1  |     2|
+|4     |LUT1     |   148|
+|5     |LUT2     |   721|
+|6     |LUT3     |   351|
+|7     |LUT4     |   518|
+|8     |LUT5     |   344|
+|9     |LUT6     |   700|
+|10    |MUXF7    |    28|
+|11    |MUXF8    |     6|
+|12    |RAMB18E1 |     2|
+|13    |XADC     |     1|
+|14    |FDCE     |   496|
+|15    |FDPE     |    41|
+|16    |FDRE     |    44|
+|17    |IBUF     |    30|
+|18    |OBUF     |    35|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:57 ; elapsed = 00:01:10 . Memory (MB): peak = 1998.262 ; gain = 1148.844
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 25 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:52 ; elapsed = 00:01:08 . Memory (MB): peak = 1998.262 ; gain = 1053.207
+Synthesis Optimization Complete : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 1998.262 ; gain = 1148.844
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.060 . Memory (MB): peak = 1998.262 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 426 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-140] Inserted 2 IBUFs to IO ports without IO buffers.
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2013.477 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 1dadfbda
+INFO: [Common 17-83] Releasing license: Synthesis
+64 Infos, 51 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:03 ; elapsed = 00:01:20 . Memory (MB): peak = 2013.477 ; gain = 1350.617
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 2013.477 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1/top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Jun 23 20:51:58 2026...

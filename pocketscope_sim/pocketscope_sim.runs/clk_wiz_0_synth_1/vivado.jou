@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Fri Jun  5 23:42:38 2026
+# Process ID         : 12780
+# Current directory  : D:/pocketscope_sim/pocketscope_sim/pocketscope_sim.runs/clk_wiz_0_synth_1
+# Command line       : vivado.exe -log clk_wiz_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source clk_wiz_0.tcl
+# Log file           : D:/pocketscope_sim/pocketscope_sim/pocketscope_sim.runs/clk_wiz_0_synth_1/clk_wiz_0.vds
+# Journal file       : D:/pocketscope_sim/pocketscope_sim/pocketscope_sim.runs/clk_wiz_0_synth_1\vivado.jou
+# Running On         : MOSS550W
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) i9-14900HX
+# CPU Frequency      : 2419 MHz
+# CPU Physical cores : 24
+# CPU Logical cores  : 32
+# Host memory        : 34070 MB
+# Swap memory        : 6354 MB
+# Total Virtual      : 40424 MB
+# Available Virtual  : 10104 MB
+#-----------------------------------------------------------
+source clk_wiz_0.tcl -notrace

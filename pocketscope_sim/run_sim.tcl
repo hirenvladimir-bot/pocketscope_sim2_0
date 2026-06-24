@@ -1,0 +1,2 @@
+open_project D:/pocketscope_sim/pocketscope_sim/pocketscope_sim.xpr
+launch_simulation

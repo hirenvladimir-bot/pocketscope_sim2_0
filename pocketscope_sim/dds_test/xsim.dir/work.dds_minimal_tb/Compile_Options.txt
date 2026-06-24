@@ -1,0 +1,1 @@
+"dds_minimal_tb" --debug "all" -log "elab.log" 

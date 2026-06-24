@@ -1,0 +1,505 @@
+
+*** Running vivado
+    with args -log clk_wiz_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source clk_wiz_0.tcl
+
+
+
+****** Vivado v2025.1 (64-bit)
+  **** SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+  **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+  **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+  **** Start of session at: Fri Jun  5 23:42:38 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source clk_wiz_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 655.098 ; gain = 203.629
+Command: synth_design -top clk_wiz_0 -part xc7a35tcsg324-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 46316
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1349.094 ; gain = 492.918
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v:65]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_axi_clk_config' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_axi_clk_config.vhd:195]
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 11 - type: integer 
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_axi_lite_ipif' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/axi_lite_ipif_v1_01_a/hdl/src/vhdl/clk_wiz_0_axi_lite_ipif.vhd:257]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 11 - type: integer 
+	Parameter C_S_AXI_MIN_SIZE bound to: 32'b00000000000000000000011111111111 
+	Parameter C_USE_WSTRB bound to: 1 - type: integer 
+	Parameter C_DPHASE_TIMEOUT bound to: 64 - type: integer 
+	Parameter C_ARD_ADDR_RANGE_ARRAY bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000011111111111 
+	Parameter C_ARD_NUM_CE_ARRAY bound to: 64'b0000000000000000000000000000100000000000000000000000000000000001 
+	Parameter C_FAMILY bound to: virtex7 - type: string 
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_slave_attachment' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/axi_lite_ipif_v1_01_a/hdl/src/vhdl/clk_wiz_0_slave_attachment.vhd:249]
+	Parameter C_ARD_ADDR_RANGE_ARRAY bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000011111111111 
+	Parameter C_ARD_NUM_CE_ARRAY bound to: 64'b0000000000000000000000000000100000000000000000000000000000000001 
+	Parameter C_IPIF_ABUS_WIDTH bound to: 11 - type: integer 
+	Parameter C_IPIF_DBUS_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_MIN_SIZE bound to: 32'b00000000000000000000011111111111 
+	Parameter C_USE_WSTRB bound to: 1 - type: integer 
+	Parameter C_DPHASE_TIMEOUT bound to: 64 - type: integer 
+	Parameter C_FAMILY bound to: virtex7 - type: string 
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_address_decoder' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/axi_lite_ipif_v1_01_a/hdl/src/vhdl/clk_wiz_0_address_decoder.vhd:198]
+	Parameter C_BUS_AWIDTH bound to: 11 - type: integer 
+	Parameter C_S_AXI_MIN_SIZE bound to: 32'b00000000000000000000011111111111 
+	Parameter C_ARD_ADDR_RANGE_ARRAY bound to: 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000011111111111 
+	Parameter C_ARD_NUM_CE_ARRAY bound to: 64'b0000000000000000000000000000100000000000000000000000000000000001 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 6 - type: integer 
+	Parameter C_AW bound to: 11 - type: integer 
+	Parameter C_BAR bound to: 11'b00000000000 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized0' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 3 - type: integer 
+	Parameter C_AW bound to: 3 - type: integer 
+	Parameter C_BAR bound to: 3'b000 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized0' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized1' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 3 - type: integer 
+	Parameter C_AW bound to: 3 - type: integer 
+	Parameter C_BAR bound to: 3'b001 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized1' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized2' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 3 - type: integer 
+	Parameter C_AW bound to: 3 - type: integer 
+	Parameter C_BAR bound to: 3'b010 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized2' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized3' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 3 - type: integer 
+	Parameter C_AW bound to: 3 - type: integer 
+	Parameter C_BAR bound to: 3'b011 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized3' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized4' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 3 - type: integer 
+	Parameter C_AW bound to: 3 - type: integer 
+	Parameter C_BAR bound to: 3'b100 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized4' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized5' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 3 - type: integer 
+	Parameter C_AW bound to: 3 - type: integer 
+	Parameter C_BAR bound to: 3'b101 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized5' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized6' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 3 - type: integer 
+	Parameter C_AW bound to: 3 - type: integer 
+	Parameter C_BAR bound to: 3'b110 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized6' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized7' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 3 - type: integer 
+	Parameter C_AW bound to: 3 - type: integer 
+	Parameter C_BAR bound to: 3'b111 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized7' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_pselect_f__parameterized8' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+	Parameter C_AB bound to: 0 - type: integer 
+	Parameter C_AW bound to: 11 - type: integer 
+	Parameter C_BAR bound to: 11'b01000000000 
+	Parameter C_FAMILY bound to: nofamily - type: string 
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_pselect_f__parameterized8' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_pselect_f.vhd:162]
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_address_decoder' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/axi_lite_ipif_v1_01_a/hdl/src/vhdl/clk_wiz_0_address_decoder.vhd:198]
+INFO: [Synth 8-226] default block is never used [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/axi_lite_ipif_v1_01_a/hdl/src/vhdl/clk_wiz_0_slave_attachment.vhd:451]
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_slave_attachment' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/axi_lite_ipif_v1_01_a/hdl/src/vhdl/clk_wiz_0_slave_attachment.vhd:249]
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_axi_lite_ipif' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/axi_lite_ipif_v1_01_a/hdl/src/vhdl/clk_wiz_0_axi_lite_ipif.vhd:257]
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 11 - type: integer 
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_FAMILY bound to: virtex7 - type: string 
+	Parameter CE_NUMBERS bound to: 9 - type: integer 
+INFO: [Synth 8-3491] module 'clk_wiz_0_clk_wiz_drp' declared at 'd:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:129' bound to instance 'CLK_CORE_DRP_I' of component 'clk_wiz_0_clk_wiz_drp' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_axi_clk_config.vhd:463]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_clk_wiz_drp' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:172]
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 11 - type: integer 
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_FAMILY bound to: virtex7 - type: string 
+	Parameter CE_NUMBERS bound to: 9 - type: integer 
+INFO: [Synth 8-3491] module 'clk_wiz_0_clk_wiz' declared at 'd:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v:65' bound to instance 'clk_inst' of component 'clk_wiz_0_clk_wiz' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:546]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0_clk_wiz' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v:65]
+INFO: [Synth 8-6157] synthesizing module 'IBUF' [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:76868]
+INFO: [Synth 8-6155] done synthesizing module 'IBUF' (0#1) [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:76868]
+INFO: [Synth 8-6157] synthesizing module 'MMCME2_ADV' [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:89421]
+	Parameter BANDWIDTH bound to: OPTIMIZED - type: string 
+	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
+	Parameter CLKFBOUT_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKFBOUT_USE_FINE_PS bound to: FALSE - type: string 
+	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
+	Parameter CLKOUT0_DIVIDE_F bound to: 31.250000 - type: double 
+	Parameter CLKOUT0_DUTY_CYCLE bound to: 0.500000 - type: double 
+	Parameter CLKOUT0_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT0_USE_FINE_PS bound to: FALSE - type: string 
+	Parameter CLKOUT4_CASCADE bound to: FALSE - type: string 
+	Parameter COMPENSATION bound to: ZHOLD - type: string 
+	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
+	Parameter STARTUP_WAIT bound to: FALSE - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'MMCME2_ADV' (0#1) [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:89421]
+INFO: [Synth 8-6157] synthesizing module 'BUFG' [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:2678]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [D:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:2678]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0_clk_wiz' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v:65]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'D:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'xpm_cdc_single_rst' of component 'xpm_cdc_single' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:557]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_single' [D:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_single' (0#1) [D:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152]
+INFO: [Synth 8-3491] module 'clk_wiz_0_clk_mon' declared at 'd:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_mon.vhd:102' bound to instance 'clk_mon_inst' of component 'clk_wiz_0_clk_mon' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:570]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_clk_mon' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_mon.vhd:114]
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_clk_mon' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_mon.vhd:114]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+	Parameter WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_array_single' declared at 'D:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:903' bound to instance 'xpm_cdc_array_single_glitch' of component 'xpm_cdc_array_single' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:581]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_array_single' [D:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:903]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+	Parameter WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_array_single' (0#1) [D:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:903]
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_clk_wiz_drp' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:172]
+INFO: [Synth 8-638] synthesizing module 'clk_wiz_0_soft_reset' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:142]
+	Parameter C_SIPIF_DWIDTH bound to: 32 - type: integer 
+	Parameter C_RESET_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'RST_FLOPS' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:273]
+INFO: [Synth 8-113] binding component instance 'FF_WRACK' to cell 'FDRSE' [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:296]
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_soft_reset' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/proc_common_v3_00_a/hdl/src/vhdl/clk_wiz_0_soft_reset.vhd:142]
+INFO: [Synth 8-256] done synthesizing module 'clk_wiz_0_axi_clk_config' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_axi_clk_config.vhd:195]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (0#1) [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v:65]
+WARNING: [Synth 8-6014] Unused sequential element load_enable_reg_actual_reg was removed.  [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:526]
+WARNING: [Synth 8-6014] Unused sequential element SEN_reg was removed.  [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:528]
+WARNING: [Synth 8-3848] Net srdy in module/entity clk_wiz_0_clk_wiz_drp does not have driver. [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:299]
+WARNING: [Synth 8-7129] Port Bus2IP_Data[0] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[1] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[2] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[3] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[4] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[5] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[6] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[7] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[8] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[9] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[10] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[11] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[12] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[13] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[14] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[15] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[16] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[17] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[18] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[19] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[20] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[21] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[22] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[23] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[24] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[25] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[26] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_Data[27] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_BE[0] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_BE[1] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_BE[2] in module clk_wiz_0_soft_reset is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Ref_Clk in module clk_wiz_0_clk_mon is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Reset in module clk_wiz_0_clk_mon is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_RdCE[5] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_RdCE[6] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_RdCE[7] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_WrCE[0] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_WrCE[5] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_WrCE[6] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_WrCE[7] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[0] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[1] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[2] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[3] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[4] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[5] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[6] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[7] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[8] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[9] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[10] in module clk_wiz_0_pselect_f__parameterized8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[6] in module clk_wiz_0_pselect_f is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[7] in module clk_wiz_0_pselect_f is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[8] in module clk_wiz_0_pselect_f is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[9] in module clk_wiz_0_pselect_f is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[10] in module clk_wiz_0_pselect_f is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus_RNW in module clk_wiz_0_address_decoder is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1479.043 ; gain = 622.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1479.043 ; gain = 622.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1479.043 ; gain = 622.867
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 1479.043 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 18 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc] for cell 'inst'
+Finished Parsing XDC File [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc] for cell 'inst'
+Parsing XDC File [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc] for cell 'inst'
+Finished Parsing XDC File [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc] for cell 'inst'
+Parsing XDC File [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc] for cell 'inst'
+Finished Parsing XDC File [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc] for cell 'inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/clk_wiz_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/clk_wiz_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+INFO: [Timing 38-2] Deriving generated clocks
+Parsing XDC File [D:/pocketscope_sim/pocketscope_sim/pocketscope_sim.runs/clk_wiz_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [D:/pocketscope_sim/pocketscope_sim/pocketscope_sim.runs/clk_wiz_0_synth_1/dont_touch.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_array_single.tcl]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/clk_wiz_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/clk_wiz_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/clk_wiz_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/clk_wiz_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+INFO: [Project 1-1714] 2 XPM XDC files have been applied to the design.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1566.535 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 17 instances were transformed.
+  FDRSE => FDRSE (FDRE, LUT4, VCC): 17 instances
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.059 . Memory (MB): peak = 1566.535 ; gain = 0.000
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 1566.535 ; gain = 710.359
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 1566.535 ; gain = 710.359
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 1566.535 ; gain = 710.359
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'clk_wiz_0_slave_attachment'
+WARNING: [Synth 8-3936] Found unconnected internal register 'clkout0_reg_reg' and it is trimmed from '32' to '18' bits. [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:413]
+WARNING: [Synth 8-3936] Found unconnected internal register 'clkfbout_reg_reg' and it is trimmed from '32' to '26' bits. [d:/pocketscope_sim/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz_drp.vhd:410]
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE2 |                             0001 |                               00
+                  iSTATE |                             0010 |                               01
+                 iSTATE0 |                             0100 |                               10
+                 iSTATE1 |                             1000 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'clk_wiz_0_slave_attachment'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1566.535 ; gain = 710.359
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    7 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 34    
+	               26 Bit    Registers := 1     
+	               18 Bit    Registers := 1     
+	               16 Bit    Registers := 10    
+	               11 Bit    Registers := 1     
+	                7 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 37    
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 4     
+	   2 Input   11 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 6     
+	   2 Input    2 Bit        Muxes := 3     
+	   3 Input    2 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 84    
+	   5 Input    1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-7129] Port Bus2IP_WrCE[0] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_WrCE[5] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_WrCE[6] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Bus2IP_WrCE[7] in module clk_wiz_0_clk_wiz_drp is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:28 . Memory (MB): peak = 1566.535 ; gain = 710.359
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:28 ; elapsed = 00:00:34 . Memory (MB): peak = 1685.109 ; gain = 828.934
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:36 . Memory (MB): peak = 1767.543 ; gain = 911.367
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:37 . Memory (MB): peak = 1767.605 ; gain = 911.430
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 1947.121 ; gain = 1090.945
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 1947.121 ; gain = 1090.945
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 1947.121 ; gain = 1090.945
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1947.121 ; gain = 1090.945
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1947.121 ; gain = 1090.945
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1947.121 ; gain = 1090.945
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----------+------+
+|      |Cell       |Count |
++------+-----------+------+
+|1     |BUFG       |     2|
+|2     |LUT1       |    18|
+|3     |LUT2       |    57|
+|4     |LUT3       |    89|
+|5     |LUT4       |    39|
+|6     |LUT5       |    75|
+|7     |LUT6       |   419|
+|8     |MMCME2_ADV |     1|
+|9     |MUXF7      |   102|
+|10    |MUXF8      |     6|
+|11    |FDRE       |  1297|
+|12    |FDSE       |    64|
+|13    |IBUF       |     1|
++------+-----------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1947.121 ; gain = 1090.945
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 7 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:40 . Memory (MB): peak = 1947.121 ; gain = 1003.453
+Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:43 . Memory (MB): peak = 1947.121 ; gain = 1090.945
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.165 . Memory (MB): peak = 1947.121 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 109 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1959.945 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 6c819171
+INFO: [Common 17-83] Releasing license: Synthesis
+95 Infos, 67 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:41 ; elapsed = 00:01:12 . Memory (MB): peak = 1959.945 ; gain = 1292.246
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1959.945 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/pocketscope_sim/pocketscope_sim/pocketscope_sim.runs/clk_wiz_0_synth_1/clk_wiz_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP clk_wiz_0, cache-ID = 3bc929186795287d
+INFO: [Coretcl 2-1174] Renamed 2 cell refs.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1959.945 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/pocketscope_sim/pocketscope_sim/pocketscope_sim.runs/clk_wiz_0_synth_1/clk_wiz_0.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file clk_wiz_0_utilization_synth.rpt -pb clk_wiz_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Jun  5 23:44:33 2026...
