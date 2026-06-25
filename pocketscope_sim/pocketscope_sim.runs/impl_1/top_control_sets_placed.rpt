@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Wed Jun 24 19:26:46 2026
+| Date         : Thu Jun 25 20:46:08 2026
 | Host         : MOSS550W running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    33 |
-|    Minimum number of control sets                        |    33 |
+| Total control sets                                       |   102 |
+|    Minimum number of control sets                        |   102 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    92 |
+| Unused register locations in slices containing registers |   468 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    33 |
+| Total control sets |   102 |
 | >= 0 to < 4        |     3 |
-| >= 4 to < 6        |     2 |
-| >= 6 to < 8        |     2 |
+| >= 4 to < 6        |     6 |
+| >= 6 to < 8        |     3 |
 | >= 8 to < 10       |    10 |
-| >= 10 to < 12      |     6 |
-| >= 12 to < 14      |     0 |
-| >= 14 to < 16      |     4 |
-| >= 16              |     6 |
+| >= 10 to < 12      |     2 |
+| >= 12 to < 14      |     2 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    76 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,11 +58,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              21 |            9 |
-| No           | No                    | Yes                    |             215 |           67 |
-| No           | Yes                   | No                     |              22 |            7 |
-| Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |             322 |           95 |
+| No           | No                    | No                     |              21 |           10 |
+| No           | No                    | Yes                    |             307 |          112 |
+| No           | Yes                   | No                     |              93 |           43 |
+| Yes          | No                    | No                     |            1152 |          589 |
+| Yes          | No                    | Yes                    |             359 |          136 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -70,42 +70,111 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+--------------------+----------------------------------------+------------------+------------------+----------------+--------------+
-|    Clock Signal    |              Enable Signal             | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
-+--------------------+----------------------------------------+------------------+------------------+----------------+--------------+
-|  u_clk_div/clk_25m |                                        | u_vga/vsync0     |                1 |              1 |         1.00 |
-|  u_clk_div/clk_25m |                                        | u_vga/hsync0     |                1 |              1 |         1.00 |
-|  u_clk_div/clk_25m | u_dac/dac_wr1_n_i_1_n_0                | u_ui/rst_n       |                1 |              1 |         1.00 |
-|  u_clk_div/clk_25m | u_ui/mod_depth[7]_i_1_n_0              | u_ui/rst_n       |                2 |              4 |         2.00 |
-|  u_clk_div/clk_25m | u_dac/wr_cnt[4]_i_1_n_0                | u_ui/rst_n       |                2 |              5 |         2.50 |
-|  sys_clk_IBUF_BUFG |                                        | u_ui/rst_n       |                3 |              7 |         2.33 |
-|  u_clk_div/clk_25m | u_ui/amplitude[7]_i_1_n_0              | u_ui/rst_n       |                2 |              7 |         3.50 |
-|  sys_clk_IBUF_BUFG | u_xadc/hw_mode.ch1_hold[15]_i_1_n_0    | u_ui/rst_n       |                2 |              8 |         4.00 |
-|  sys_clk_IBUF_BUFG | u_xadc/hw_mode.ch2_hold                | u_ui/rst_n       |                2 |              8 |         4.00 |
-|  sys_clk_IBUF_BUFG | u_xadc/hw_mode.settle_cnt[7]_i_1_n_0   | u_ui/rst_n       |                3 |              8 |         2.67 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch1_vld_reg_3[0]        | u_ui/rst_n       |                2 |              8 |         4.00 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch2_vld_reg_4[0]        | u_ui/rst_n       |                2 |              8 |         4.00 |
-|  u_clk_div/clk_25m | u_analyzer_ch1/peak_min[7]_i_1_n_0     | u_ui/rst_n       |                2 |              8 |         4.00 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch1_vld_reg_2[0]        | u_ui/rst_n       |                2 |              8 |         4.00 |
-|  u_clk_div/clk_25m | u_analyzer_ch2/peak_min[7]_i_1__0_n_0  | u_ui/rst_n       |                3 |              8 |         2.67 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch2_vld_reg_3[0]        | u_ui/rst_n       |                1 |              8 |         8.00 |
-|  u_clk_div/clk_25m | u_ui/wr_active_reg                     | u_ui/rst_n       |                3 |              8 |         2.67 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch2_hold_reg[15]_1[0]   | u_ui/rst_n       |                3 |             10 |         3.33 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch1_hold_reg[15]_0[0]   | u_ui/rst_n       |                3 |             10 |         3.33 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch2_vld_reg_1[0]        | u_ui/rst_n       |                2 |             10 |         5.00 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch1_vld_reg_0[0]        | u_ui/rst_n       |                2 |             10 |         5.00 |
-|  u_clk_div/clk_25m | u_vga/v_cnt                            | u_ui/rst_n       |                3 |             10 |         3.33 |
-|  u_clk_div/clk_25m | u_scroll/shift[9]_i_1_n_0              | u_ui/rst_n       |                2 |             10 |         5.00 |
-|  u_clk_div/clk_25m | u_xadc/E[0]                            | u_ui/rst_n       |                5 |             15 |         3.00 |
-|  u_clk_div/clk_25m | u_analyzer_ch2/zc_count[14]_i_1__0_n_0 | u_ui/rst_n       |                4 |             15 |         3.75 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch2_vld_reg_0[0]        | u_ui/rst_n       |                5 |             15 |         3.00 |
-|  u_clk_div/clk_25m | u_analyzer_ch1/zc_count[14]_i_1_n_0    | u_ui/rst_n       |                4 |             15 |         3.75 |
-|  u_clk_div/clk_25m | u_xadc/hw_mode.ch1_vld_reg_5[0]        | u_ui/rst_n       |                9 |             19 |         2.11 |
-|  u_clk_div/clk_25m |                                        | u_vga/p_0_in     |                5 |             20 |         4.00 |
-|  u_clk_div/clk_25m |                                        |                  |                9 |             21 |         2.33 |
-|  u_clk_div/clk_25m | u_xadc/ch2_valid                       | u_ui/rst_n       |               13 |             43 |         3.31 |
-|  u_clk_div/clk_25m | u_xadc/ch1_valid                       | u_ui/rst_n       |               11 |             43 |         3.91 |
-|  u_clk_div/clk_25m |                                        | u_ui/rst_n       |               64 |            208 |         3.25 |
-+--------------------+----------------------------------------+------------------+------------------+----------------+--------------+
++--------------------+--------------------------------------------+------------------+------------------+----------------+--------------+
+|    Clock Signal    |                Enable Signal               | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------+--------------------------------------------+------------------+------------------+----------------+--------------+
+|  u_clk_div/clk_25m |                                            | u_vga/hsync0     |                1 |              1 |         1.00 |
+|  u_clk_div/clk_25m |                                            | u_vga/vsync0     |                1 |              1 |         1.00 |
+|  u_clk_div/clk_25m | u_dac/dac_wr1_n_i_1_n_0                    | u_ui/rst_n       |                1 |              1 |         1.00 |
+|  sys_clk_IBUF_BUFG | u_xadc/E[0]                                | u_ui/rst_n       |                1 |              4 |         4.00 |
+|  sys_clk_IBUF_BUFG | u_xadc/sr_update_stretch                   | u_ui/rst_n       |                1 |              4 |         4.00 |
+|  u_clk_div/clk_25m | u_ui/mod_depth[7]_i_1_n_0                  | u_ui/rst_n       |                2 |              4 |         2.00 |
+|  sys_clk_IBUF_BUFG | u_xadc/p_2_in                              | u_ui/rst_n       |                1 |              4 |         4.00 |
+|  sys_clk_IBUF_BUFG | u_xadc/ch2_valid_sys_reg[0]                | u_ui/rst_n       |                1 |              4 |         4.00 |
+|  u_clk_div/clk_25m | u_dac/wr_cnt[4]_i_1_n_0                    | u_ui/rst_n       |                2 |              5 |         2.50 |
+|  u_clk_div/clk_25m | u_liss/pair_valid                          | u_ui/rst_n       |                4 |              7 |         1.75 |
+|  u_clk_div/clk_25m | u_ui/amplitude[7]_i_1_n_0                  | u_ui/rst_n       |                2 |              7 |         3.50 |
+|  u_clk_div/clk_25m | u_ui/scope_trigger_level[7]_i_1_n_0        | u_ui/rst_n       |                2 |              7 |         3.50 |
+|  sys_clk_IBUF_BUFG | u_xadc/adc_ch2_vld                         | u_ui/rst_n       |                5 |              8 |         1.60 |
+|  sys_clk_IBUF_BUFG | u_xadc/hw_mode.ch2_vld                     | u_ui/rst_n       |                2 |              8 |         4.00 |
+|  sys_clk_IBUF_BUFG | u_xadc/hw_mode.settle_cnt[7]_i_1_n_0       | u_ui/rst_n       |                3 |              8 |         2.67 |
+|  u_clk_div/clk_25m | u_analyzer_ch1/peak_min[7]_i_1_n_0         | u_ui/rst_n       |                2 |              8 |         4.00 |
+|  u_clk_div/clk_25m | u_analyzer_ch1/peak_max[7]_i_1_n_0         | u_ui/rst_n       |                2 |              8 |         4.00 |
+|  u_clk_div/clk_25m | u_analyzer_ch2/peak_min[7]_i_1__0_n_0      | u_ui/rst_n       |                1 |              8 |         8.00 |
+|  u_clk_div/clk_25m | u_analyzer_ch2/peak_max[7]_i_1__0_n_0      | u_ui/rst_n       |                2 |              8 |         4.00 |
+|  sys_clk_IBUF_BUFG | u_xadc/hw_mode.ch1_hold[15]_i_1_n_0        | u_ui/rst_n       |                1 |              8 |         8.00 |
+|  sys_clk_IBUF_BUFG | u_xadc/adc_ch1_vld                         | u_ui/rst_n       |                5 |              8 |         1.60 |
+|  u_clk_div/clk_25m | u_ui/E[0]                                  | u_ui/rst_n       |                1 |              8 |         8.00 |
+|  u_clk_div/clk_25m | u_scroll/shift0                            | u_ui/rst_n       |                3 |             10 |         3.33 |
+|  u_clk_div/clk_25m | u_vga/v_cnt                                | u_ui/rst_n       |                4 |             10 |         2.50 |
+|  u_clk_div/clk_25m | u_analyzer_ch1/frequency_hz[12]_i_1_n_0    | u_ui/rst_n       |                6 |             13 |         2.17 |
+|  u_clk_div/clk_25m | u_analyzer_ch2/frequency_hz[12]_i_1__0_n_0 | u_ui/rst_n       |                9 |             13 |         1.44 |
+|  sys_clk_IBUF_BUFG | u_xadc/sample_rate_hz[15]_i_1_n_0          | u_ui/rst_n       |               10 |             16 |         1.60 |
+|  u_clk_div/clk_25m | u_analyzer_ch1/zc_count[15]_i_1_n_0        | u_ui/rst_n       |                4 |             16 |         4.00 |
+|  u_clk_div/clk_25m | u_analyzer_ch2/zc_count[15]_i_1__0_n_0     | u_ui/rst_n       |                3 |             16 |         5.33 |
+|  u_clk_div/clk_25m | sample_rate_disp0                          | u_ui/rst_n       |                8 |             16 |         2.00 |
+|  u_clk_div/clk_25m | u_ui/trigger_holdoff_cnt_reg[0][0]         | u_ui/rst_n       |                8 |             16 |         2.00 |
+|  sys_clk_IBUF_BUFG | u_xadc/sr_pulse_cnt                        | u_ui/rst_n       |                4 |             16 |         4.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[36][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[63][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[55][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[23][9]_i_1_n_0              |                  |               12 |             18 |         1.50 |
+|  u_clk_div/clk_25m | u_liss/trail_x[10][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[14][9]_i_1_n_0              |                  |               11 |             18 |         1.64 |
+|  u_clk_div/clk_25m | u_liss/trail_x[16][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[19][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[20][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[21][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[22][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[24][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[25][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[26][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[27][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[15][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[28][9]_i_1_n_0              |                  |               11 |             18 |         1.64 |
+|  u_clk_div/clk_25m | u_liss/trail_x[29][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[11][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x                             |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[13][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[18][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[12][9]_i_1_n_0              |                  |                7 |             18 |         2.57 |
+|  u_clk_div/clk_25m | u_liss/trail_x[17][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[1][9]_i_1_n_0               |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[51][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[8][9]_i_1_n_0               |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[33][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[58][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[6][9]_i_1_n_0               |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[40][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[57][9]_i_1_n_0              |                  |               11 |             18 |         1.64 |
+|  u_clk_div/clk_25m | u_liss/trail_x[30][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[3][9]_i_1_n_0               |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[52][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[56][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[32][9]_i_1_n_0              |                  |               13 |             18 |         1.38 |
+|  u_clk_div/clk_25m | u_liss/trail_x[47][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[43][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[41][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[4][9]_i_1_n_0               |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[2][9]_i_1_n_0               |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[61][9]_i_1_n_0              |                  |               11 |             18 |         1.64 |
+|  u_clk_div/clk_25m | u_liss/trail_x[34][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[42][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[38][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[60][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[45][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[49][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[5][9]_i_1_n_0               |                  |               11 |             18 |         1.64 |
+|  u_clk_div/clk_25m | u_liss/trail_x[62][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[9][9]_i_1_n_0               |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[31][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[48][9]_i_1_n_0              |                  |                7 |             18 |         2.57 |
+|  u_clk_div/clk_25m | u_liss/trail_x[54][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[59][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[53][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[37][9]_i_1_n_0              |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[44][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[46][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[50][9]_i_1_n_0              |                  |                8 |             18 |         2.25 |
+|  u_clk_div/clk_25m | u_liss/trail_x[35][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m | u_liss/trail_x[7][9]_i_1_n_0               |                  |               10 |             18 |         1.80 |
+|  u_clk_div/clk_25m | u_liss/trail_x[39][9]_i_1_n_0              |                  |                9 |             18 |         2.00 |
+|  u_clk_div/clk_25m |                                            |                  |               10 |             21 |         2.10 |
+|  sys_clk_IBUF_BUFG |                                            | u_ui/rst_n       |               15 |             38 |         2.53 |
+|  u_clk_div/clk_25m | u_analyzer_ch2/adc_ch2_vld_25m             | u_ui/rst_n       |               19 |             45 |         2.37 |
+|  u_clk_div/clk_25m | u_analyzer_ch1/adc_ch1_vld_25m             | u_ui/rst_n       |               17 |             45 |         2.65 |
+|  u_clk_div/clk_25m |                                            | u_vga/p_0_in__1  |               41 |             91 |         2.22 |
+|  u_clk_div/clk_25m |                                            | u_ui/rst_n       |               97 |            269 |         2.77 |
++--------------------+--------------------------------------------+------------------+------------------+----------------+--------------+
 
 

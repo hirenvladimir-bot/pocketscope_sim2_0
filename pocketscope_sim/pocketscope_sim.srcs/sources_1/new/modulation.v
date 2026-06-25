@@ -22,11 +22,14 @@ module modulation
         else mod_phase <= mod_phase + MOD_FTW;
     end
 
-    localparam TRI_MAX = 1023;  // symmetric triangle: 0-1023
-    reg [9:0] tri_cnt = 0; reg tri_dir = 0;
+    // SPWM triangle carrier: 25MHz / (2*256) ≈ 48.8kHz
+    // Provides ~5:1 carrier-to-signal ratio at max 10kHz signal,
+    // enabling proper sinusoidal PWM modulation.
+    localparam TRI_MAX = 255;  // 8-bit symmetric triangle: 0-255
+    reg [7:0] tri_cnt = 0; reg tri_dir = 0;
     // Center-symmetric triangle: range 1-255, centered at 128 (0x80)
     // Add 1 and saturate at 255 to prevent wraparound
-    wire [8:0] tri_shifted = {1'b0, tri_cnt[9], tri_cnt[8:2]} + 9'd1;
+    wire [8:0] tri_shifted = {1'b0, tri_cnt[7], tri_cnt[6:0]} + 9'd1;
     wire [7:0] tri_val = (tri_shifted > 9'd255) ? 8'd255 : tri_shifted[7:0];
     always @(posedge clk or negedge rst_n) begin
         if(!rst_n) begin tri_cnt<=0; tri_dir<=0; end
