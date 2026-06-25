@@ -3086,3 +3086,8 @@ selectCodeEditor("pocketscope.xdc", 648, 700); // ae (pocketscope.xdc)
 // HMemoryUtils.trashcanNow. Engine heap size: 1,239 MB. GUI used memory: 193 MB. Current time: 6/26/26, 12:24:20 AM CST
 // WARNING: HSwingWorker (Monitor File Timestamp Swing Worker) is taking 1838 ms to process. Increasing delay to 3000 ms.
 // WARNING: HSwingWorker (Refresh Filesets Swing Worker) is taking 10392 ms. Increasing delay to 31176 ms.
+// WARNING: HSwingWorker (Update Runs Swing Worker) is taking 15302 ms. Increasing delay to 5000 ms.
+// WARNING: HSwingWorker (Refresh Filesets Swing Worker) is taking 103 ms. Decreasing delay to 2103 ms.
+// WARNING: HSwingWorker (Refresh Filesets Swing Worker) is taking 2542 ms. Increasing delay to 7626 ms.
+// WARNING: HSwingWorker (Update Runs Swing Worker) is taking 3640 ms. Increasing delay to 6000 ms.
+// WARNING: HSwingWorker (Update Runs Swing Worker) is taking 3695 ms. Increasing delay to 7000 ms.
