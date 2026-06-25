@@ -81,7 +81,6 @@ read_verilog -library xil_defaultlib {
   C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/kaleidoscope.v
   C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/lissajous_display.v
   C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/modulation.v
-  C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/scroll_addr_gen.v
   C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/ui_ctrl.v
   C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/vga_ctrl.v
   C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/wave_analyzer.v

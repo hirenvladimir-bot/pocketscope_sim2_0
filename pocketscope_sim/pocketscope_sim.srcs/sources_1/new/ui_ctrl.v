@@ -111,7 +111,7 @@ module ui_ctrl
             amplitude           <= 8'hFF;
             mod_depth           <= 8'h80;
             scope_timebase      <= 3'd3;
-            scope_trigger_level <= 8'd128;
+            scope_trigger_level <= 8'd128;  // mid-scale (~0.5V, matching VBIAS=0.55V DC offset)
         end else begin
             device_mode     <= sw[1:0];
             sig_gen_submode <= sw[4:2];

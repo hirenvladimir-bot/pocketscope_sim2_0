@@ -3,8 +3,8 @@
 # SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Thu Jun 25 20:44:03 2026
-# Process ID         : 142728
+# Start of session at: Thu Jun 25 22:52:06 2026
+# Process ID         : 140352
 # Current directory  : C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1
 # Command line       : vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file           : C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1/top.vds
@@ -17,8 +17,8 @@
 # CPU Physical cores : 24
 # CPU Logical cores  : 32
 # Host memory        : 34070 MB
-# Swap memory        : 12932 MB
-# Total Virtual      : 47002 MB
-# Available Virtual  : 2142 MB
+# Swap memory        : 16176 MB
+# Total Virtual      : 50246 MB
+# Available Virtual  : 5450 MB
 #-----------------------------------------------------------
 source top.tcl -notrace

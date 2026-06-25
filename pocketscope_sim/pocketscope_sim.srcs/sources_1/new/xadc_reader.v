@@ -120,7 +120,15 @@ module xadc_reader
         wire        drp_den;
 
         XADC #(
-            .INIT_40(16'h1000),
+            // INIT_40: Configuration Register #0
+            //   bit12 (CAL1)  = 1 -> enable offset calibration
+            //   bit5  (CAL0)  = 1 -> enable gain calibration
+            //   bit4  (CHSEL) = 1 -> enable sequencer mode (required for VAUXP sampling)
+            //   bits[3:0] (SEQ) = 0010 -> continuous sequencer cycling
+            //   FIX: was 0x1012 → CHSEL was still 0 (single-ch mode). Now 0x1032
+            //        sets both CAL0 and CHSEL. Required so sequencer uses INIT_48
+            //        channel enables to sample VAUXP[0] instead of a default channel.
+            .INIT_40(16'h1032),
             .INIT_41(16'h2000),
             .INIT_42(16'h0000),
             // Enable VAUXP[0] in sequencer (48h: VAUXP[7:0] channel enable)
@@ -171,11 +179,20 @@ module xadc_reader
         // When USE_4053=0: alternate DRP addresses between 0x12 and 0x13
         reg         active_ch;          // only used in dual-channel mode
 
-        // Startup delay: wait ~320ns (32 cycles @ 100MHz) after reset before
-        // first DRP access. Prevents DEN pulse from being lost if XADC DRP
-        // interface is still recovering from RESET.
-        reg [4:0]   startup_cnt;
-        wire        startup_done = (startup_cnt == 5'd31);
+        // Startup delay: XADC needs ~4ms at 100MHz for post-reset auto-calibration
+        // (UG480: calibration completes ~4ms after DCLK stable).
+        // 500,000 cycles = 5ms at 100MHz — provides safe margin.
+        // If DEN is sent during calibration, DRDY never asserts and the FSM hangs
+        // permanently. This extended delay prevents that lockup.
+        localparam STARTUP_MAX = 19'd500_000;
+        reg [18:0]  startup_cnt;
+        wire        startup_done = (startup_cnt == STARTUP_MAX);
+
+        // DRDY timeout watchdog: if DRDY doesn't arrive within ~10µs after DEN,
+        // re-trigger DEN. Prevents permanent FSM hang if XADC misses a DEN pulse.
+        localparam DRDY_TIMEOUT = 10'd1000;   // 1000 cycles = 10µs at 100MHz
+        reg [9:0]   drdy_timeout_cnt;
+        reg         den_sent;                 // flag: DEN was issued, waiting for DRDY
 
         wire [6:0]  ch_addr_dual = active_ch ? 7'h13 : 7'h12;
 
@@ -190,26 +207,31 @@ module xadc_reader
 
         always @(posedge clk or negedge rst_n) begin
             if (!rst_n) begin
-                active_ch    <= 1'b0;
-                mux_sel_reg  <= 1'b1;  // default to CH2
-                settle_cnt   <= 0;
-                settling     <= 1'b0;
-                ch1_hold     <= 16'h0800;
-                ch2_hold     <= 16'h0800;
-                ch1_vld      <= 1'b0;
-                ch2_vld      <= 1'b0;
-                den_pending  <= 1'b0;
-                startup_cnt  <= 0;
+                active_ch        <= 1'b0;
+                mux_sel_reg      <= 1'b0;  // mux forced LOW → CH1 selected
+                settle_cnt       <= 0;
+                settling         <= 1'b0;
+                ch1_hold         <= 16'h0800;
+                ch2_hold         <= 16'h0800;
+                ch1_vld          <= 1'b0;
+                ch2_vld          <= 1'b0;
+                den_pending      <= 1'b0;
+                den_sent         <= 1'b0;
+                startup_cnt      <= 0;
+                drdy_timeout_cnt <= 0;
             end else begin
                 ch1_vld <= 1'b0;
                 ch2_vld <= 1'b0;
 
-                // --- Startup delay: count up to 32 cycles before DRP access ---
+                // --- Startup delay: count up to STARTUP_MAX (~5ms) before DRP access ---
+                // XADC needs ~4ms post-reset calibration. During calibration,
+                // DRDY does NOT assert, so we must wait before first DEN.
                 if (!startup_done) begin
                     startup_cnt <= startup_cnt + 1'b1;
-                    if (startup_cnt == 5'd30) begin
+                    if (startup_cnt == STARTUP_MAX - 1) begin
                         // Startup complete — trigger first DRP read
                         den_pending <= 1'b1;
+                        den_sent    <= 1'b0;
                     end
                 end
 
@@ -220,18 +242,37 @@ module xadc_reader
                         settle_cnt  <= 0;
                         // Now safe to start next conversion
                         den_pending <= 1'b1;
+                        den_sent    <= 1'b0;
                     end else begin
                         settle_cnt <= settle_cnt + 1'b1;
                     end
                 end
 
-                // --- DEN: clear pending when asserted ---
+                // --- DEN: assert pending, track when sent ---
                 if (den_pending && drp_den) begin
                     den_pending <= 1'b0;
+                    den_sent    <= 1'b1;
+                    drdy_timeout_cnt <= 0;
+                end
+
+                // --- DRDY timeout watchdog: re-issue DEN if no response ---
+                // When DEN was sent but DRDY never comes (e.g., XADC still
+                // calibrating, missed DEN pulse), retry after timeout.
+                // This prevents permanent FSM hang.
+                if (den_sent && !drp_drdy) begin
+                    if (drdy_timeout_cnt == DRDY_TIMEOUT - 1) begin
+                        // Timeout: DRDY never responded — re-trigger DEN
+                        den_pending      <= 1'b1;
+                        den_sent         <= 1'b0;
+                        drdy_timeout_cnt <= 0;
+                    end else begin
+                        drdy_timeout_cnt <= drdy_timeout_cnt + 1'b1;
+                    end
                 end
 
                 // --- DRDY: latch data and set up next conversion ---
                 if (drp_drdy) begin
+                    den_sent <= 1'b0;  // clear sent flag, response received
                     if (USE_4053) begin
                         // Route data to correct channel based on mux_sel
                         if (mux_sel_reg) begin
@@ -242,7 +283,7 @@ module xadc_reader
                             ch1_vld  <= 1'b1;
                         end
 
-                        // Toggle mux_sel for next channel
+                        // Toggle mux_sel for next channel (CH1↔CH2 alternating)
                         mux_sel_reg <= ~mux_sel_reg;
 
                         // Begin settle period before next DEN
@@ -261,6 +302,7 @@ module xadc_reader
                         end
                         active_ch    <= ~active_ch;
                         den_pending  <= 1'b1;
+                        den_sent     <= 1'b0;
                     end
                 end
             end

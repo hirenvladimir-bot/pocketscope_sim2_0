@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Thu Jun 25 20:46:31 2026
+| Date         : Thu Jun 25 22:54:53 2026
 | Host         : MOSS550W running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -23,14 +23,14 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 42
+             Checks found: 53
 +-----------+----------+-------------------------------------------------------------------------------------------------------+--------+
 | Rule      | Severity | Description                                                                                           | Checks |
 +-----------+----------+-------------------------------------------------------------------------------------------------------+--------+
-| DPIR-1    | Warning  | Asynchronous driver check                                                                             | 36     |
+| DPIR-1    | Warning  | Asynchronous driver check                                                                             | 43     |
 | SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal                                                            | 2      |
 | TIMING-10 | Warning  | Missing property on synchronizer                                                                      | 1      |
-| TIMING-18 | Warning  | Missing input or output delay                                                                         | 2      |
+| TIMING-18 | Warning  | Missing input or output delay                                                                         | 6      |
 | TIMING-47 | Warning  | False path, asynchronous clock group or max delay datapath only constraint between synchronous clocks | 1      |
 +-----------+----------+-------------------------------------------------------------------------------------------------------+--------+
 
@@ -216,6 +216,41 @@ Asynchronous driver check
 DSP u_mod/fm_dev2 input pin u_mod/fm_dev2/A[9] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
 Related violations: <none>
 
+DPIR-1#37 Warning
+Asynchronous driver check  
+DSP u_scope_display/trigger_mv0 input pin u_scope_display/trigger_mv0/A[1] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#38 Warning
+Asynchronous driver check  
+DSP u_scope_display/trigger_mv0 input pin u_scope_display/trigger_mv0/A[2] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#39 Warning
+Asynchronous driver check  
+DSP u_scope_display/trigger_mv0 input pin u_scope_display/trigger_mv0/A[3] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#40 Warning
+Asynchronous driver check  
+DSP u_scope_display/trigger_mv0 input pin u_scope_display/trigger_mv0/A[4] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#41 Warning
+Asynchronous driver check  
+DSP u_scope_display/trigger_mv0 input pin u_scope_display/trigger_mv0/A[5] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#42 Warning
+Asynchronous driver check  
+DSP u_scope_display/trigger_mv0 input pin u_scope_display/trigger_mv0/A[6] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+DPIR-1#43 Warning
+Asynchronous driver check  
+DSP u_scope_display/trigger_mv0 input pin u_scope_display/trigger_mv0/A[7] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
 SYNTH-6#1 Warning
 Timing of a RAM block might be sub-optimal  
 The timing for the instance u_ram_ch1/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
@@ -237,6 +272,26 @@ An input delay is missing on rst_n relative to the rising and/or falling clock e
 Related violations: <none>
 
 TIMING-18#2 Warning
+Missing input or output delay  
+An output delay is missing on loop_tx[0] relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An output delay is missing on loop_tx[1] relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An output delay is missing on loop_tx[2] relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An output delay is missing on loop_tx[3] relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-18#6 Warning
 Missing input or output delay  
 An output delay is missing on mux_sel relative to the rising and/or falling clock edge(s) of sys_clk_pin.
 Related violations: <none>

@@ -10,7 +10,7 @@
 //   Row 2: CH2  F:#####Hz  V:####mV  T:X
 //   Row 3:      R:###  A:###  M:###   (mV)
 //   Row 4: ADC:#####kS/s  (sample rate)
-//   Row 5: TRIG:### ARMED/WAIT (trigger status)
+//   Row 5: TRG:###mV STA:XXXXX (trigger mV + armed/wait)
 //=============================================================================
 
 module waveform_display
@@ -58,25 +58,26 @@ module waveform_display
 );
 
 //=============================================================================
-// ADC value -> Y coordinate (full-screen mapping: 0->479)
+// ADC value -> Y coordinate (mapped to waveform area: 0->431)
+// Metrics bar occupies y=432..479, so waveform must fit in y=0..431.
 //=============================================================================
-wire [9:0] wave_y_ch1 = 10'd479 - ((wave_ch1 * 10'd479) >> 8);
-wire [9:0] wave_y_ch2 = 10'd479 - ((wave_ch2 * 10'd479) >> 8);
+wire [9:0] wave_y_ch1 = 10'd431 - ((wave_ch1 * 10'd431) >> 8);
+wire [9:0] wave_y_ch2 = 10'd431 - ((wave_ch2 * 10'd431) >> 8);
 
 //=============================================================================
 // Grid & Center Lines
 //=============================================================================
 wire grid_x  = ((pixel_x % 80) == 0);
 wire grid_y  = ((pixel_y % 60) == 0);
-wire center_line = (pixel_y == 240);
+wire center_line = (pixel_y == 215);  // center of waveform area (431/2)
 
 //=============================================================================
-// Waveform hit detection (3-pixel wide traces)
+// Waveform hit detection (3-pixel wide traces, clamped to waveform area)
 //=============================================================================
 wire hit_ch1 = (pixel_y >= ((wave_y_ch1 > 1) ? wave_y_ch1 - 1 : 0)) &&
-               (pixel_y <= ((wave_y_ch1 < 478) ? wave_y_ch1 + 1 : 479));
+               (pixel_y <= ((wave_y_ch1 < 430) ? wave_y_ch1 + 1 : 431));
 wire hit_ch2 = (pixel_y >= ((wave_y_ch2 > 1) ? wave_y_ch2 - 1 : 0)) &&
-               (pixel_y <= ((wave_y_ch2 < 478) ? wave_y_ch2 + 1 : 479));
+               (pixel_y <= ((wave_y_ch2 < 430) ? wave_y_ch2 + 1 : 431));
 
 //=============================================================================
 // Metrics Bar Area (pixels y=432..479, 48 rows = 6 char rows)
@@ -164,10 +165,12 @@ wire [3:0] srate_d3 = (sample_rate_hz / 16'd100)   % 4'd10;
 wire [3:0] srate_d2 = (sample_rate_hz / 16'd10)    % 4'd10;
 wire [3:0] srate_d1 = (sample_rate_hz)             % 4'd10;
 
-// Trigger level digits (8-bit, 0-255)
-wire [3:0] trig_d3 = (trigger_level / 8'd100) % 4'd10;
-wire [3:0] trig_d2 = (trigger_level / 8'd10)  % 4'd10;
-wire [3:0] trig_d1 = (trigger_level)          % 4'd10;
+// Trigger level in mV (CAL_MV_X1024=4000, 3.90625mV/LSB, range 0-996mV)
+// trigger_mv = round(trigger_level * 4000 / 1024)
+wire [15:0] trigger_mv = (({8'b0, trigger_level} * 16'd4000) + 16'd512) >> 10;
+wire [3:0]  trig_mv_d3 = (trigger_mv / 16'd100) % 4'd10;
+wire [3:0]  trig_mv_d2 = (trigger_mv / 16'd10)  % 4'd10;
+wire [3:0]  trig_mv_d1 = (trigger_mv)           % 4'd10;
 
 //=============================================================================
 // Character selection mux: pick the right char for current (x,y) in metrics
@@ -243,7 +246,7 @@ always @(*) begin
                 7'd4:  metrics_char = digit_to_ascii(rms1_mv_d2);
                 7'd5:  metrics_char = digit_to_ascii(rms1_mv_d1);
                 7'd6:  metrics_char = 8'h20;  // space
-                7'd7:  metrics_char = 8'h20;  // space
+                7'd7:  metrics_char = 8'h6D;  // 'm'
                 7'd8:  metrics_char = 8'h41;  // 'A'
                 7'd9:  metrics_char = 8'h3A;  // ':'
                 7'd10: metrics_char = digit_to_ascii(avg1_mv_d3);
@@ -308,7 +311,7 @@ always @(*) begin
                 7'd4:  metrics_char = digit_to_ascii(rms2_mv_d2);
                 7'd5:  metrics_char = digit_to_ascii(rms2_mv_d1);
                 7'd6:  metrics_char = 8'h20;  // space
-                7'd7:  metrics_char = 8'h20;  // space
+                7'd7:  metrics_char = 8'h6D;  // 'm'
                 7'd8:  metrics_char = 8'h41;  // 'A'
                 7'd9:  metrics_char = 8'h3A;  // ':'
                 7'd10: metrics_char = digit_to_ascii(avg2_mv_d3);
@@ -351,7 +354,7 @@ always @(*) begin
         end
 
         //=================================================================
-        // Row 5: Trigger status  "TRG:### STA:XXXXX"
+        // Row 5: Trigger status  "TRG:###mV STA:XXXXX"
         //=================================================================
         3'd5: begin
             case (char_cell_x)
@@ -359,19 +362,21 @@ always @(*) begin
                 7'd1:  metrics_char = 8'h52;  // 'R'
                 7'd2:  metrics_char = 8'h47;  // 'G'
                 7'd3:  metrics_char = 8'h3A;  // ':'
-                7'd4:  metrics_char = digit_to_ascii(trig_d3);
-                7'd5:  metrics_char = digit_to_ascii(trig_d2);
-                7'd6:  metrics_char = digit_to_ascii(trig_d1);
-                7'd7:  metrics_char = 8'h20;  // space
-                7'd8:  metrics_char = 8'h53;  // 'S'
-                7'd9:  metrics_char = 8'h54;  // 'T'
-                7'd10: metrics_char = 8'h41;  // 'A'
-                7'd11: metrics_char = 8'h3A;  // ':'
-                7'd12: metrics_char = trigger_armed ? 8'h41 : 8'h57;  // 'A'=Armed, 'W'=Wait
-                7'd13: metrics_char = trigger_armed ? 8'h52 : 8'h41;  // 'R'=aRmed, 'A'=wAit
-                7'd14: metrics_char = trigger_armed ? 8'h4D : 8'h49;  // 'M'=arMed, 'I'=waIt
-                7'd15: metrics_char = trigger_armed ? 8'h45 : 8'h54;  // 'E'=armEd, 'T'=waiT
-                7'd16: metrics_char = 8'h44;  // 'D'
+                7'd4:  metrics_char = digit_to_ascii(trig_mv_d3);
+                7'd5:  metrics_char = digit_to_ascii(trig_mv_d2);
+                7'd6:  metrics_char = digit_to_ascii(trig_mv_d1);
+                7'd7:  metrics_char = 8'h6D;  // 'm'
+                7'd8:  metrics_char = 8'h56;  // 'V'
+                7'd9:  metrics_char = 8'h20;  // space
+                7'd10: metrics_char = 8'h53;  // 'S'
+                7'd11: metrics_char = 8'h54;  // 'T'
+                7'd12: metrics_char = 8'h41;  // 'A'
+                7'd13: metrics_char = 8'h3A;  // ':'
+                7'd14: metrics_char = trigger_armed ? 8'h41 : 8'h57;  // 'A'=Armed, 'W'=Wait
+                7'd15: metrics_char = trigger_armed ? 8'h52 : 8'h41;  // 'R'=aRmed, 'A'=wAit
+                7'd16: metrics_char = trigger_armed ? 8'h4D : 8'h49;  // 'M'=arMed, 'I'=waIt
+                7'd17: metrics_char = trigger_armed ? 8'h45 : 8'h54;  // 'E'=armEd, 'T'=waiT
+                7'd18: metrics_char = 8'h44;  // 'D'
                 default: metrics_char = 8'h20;
             endcase
         end

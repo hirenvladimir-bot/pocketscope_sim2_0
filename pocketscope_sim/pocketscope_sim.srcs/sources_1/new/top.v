@@ -27,7 +27,7 @@ module top
     output wire [3:0]    loop_tx,       // loop_tx[0] repurposed as mux_sel
     input  wire [3:0]    loop_rx,
     // 4053 analog switch control (expansion board)
-    output wire          mux_sel        // 0=CH1, 1=CH2
+    output wire          mux_sel        // 0=CH1, 1=CH2 (toggled each sample)
 );
 
 //=============================================================================
@@ -147,8 +147,11 @@ wire dac_update;
 // DDS Y for sig-gen preview
 assign dds_y = 10'd479 - (({2'b0, dds_wave_out} * 10'd479) >> 8);
 
-// DAC update rate divider (25MHz / 64 ≈ 390kHz)
-reg [5:0]  dac_rate_cnt;
+// DAC update rate divider (25MHz / 24 ≈ 1.04MHz)
+// 24-cycle period = 960ns, WR# pulse = 16 cycles (640ns), gives 320ns idle gap.
+// Increased from 64 (390kHz) to reduce square-wave edge jitter and improve
+// waveform fidelity. DAC0832 settling time ~1µs limits useful update rate.
+reg [4:0]  dac_rate_cnt;
 reg        dac_update_trig;
 
 always @(posedge clk_25m or negedge rst_n) begin
@@ -157,7 +160,7 @@ always @(posedge clk_25m or negedge rst_n) begin
         dac_update_trig <= 0;
     end else begin
         dac_update_trig <= 0;
-        if (dac_rate_cnt == 63) begin
+        if (dac_rate_cnt == 23) begin
             dac_rate_cnt <= 0;
             dac_update_trig <= 1;
         end else begin
@@ -392,8 +395,6 @@ assign trigger_event = trigger_fired;
 //=============================================================================
 // Waveform Storage (Dual Channel RAM)
 //=============================================================================
-wire [9:0] wr_addr;
-wire [9:0] scroll_shift;
 wire       de;
 wire [9:0] pixel_x, pixel_y;
 
@@ -402,26 +403,36 @@ wire [9:0] pixel_x, pixel_y;
 wire trigger_reset;
 assign trigger_reset = trigger_event && (device_mode == 2'b01);
 
-scroll_addr_gen u_scroll (
-    .clk(clk_25m), .rst_n(rst_n),
-    .pixel_x(pixel_x),
-    .trigger_reset(trigger_reset),
-    .display_addr(wr_addr),
-    .shift(scroll_shift)
-);
+// Sequential write address: increments on each CH2 valid (CH1+CH2 pair
+// complete in 4053 mux mode). CH1 and CH2 write to the SAME address so
+// they share the same horizontal position on screen.
+reg [9:0] sample_wr_addr;
+
+always @(posedge clk_25m or negedge rst_n) begin
+    if (!rst_n)
+        sample_wr_addr <= 10'd0;
+    else if (trigger_reset)
+        sample_wr_addr <= 10'd512;  // align trigger point to buffer center
+    else if (adc_ch2_vld_25m)
+        sample_wr_addr <= sample_wr_addr + 1'b1;
+end
+
+// Display read address: show the last 640 samples before current write pos.
+// pixel_x=0 → oldest visible sample; pixel_x=639 → newest visible sample.
+// 10-bit unsigned underflow naturally implements modulo-1024 wrap.
+wire [9:0] display_addr = (sample_wr_addr - 10'd640 + pixel_x);
 
 wire [7:0] wave_ch1, wave_ch2;
-wire [9:0] display_addr = wr_addr;
 
 wave_ram_ch1 u_ram_ch1 (
     .clk(clk_25m),
-    .we(adc_ch1_vld_25m), .wr_addr(wr_addr), .din(adc_ch1_8b),
+    .we(adc_ch1_vld_25m), .wr_addr(sample_wr_addr), .din(adc_ch1_8b),
     .rd_addr(display_addr), .dout(wave_ch1)
 );
 
 wave_ram_ch2 u_ram_ch2 (
     .clk(clk_25m),
-    .we(adc_ch2_vld_25m), .wr_addr(wr_addr), .din(adc_ch2_8b),
+    .we(adc_ch2_vld_25m), .wr_addr(sample_wr_addr), .din(adc_ch2_8b),
     .rd_addr(display_addr), .dout(wave_ch2)
 );
 
@@ -595,6 +606,7 @@ assign led_speed[1] = (device_mode == 2'b01);   // Scope
 assign led_speed[2] = (device_mode == 2'b10 || device_mode == 2'b11);  // XY modes
 
 // Loopback: echo rx to tx for self-test
-assign loop_tx = loop_rx;
+// loop_tx[0] carries mux_sel for 74HC4053 analog switch control
+assign loop_tx = {loop_rx[3:1], mux_sel};
 
 endmodule
