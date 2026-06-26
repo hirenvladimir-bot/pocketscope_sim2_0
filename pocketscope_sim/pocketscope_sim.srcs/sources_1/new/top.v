@@ -856,4 +856,81 @@ assign led_speed[2] = (device_mode == 2'b10 || device_mode == 2'b11);  // XY mod
 // loop_tx[0] carries mux_sel for 74HC4053 analog switch control
 assign loop_tx = {loop_rx[3:1], mux_sel};
 
+//=============================================================================
+// ILA Debug Probe — ADC signal chain monitoring
+//=============================================================================
+// Resynchronize 25MHz-domain signals into sys_clk (100MHz) domain for ILA.
+// 2-stage synchronizers prevent metastability in the debug capture path.
+// These are DEBUG-ONLY; they do not affect functional data paths.
+
+// --- 2-stage synchronizers for 25MHz → 100MHz signals ---
+reg        ila_ch1_vld_25m_s1, ila_ch1_vld_25m_s2;
+reg        ila_ch2_vld_25m_s1, ila_ch2_vld_25m_s2;
+reg [7:0]  ila_ch1_8b_s1,     ila_ch1_8b_s2;
+reg [7:0]  ila_ch2_8b_s1,     ila_ch2_8b_s2;
+reg        ila_trig_fired_s1,  ila_trig_fired_s2;
+reg        ila_trig_armed_s1,  ila_trig_armed_s2;
+reg [9:0]  ila_wr_addr_s1,    ila_wr_addr_s2;
+reg [1:0]  ila_mode_s1,       ila_mode_s2;
+reg        ila_clk25m_s1,      ila_clk25m_s2;
+
+always @(posedge sys_clk) begin
+    // CH1 valid
+    ila_ch1_vld_25m_s1 <= adc_ch1_vld_25m;
+    ila_ch1_vld_25m_s2 <= ila_ch1_vld_25m_s1;
+    // CH2 valid
+    ila_ch2_vld_25m_s1 <= adc_ch2_vld_25m;
+    ila_ch2_vld_25m_s2 <= ila_ch2_vld_25m_s1;
+    // CH1 8-bit data
+    ila_ch1_8b_s1 <= adc_ch1_8b;
+    ila_ch1_8b_s2 <= ila_ch1_8b_s1;
+    // CH2 8-bit data
+    ila_ch2_8b_s1 <= adc_ch2_8b;
+    ila_ch2_8b_s2 <= ila_ch2_8b_s1;
+    // Trigger fired
+    ila_trig_fired_s1 <= trigger_fired;
+    ila_trig_fired_s2 <= ila_trig_fired_s1;
+    // Trigger armed
+    ila_trig_armed_s1 <= trigger_armed;
+    ila_trig_armed_s2 <= ila_trig_armed_s1;
+    // Write address
+    ila_wr_addr_s1 <= sample_wr_addr;
+    ila_wr_addr_s2 <= ila_wr_addr_s1;
+    // Device mode
+    ila_mode_s1 <= device_mode;
+    ila_mode_s2 <= ila_mode_s1;
+    // 25MHz clock sampled as reference
+    ila_clk25m_s1 <= clk_25m;
+    ila_clk25m_s2 <= ila_clk25m_s1;
+end
+
+// --- Probe bus assembly ---
+// See ila_adc_debug.v for complete bit-mapping documentation
+wire [63:0] ila_probe;
+assign ila_probe = {
+    ila_mode_s2,          // [63:62] device_mode
+    mux_sel,              // [61]    4053 channel select
+    ila_trig_fired_s2,    // [60]    scope trigger fired
+    ila_trig_armed_s2,    // [59]    scope trigger armed
+    ch1_valid_sys,        // [58]    CH1 valid stretched (sys_clk)
+    ch2_valid_sys,        // [57]    CH2 valid stretched (sys_clk)
+    adc_ch1_vld,          // [56]    CH1 valid raw (XADC)
+    adc_ch2_vld,          // [55]    CH2 valid raw (XADC)
+    ila_ch1_vld_25m_s2,   // [54]    CH1 valid (25MHz domain)
+    ila_ch2_vld_25m_s2,   // [53]    CH2 valid (25MHz domain)
+    ila_wr_addr_s2,       // [52:43] sample write address
+    adc_ch1_raw,          // [42:31] CH1 raw 12-bit XADC
+    adc_ch2_raw,          // [30:19] CH2 raw 12-bit XADC
+    ila_ch1_8b_s2,        // [18:11] CH1 8-bit scope data
+    ila_ch2_8b_s2,        // [10:3]  CH2 8-bit scope data
+    ila_clk25m_s2,        // [2]     25MHz clock reference
+    2'b00                 // [1:0]   reserved
+};
+
+// --- ILA Core instantiation ---
+ila_adc_debug u_ila_adc (
+    .clk   (sys_clk),
+    .probe (ila_probe)
+);
+
 endmodule

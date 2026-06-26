@@ -5,14 +5,105 @@
 <!-- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.        -->
 
 <hwsession version="1" minor="2">
-  <device name="xc7a35t_0" gui_info=""/>
+  <device name="xc7a35t_0" gui_info="dashboard1=hw_ila_1[xc7a35t_0/hw_ila_1/Settings=ILA_SETTINGS_1;xc7a35t_0/hw_ila_1/Status=ILA_STATUS_1;xc7a35t_0/hw_ila_1/Trigger Setup=ILA_TRIGGER_1;xc7a35t_0/hw_ila_1/Waveform=ILA_WAVE_1;xc7a35t_0/hw_ila_1/Capture Setup=ILA_CAPTURE_1;]"/>
   <ObjectList object_type="hw_device" gui_info="">
     <Object name="xc7a35t_0" gui_info="">
-      <Properties Property="FULL_PROBES.FILE" value=""/>
-      <Properties Property="PROBES.FILE" value=""/>
+      <Properties Property="FULL_PROBES.FILE" value="$_project_name_.runs/impl_1/top.ltx"/>
+      <Properties Property="PROBES.FILE" value="$_project_name_.runs/impl_1/top.ltx"/>
       <Properties Property="PROGRAM.HW_BITSTREAM" value="$_project_name_.runs/impl_1/top.bit"/>
       <Properties Property="SLR.COUNT" value="1"/>
     </Object>
   </ObjectList>
-  <probeset name="hw project" active="false"/>
+  <ObjectList object_type="hw_ila" gui_info="">
+    <Object name="u_ila_adc/u_ila" gui_info="">
+      <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
+      <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
+    </Object>
+  </ObjectList>
+  <probeset name="hw project" active="false">
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq64&apos;hXXXX_XXXX_XXXX_XXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq64&apos;hXXXX_XXXX_XXXX_XXXX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe0[63:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq64&apos;hXXXX_XXXX_XXXX_XXXX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
+        <net name="u_ila_adc/probe[63]"/>
+        <net name="u_ila_adc/probe[62]"/>
+        <net name="u_ila_adc/probe[61]"/>
+        <net name="u_ila_adc/probe[60]"/>
+        <net name="u_ila_adc/probe[59]"/>
+        <net name="u_ila_adc/probe[58]"/>
+        <net name="u_ila_adc/probe[57]"/>
+        <net name="u_ila_adc/probe[56]"/>
+        <net name="u_ila_adc/probe[55]"/>
+        <net name="u_ila_adc/probe[54]"/>
+        <net name="u_ila_adc/probe[53]"/>
+        <net name="u_ila_adc/probe[52]"/>
+        <net name="u_ila_adc/probe[51]"/>
+        <net name="u_ila_adc/probe[50]"/>
+        <net name="u_ila_adc/probe[49]"/>
+        <net name="u_ila_adc/probe[48]"/>
+        <net name="u_ila_adc/probe[47]"/>
+        <net name="u_ila_adc/probe[46]"/>
+        <net name="u_ila_adc/probe[45]"/>
+        <net name="u_ila_adc/probe[44]"/>
+        <net name="u_ila_adc/probe[43]"/>
+        <net name="u_ila_adc/probe[42]"/>
+        <net name="u_ila_adc/probe[41]"/>
+        <net name="u_ila_adc/probe[40]"/>
+        <net name="u_ila_adc/probe[39]"/>
+        <net name="u_ila_adc/probe[38]"/>
+        <net name="u_ila_adc/probe[37]"/>
+        <net name="u_ila_adc/probe[36]"/>
+        <net name="u_ila_adc/probe[35]"/>
+        <net name="u_ila_adc/probe[34]"/>
+        <net name="u_ila_adc/probe[33]"/>
+        <net name="u_ila_adc/probe[32]"/>
+        <net name="u_ila_adc/probe[31]"/>
+        <net name="u_ila_adc/probe[30]"/>
+        <net name="u_ila_adc/probe[29]"/>
+        <net name="u_ila_adc/probe[28]"/>
+        <net name="u_ila_adc/probe[27]"/>
+        <net name="u_ila_adc/probe[26]"/>
+        <net name="u_ila_adc/probe[25]"/>
+        <net name="u_ila_adc/probe[24]"/>
+        <net name="u_ila_adc/probe[23]"/>
+        <net name="u_ila_adc/probe[22]"/>
+        <net name="u_ila_adc/probe[21]"/>
+        <net name="u_ila_adc/probe[20]"/>
+        <net name="u_ila_adc/probe[19]"/>
+        <net name="u_ila_adc/probe[18]"/>
+        <net name="u_ila_adc/probe[17]"/>
+        <net name="u_ila_adc/probe[16]"/>
+        <net name="u_ila_adc/probe[15]"/>
+        <net name="u_ila_adc/probe[14]"/>
+        <net name="u_ila_adc/probe[13]"/>
+        <net name="u_ila_adc/probe[12]"/>
+        <net name="u_ila_adc/probe[11]"/>
+        <net name="u_ila_adc/probe[10]"/>
+        <net name="u_ila_adc/probe[9]"/>
+        <net name="u_ila_adc/probe[8]"/>
+        <net name="u_ila_adc/probe[7]"/>
+        <net name="u_ila_adc/probe[6]"/>
+        <net name="u_ila_adc/probe[5]"/>
+        <net name="u_ila_adc/probe[4]"/>
+        <net name="u_ila_adc/probe[3]"/>
+        <net name="u_ila_adc/probe[2]"/>
+        <net name="u_ila_adc/probe[1]"/>
+        <net name="u_ila_adc/probe[0]"/>
+      </nets>
+    </probe>
+  </probeset>
 </hwsession>

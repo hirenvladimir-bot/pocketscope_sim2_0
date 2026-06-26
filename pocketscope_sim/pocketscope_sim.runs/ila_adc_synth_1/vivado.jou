@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Fri Jun 26 18:55:29 2026
+# Process ID         : 46748
+# Current directory  : C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/ila_adc_synth_1
+# Command line       : vivado.exe -log ila_adc.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ila_adc.tcl
+# Log file           : C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/ila_adc_synth_1/ila_adc.vds
+# Journal file       : C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/ila_adc_synth_1\vivado.jou
+# Running On         : MOSS550W
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) i9-14900HX
+# CPU Frequency      : 2419 MHz
+# CPU Physical cores : 24
+# CPU Logical cores  : 32
+# Host memory        : 34070 MB
+# Swap memory        : 9663 MB
+# Total Virtual      : 43733 MB
+# Available Virtual  : 9561 MB
+#-----------------------------------------------------------
+source ila_adc.tcl -notrace
