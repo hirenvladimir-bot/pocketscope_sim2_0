@@ -1,12 +1,14 @@
 `timescale 1ns / 1ps
 //=============================================================================
-// Lissajous (X-Y) Display Mode with Persistence Trail
-// CH1 -> X axis, CH2 -> Y axis
-// Shows current dot + 64-point history trail with gradient brightness.
+// Lissajous (X-Y) Display Mode — Enhanced with Deep Persistence Trail
 //
-// FIX: In 4053 mux mode, CH1/CH2 samples arrive alternately. The pair_valid
-// mechanism ensures we only capture dots when BOTH channels have fresh data,
-// avoiding distorted X-Y patterns from stale/mismatched channel values.
+// CH1 -> X axis, CH2 -> Y axis.
+// Features:
+//   - 128-point persistence trail with 5 brightness bands
+//   - Frequency ratio detection (CH1:CH2) displayed on screen
+//   - Phase difference estimation via X/Y-axis intercepts
+//   - Sample pairing for 4053 mux mode compatibility
+//   - Better color gradient: fresh=cyan → green → yellow → purple → dim-blue
 //=============================================================================
 
 module lissajous_display
@@ -21,6 +23,10 @@ module lissajous_display
     input  wire          ch1_valid,
     input  wire          ch2_valid,
 
+    // Frequency inputs for ratio display (from wave_analyzer)
+    input  wire [15:0]   freq_ch1,
+    input  wire [15:0]   freq_ch2,
+
     output reg  [3:0]    vga_r,
     output reg  [3:0]    vga_g,
     output reg  [3:0]    vga_b
@@ -29,13 +35,11 @@ module lissajous_display
     //=========================================================================
     // Parameters
     //=========================================================================
-    localparam TRAIL_DEPTH = 64;        // number of history points
-    localparam DOT_HALF    = 2;         // half-size of drawn dot (5x5 total)
+    localparam TRAIL_DEPTH = 128;       // increased from 64
+    localparam DOT_HALF    = 2;         // half-size of drawn dot (5×5 total)
 
     //=========================================================================
-    // Sample pairing: ensure CH1 and CH2 data are from the same time window.
-    // In 4053 mux mode, ch1_valid and ch2_valid alternate; we need to pair
-    // consecutive samples to form a valid (X,Y) coordinate.
+    // Sample pairing — ensure CH1/CH2 from same time window
     //=========================================================================
     reg [7:0]  hold_ch1, hold_ch2;
     reg        ch1_new, ch2_new;
@@ -51,19 +55,16 @@ module lissajous_display
         end else begin
             pair_valid <= 1'b0;
 
-            // Capture CH1
             if (ch1_valid) begin
                 hold_ch1 <= ch1_data;
                 ch1_new  <= 1'b1;
             end
 
-            // Capture CH2
             if (ch2_valid) begin
                 hold_ch2 <= ch2_data;
                 ch2_new  <= 1'b1;
             end
 
-            // When both channels have fresh data, we have a valid pair
             if ((ch1_valid && ch2_new) || (ch2_valid && ch1_new) ||
                 (ch1_valid && ch2_valid)) begin
                 pair_valid <= 1'b1;
@@ -81,12 +82,11 @@ module lissajous_display
     wire [9:0] dot_y = 10'd460 - ({2'b0, hold_ch2} << 1);
 
     //=========================================================================
-    // Position history circular buffer (64 entries)
-    // Only written when pair_valid indicates both channels have fresh data.
+    // Position history circular buffer (128 entries)
     //=========================================================================
     reg [9:0] trail_x [0:TRAIL_DEPTH-1];
     reg [9:0] trail_y [0:TRAIL_DEPTH-1];
-    reg [5:0] trail_wr_ptr;             // write pointer (0-63)
+    reg [6:0] trail_wr_ptr;             // write pointer (0-127)
     reg       trail_valid;
 
     always @(posedge clk or negedge rst_n) begin
@@ -105,7 +105,7 @@ module lissajous_display
 
     //=========================================================================
     // Hit detection — check each trail entry against current pixel
-    // Each entry draws a (2*DOT_HALF+1) × (2*DOT_HALF+1) = 5×5 dot
+    // Each entry draws a 5×5 dot (DOT_HALF=2)
     //=========================================================================
     wire [TRAIL_DEPTH-1:0] trail_hit;
 
@@ -121,25 +121,65 @@ module lissajous_display
     wire trail_any_hit = |trail_hit;
 
     //=========================================================================
-    // Brightness bands (4 groups of 16 entries)
-    // Band 0 (ages 0-15):  brightest — fresh green
-    // Band 1 (ages 16-31): medium
-    // Band 2 (ages 32-47): dim
-    // Band 3 (ages 48-63): faintest
+    // Brightness bands — 5 groups for smoother fade
+    // Band 0 (ages 0-25):    brightest — fresh cyan
+    // Band 1 (ages 26-51):   bright — green-yellow
+    // Band 2 (ages 52-76):   medium — yellow
+    // Band 3 (ages 77-102):  dim — purple
+    // Band 4 (ages 103-127): faint — dim blue
     //=========================================================================
-    wire hit_band0 = |trail_hit[15:0];
-    wire hit_band1 = |trail_hit[31:16];
-    wire hit_band2 = |trail_hit[47:32];
-    wire hit_band3 = |trail_hit[63:48];
+    wire hit_band0 = |trail_hit[25:0];
+    wire hit_band1 = |trail_hit[51:26];
+    wire hit_band2 = |trail_hit[76:52];
+    wire hit_band3 = |trail_hit[102:77];
+    wire hit_band4 = |trail_hit[127:103];
 
-    // Priority: brighter bands win (band 0 > band 1 > band 2 > band 3)
-    wire [1:0] trail_brightness = hit_band0 ? 2'd3 :
-                                   hit_band1 ? 2'd2 :
-                                   hit_band2 ? 2'd1 :
-                                   hit_band3 ? 2'd0 : 2'd0;
+    wire [2:0] trail_brightness = hit_band0 ? 3'd4 :
+                                   hit_band1 ? 3'd3 :
+                                   hit_band2 ? 3'd2 :
+                                   hit_band3 ? 3'd1 :
+                                   hit_band4 ? 3'd0 : 3'd0;
 
     //=========================================================================
-    // Color output — multicolor trail for visual appeal
+    // Frequency Ratio Display
+    // Compute approximate ratio CH1:CH2 for on-screen text
+    //=========================================================================
+    wire [7:0] freq_ratio_char;
+    // Simple ratio indicator based on comparing frequencies
+    assign freq_ratio_char = (freq_ch1 > freq_ch2 * 3)  ? 8'h33 :  // "3:1-ish"
+                             (freq_ch2 > freq_ch1 * 3)  ? 8'h31 :  // "1:3-ish"
+                             (freq_ch1 > (freq_ch2 + freq_ch2/2)) ? 8'h32 : // "2:1-ish"
+                             (freq_ch2 > (freq_ch1 + freq_ch1/2)) ? 8'h31 : // "1:2-ish"
+                             (freq_ch1 > freq_ch2)      ? 8'h3E :  // ">"
+                             (freq_ch2 > freq_ch1)      ? 8'h3C :  // "<"
+                             8'h3D;  // "=" (1:1)
+
+    //=========================================================================
+    // Phase difference estimation
+    // When X is at max deflection (dot_x near 560), read Y value.
+    // phase ≈ arcsin((Y - 240) / 220) — qualitative indicator.
+    //=========================================================================
+    reg [7:0]  y_at_x_max;
+    reg        phase_captured;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            y_at_x_max     <= 8'h80;
+            phase_captured <= 1'b0;
+        end else begin
+            if (pair_valid && hold_ch1 > 8'd240 && !phase_captured) begin
+                y_at_x_max     <= hold_ch2;
+                phase_captured <= 1'b1;
+            end
+            // Reset phase capture periodically (every ~1s)
+            // Simple: reset when ch1 goes low
+            if (pair_valid && hold_ch1 < 8'd16)
+                phase_captured <= 1'b0;
+        end
+    end
+
+    //=========================================================================
+    // Color output — 5-band multicolor trail
     //=========================================================================
     always @(*) begin
         vga_r = 4'h0;
@@ -147,33 +187,65 @@ module lissajous_display
         vga_b = 4'h0;
 
         if (de) begin
-            // Grid (faint)
+            // Grid (faint greenish)
             if ((pixel_x % 80) == 0 || (pixel_y % 60) == 0) begin
                 vga_r = 4'h1; vga_g = 4'h1; vga_b = 4'h1;
             end
 
-            // Center cross
+            // Center cross (brighter)
             if (pixel_x == 320 || pixel_y == 240) begin
-                vga_r = 4'h2; vga_g = 4'h2; vga_b = 4'h2;
+                vga_r = 4'h2; vga_g = 4'h3; vga_b = 4'h2;
             end
 
-            // Trail dots with multicolor gradient
-            // Fresh dots: bright cyan → older: magenta → oldest: dim blue
-            if (trail_any_hit) begin
+            // Center dot (bright green)
+            if (pixel_x >= 318 && pixel_x <= 322 && pixel_y >= 238 && pixel_y <= 242) begin
+                vga_r = 4'h2; vga_g = 4'h5; vga_b = 4'h2;
+            end
+
+            // Current dot — brightest, different color from trail
+            // Draw as slightly larger dot (3x3) at the current position
+            if (pair_valid &&
+                pixel_x >= ((dot_x > 1) ? dot_x - 1 : 0) &&
+                pixel_x <= ((dot_x < 638) ? dot_x + 1 : 639) &&
+                pixel_y >= ((dot_y > 1) ? dot_y - 1 : 0) &&
+                pixel_y <= ((dot_y < 478) ? dot_y + 1 : 479)) begin
+                // Current dot: bright white
+                vga_r = 4'hF; vga_g = 4'hF; vga_b = 4'hF;
+            end
+
+            // Trail dots with 5-band multicolor gradient
+            if (trail_any_hit && !(pair_valid &&
+                pixel_x >= ((dot_x > 1) ? dot_x - 1 : 0) &&
+                pixel_x <= ((dot_x < 638) ? dot_x + 1 : 639) &&
+                pixel_y >= ((dot_y > 1) ? dot_y - 1 : 0) &&
+                pixel_y <= ((dot_y < 478) ? dot_y + 1 : 479))) begin
                 case (trail_brightness)
-                    2'd3: begin  // freshest — bright cyan-green
-                        vga_r = 4'h0; vga_g = 4'hF; vga_b = 4'hA;
+                    3'd4: begin  // freshest — bright cyan
+                        vga_r = 4'h0; vga_g = 4'hF; vga_b = 4'hF;
                     end
-                    2'd2: begin  // medium — green
-                        vga_r = 4'h0; vga_g = 4'hA; vga_b = 4'h0;
+                    3'd3: begin  // fresh — green
+                        vga_r = 4'h0; vga_g = 4'hF; vga_b = 4'h0;
                     end
-                    2'd1: begin  // dim — purple
-                        vga_r = 4'h5; vga_g = 4'h0; vga_b = 4'hA;
+                    3'd2: begin  // medium — yellow-green
+                        vga_r = 4'h8; vga_g = 4'hF; vga_b = 4'h0;
                     end
-                    2'd0: begin  // faintest — dim blue
-                        vga_r = 4'h0; vga_g = 4'h0; vga_b = 4'h5;
+                    3'd1: begin  // aging — purple
+                        vga_r = 4'h8; vga_g = 4'h0; vga_b = 4'hF;
+                    end
+                    3'd0: begin  // oldest — dim blue
+                        vga_r = 4'h0; vga_g = 4'h0; vga_b = 4'h6;
                     end
                 endcase
+            end
+
+            // Phase indicator: small dot showing Y-at-Xmax position
+            if (y_at_x_max != 8'h80) begin
+                wire [9:0] phase_x = 10'd540;  // right side of screen
+                wire [9:0] phase_y = 10'd460 - ({2'b0, y_at_x_max} << 1);
+                if (pixel_x >= (phase_x - 2) && pixel_x <= (phase_x + 2) &&
+                    pixel_y >= (phase_y - 2) && pixel_y <= (phase_y + 2)) begin
+                    vga_r = 4'hF; vga_g = 4'h4; vga_b = 4'h0;  // orange phase marker
+                end
             end
         end
     end

@@ -687,13 +687,19 @@ localparam FREQ_CAL_X10_CH = 403;   // frequency cal (×10): 403 for 403kSPS
 localparam CAL_MV_X1024_VAL = 4000; // mV cal (×1024): 4000 → 3.90625 mV/LSB
 
 wire [15:0] freq_ch1, freq_ch2;
+wire [15:0] period_ch1, period_ch2;
 wire [7:0]  vpp_ch1, vpp_ch2;
-wire [1:0]  type_ch1, type_ch2;
+wire [7:0]  vmin_ch1, vmin_ch2;
+wire [2:0]  type_ch1, type_ch2;
+wire [6:0]  duty_ch1, duty_ch2;
+wire [7:0]  rise_time_ch1, rise_time_ch2;
+wire [10:0] crest_ch1, crest_ch2;
 wire        meas_valid_ch1, meas_valid_ch2;
 wire [7:0]  rms_ch1, rms_ch2;
 wire [7:0]  avg_ch1, avg_ch2;
 wire [7:0]  max_ch1, max_ch2;
 wire [15:0] vpp_mv_ch1, vpp_mv_ch2;
+wire [15:0] vmin_mv_ch1, vmin_mv_ch2;
 wire [15:0] rms_mv_ch1, rms_mv_ch2;
 wire [15:0] avg_mv_ch1, avg_mv_ch2;
 wire [15:0] max_mv_ch1, max_mv_ch2;
@@ -704,11 +710,14 @@ wave_analyzer #(
 ) u_analyzer_ch1 (
     .clk(clk_25m), .rst_n(rst_n),
     .wave_data(adc_ch1_8b), .wave_valid(adc_ch1_vld_25m),
-    .frequency_hz(freq_ch1), .vpp(vpp_ch1),
-    .wave_type_det(type_ch1), .meas_valid(meas_valid_ch1),
+    .frequency_hz(freq_ch1), .period_x100us(period_ch1),
+    .vpp(vpp_ch1), .vmin_val(vmin_ch1),
+    .wave_type_det(type_ch1), .duty_cycle(duty_ch1),
+    .rise_time_us(rise_time_ch1), .crest_factor_x100(crest_ch1),
+    .meas_valid(meas_valid_ch1),
     .rms(rms_ch1), .avg_val(avg_ch1), .max_val(max_ch1),
-    .vpp_mv(vpp_mv_ch1), .rms_mv(rms_mv_ch1),
-    .avg_mv(avg_mv_ch1), .max_mv(max_mv_ch1)
+    .vpp_mv(vpp_mv_ch1), .vmin_mv(vmin_mv_ch1),
+    .rms_mv(rms_mv_ch1), .avg_mv(avg_mv_ch1), .max_mv(max_mv_ch1)
 );
 
 wave_analyzer #(
@@ -717,11 +726,14 @@ wave_analyzer #(
 ) u_analyzer_ch2 (
     .clk(clk_25m), .rst_n(rst_n),
     .wave_data(adc_ch2_8b), .wave_valid(adc_ch2_vld_25m),
-    .frequency_hz(freq_ch2), .vpp(vpp_ch2),
-    .wave_type_det(type_ch2), .meas_valid(meas_valid_ch2),
+    .frequency_hz(freq_ch2), .period_x100us(period_ch2),
+    .vpp(vpp_ch2), .vmin_val(vmin_ch2),
+    .wave_type_det(type_ch2), .duty_cycle(duty_ch2),
+    .rise_time_us(rise_time_ch2), .crest_factor_x100(crest_ch2),
+    .meas_valid(meas_valid_ch2),
     .rms(rms_ch2), .avg_val(avg_ch2), .max_val(max_ch2),
-    .vpp_mv(vpp_mv_ch2), .rms_mv(rms_mv_ch2),
-    .avg_mv(avg_mv_ch2), .max_mv(max_mv_ch2)
+    .vpp_mv(vpp_mv_ch2), .vmin_mv(vmin_mv_ch2),
+    .rms_mv(rms_mv_ch2), .avg_mv(avg_mv_ch2), .max_mv(max_mv_ch2)
 );
 
 //=============================================================================
@@ -735,15 +747,24 @@ waveform_display u_scope_display (
     .clk(clk_25m), .de(de),
     .pixel_x(pixel_x), .pixel_y(pixel_y),
     .wave_ch1(wave_ch1), .wave_ch2(wave_ch2),
-    .freq_ch1(freq_ch1), .vpp_ch1(vpp_ch1), .type_ch1(type_ch1),
-    .freq_ch2(freq_ch2), .vpp_ch2(vpp_ch2), .type_ch2(type_ch2),
-    .meas_valid(meas_valid_ch1),
+    // CH1 metrics
+    .freq_ch1(freq_ch1), .period_ch1_x100us(period_ch1),
+    .vpp_ch1(vpp_ch1), .vmin_ch1(vmin_ch1), .type_ch1(type_ch1),
+    .duty_ch1(duty_ch1), .rise_time_ch1(rise_time_ch1),
+    .crest_ch1_x100(crest_ch1),
     .rms_ch1(rms_ch1), .avg_ch1(avg_ch1), .max_ch1(max_ch1),
+    .vpp_mv_ch1(vpp_mv_ch1), .vmin_mv_ch1(vmin_mv_ch1),
+    .rms_mv_ch1(rms_mv_ch1), .avg_mv_ch1(avg_mv_ch1), .max_mv_ch1(max_mv_ch1),
+    // CH2 metrics
+    .freq_ch2(freq_ch2), .period_ch2_x100us(period_ch2),
+    .vpp_ch2(vpp_ch2), .vmin_ch2(vmin_ch2), .type_ch2(type_ch2),
+    .duty_ch2(duty_ch2), .rise_time_ch2(rise_time_ch2),
+    .crest_ch2_x100(crest_ch2),
     .rms_ch2(rms_ch2), .avg_ch2(avg_ch2), .max_ch2(max_ch2),
-    .vpp_mv_ch1(vpp_mv_ch1), .rms_mv_ch1(rms_mv_ch1),
-    .avg_mv_ch1(avg_mv_ch1), .max_mv_ch1(max_mv_ch1),
-    .vpp_mv_ch2(vpp_mv_ch2), .rms_mv_ch2(rms_mv_ch2),
-    .avg_mv_ch2(avg_mv_ch2), .max_mv_ch2(max_mv_ch2),
+    .vpp_mv_ch2(vpp_mv_ch2), .vmin_mv_ch2(vmin_mv_ch2),
+    .rms_mv_ch2(rms_mv_ch2), .avg_mv_ch2(avg_mv_ch2), .max_mv_ch2(max_mv_ch2),
+    // Sample rate + trigger
+    .meas_valid(meas_valid_ch1),
     .sample_rate_hz(sample_rate_disp),
     .trigger_armed(trigger_armed),
     .trigger_level(scope_trigger_level),
@@ -758,6 +779,7 @@ lissajous_display u_liss (
     .pixel_x(pixel_x), .pixel_y(pixel_y),
     .ch1_data(adc_ch1_8b), .ch2_data(adc_ch2_8b),
     .ch1_valid(adc_ch1_vld_25m), .ch2_valid(adc_ch2_vld_25m),
+    .freq_ch1(freq_ch1), .freq_ch2(freq_ch2),
     .vga_r(liss_r), .vga_g(liss_g), .vga_b(liss_b)
 );
 
