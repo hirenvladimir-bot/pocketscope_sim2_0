@@ -1521,3 +1521,1125 @@ selectMenuItem(RDIResource.WaveformMenuMgr_MENU_ITEM, "Analog"); // ad (RDIResou
 // TclEventType: WAVEFORM_UPDATE_COMMANDS
 // TclEventType: WAVEFORM_UPDATE_TITLE
 // TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 220 seconds
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0]]", 0, true, false, false, false, true, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE) - Popup Trigger - Node
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0]]", 0); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:04 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:04 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:04 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:05 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:05 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:05 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0]]", 0); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// Elapsed time: 10 seconds
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0]]", 0); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [63]]", 1, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:18 PM CST
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [62]]", 2, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:20 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:20 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:21 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectButton(PAResourceEtoH.HardwareIlaWaveformView_RUN_TRIGGER_FOR_THIS_ILA_CORE, "Waveform View_run_trigger"); // C (PAResourceEtoH.HardwareIlaWaveformView_RUN_TRIGGER_FOR_THIS_ILA_CORE, Waveform View_run_trigger)
+// Run Command: PAResourceCommand.PACommandNames_RUN_TRIGGER
+// TclEventType: HW_ILA_CHANGE
+// Tcl Message: run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7a35t_0] -filter {CELL_NAME=~"u_ila_adc/u_ila"}] 
+// Tcl Message: INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Jun-26 19:11:23 
+// Tcl Message: wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7a35t_0] -filter {CELL_NAME=~"u_ila_adc/u_ila"}] 
+// TclEventType: HW_ILA_CHANGE
+// TclEventType: WAVEFORM_GLASSPANE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_DELAYED_MODEL_EVENT
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: HW_WAVE_ZIP_EXPORT_DONE
+// TclEventType: WAVEFORM_GLASSPANE
+// Tcl Message: display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7a35t_0] -filter {CELL_NAME=~"u_ila_adc/u_ila"}]] 
+// Tcl Message: INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Jun-26 19:11:23 INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.hw/backup/hw_ila_data_1.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data. 
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:24 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:24 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:25 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:26 PM CST
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:26 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:11:42 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:50 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:56 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:56 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:11:58 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:06 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:07 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:07 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:07 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:08 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:08 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:09 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:12:11 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 165 MB. Current time: 6/26/26, 7:12:13 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// Elapsed time: 52 seconds
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [56]]", 2, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:16 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [61]]", 3, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:20 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// Elapsed time: 15 seconds
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, -264, 167); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+/********** startDrag (2115, 595); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer) **********/
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 167 MB. Current time: 6/26/26, 7:12:35 PM CST
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:35 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:35 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:36 PM CST
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:36 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 167 MB. Current time: 6/26/26, 7:12:36 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 167 MB. Current time: 6/26/26, 7:12:36 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:37 PM CST
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:37 PM CST
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:37 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:37 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 167 MB. Current time: 6/26/26, 7:12:37 PM CST
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 167 MB. Current time: 6/26/26, 7:12:37 PM CST
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:38 PM CST
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:38 PM CST
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:38 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:12:38 PM CST
+/********** endDrag (2140, 576); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer) **********/
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 119 seconds
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [59]]", 5, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [60]]", 4, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:14:39 PM CST
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [59]]", 5, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [58]]", 6, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [57]]", 7, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:14:46 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [56]]", 5, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [55]]", 6, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:14:50 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [54]]", 4, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [53]]", 5, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:14:54 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [52]]", 3, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [51]]", 4, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:15:00 PM CST
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [50]]", 5, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [49]]", 6, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:15:07 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:15:20 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 17 seconds
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0], [2]]", 5, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE)
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 166 MB. Current time: 6/26/26, 7:15:24 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// Elapsed time: 121 seconds
+selectTreeTable(PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE, "XADC ; ", 3, "XADC", 0, false); // m (PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE)
+selectTreeTable(PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE, "XADC ; ", 3, "XADC", 0, false, false, false, false, true, false); // m (PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE) - Popup Trigger
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 276 seconds
+selectTreeTable(PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE, "hw_ila_1 ; Idle", 4, "hw_ila_1", 0, false, false, false, false, true, false); // m (PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE) - Popup Trigger
+selectMenu(PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, "Dashboard"); // am (PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, Dashboard)
+selectMenu(PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, "Dashboard"); // am (PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, Dashboard)
+selectMenuItem(RDIResourceCommand.RDICommands_PROPERTIES, "ILA Core Properties..."); // ap (RDIResourceCommand.RDICommands_PROPERTIES, edit_properties_menu)
+// Run Command: RDIResourceCommand.RDICommands_PROPERTIES
+selectTreeTable(PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE, "hw_ila_1 ; Idle", 4, "Idle", 1, false, false, false, false, true, false); // m (PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE) - Popup Trigger
+selectMenuItem(PAResourceCommand.PACommandNames_CREATE_USER_DEFINED_DEBUG_PROBE, "Create User Defined Probe..."); // ap (PAResourceCommand.PACommandNames_CREATE_USER_DEFINED_DEBUG_PROBE, create_user_defined_debug_probe_menu)
+// Run Command: PAResourceCommand.PACommandNames_CREATE_USER_DEFINED_DEBUG_PROBE
+dismissDialog("Create User Defined Probe"); // a (dialog28)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 168 MB. Current time: 6/26/26, 7:24:03 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 168 MB. Current time: 6/26/26, 7:24:03 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 168 MB. Current time: 6/26/26, 7:24:03 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 98 seconds
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, u_ila_adc/probe[63:0]]", 0, true, false, false, false, true, false); // k (RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE) - Popup Trigger - Node
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectButton(PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, "IlaProbeTablePanel_new"); // C (PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, IlaProbeTablePanel_new)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "==  ", 1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, null, -1, null, -1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, true, false); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Popup Trigger
+// Elapsed time: 62 seconds
+selectTreeTable(PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE, "hw_ila_1 ; Idle", 4, "hw_ila_1", 0, false); // m (PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE)
+selectTreeTable(PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE, "hw_ila_1 ; Idle", 4, "hw_ila_1", 0, false, false, false, false, true, false); // m (PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE) - Popup Trigger
+selectMenu(PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, "Dashboard"); // am (PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, Dashboard)
+// Elapsed time: 42 seconds
+selectButton(PAResourceTtoZ.TriggerStatusPanel_COMPILE_TRIGGER_STATE_MACHINE, "ILA_compile_tsm"); // C (PAResourceTtoZ.TriggerStatusPanel_COMPILE_TRIGGER_STATE_MACHINE, ILA_compile_tsm)
+selectMenuItem(RDIResource.WorkspaceDockingHolder_CLOSE, "Close"); // ap (RDIResource.WorkspaceDockingHolder_CLOSE, DockableFrameTitlePane.close)
+closeFrame(RDIResource.WorkspaceDockingHolder_DOCKABLE_FRAME, "Status - hw_ila_1"); // S.b (RDIResource.WorkspaceDockingHolder_DOCKABLE_FRAME, ILA_STATUS_1)
+selectTreeTable(PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE, "hw_ila_1 ; Idle", 4, "hw_ila_1", 0, false, false, false, false, true, false); // m (PAResourceEtoH.HardwareTreePanel_HARDWARE_TREE_TABLE) - Popup Trigger
+selectMenu(PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, "Dashboard"); // am (PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, Dashboard)
+selectMenu(PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, "Dashboard"); // am (PAResourceCommand.PACommandNames_CREATE_HARDWARE_DASHBOARDS, Dashboard)
+selectMenuItem((HResource) null, "hw_ila_1"); // ap (hw_ila_1)
+// Elapsed time: 153 seconds
+selectButton(PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, "IlaProbeTablePanel_new"); // C (PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, IlaProbeTablePanel_new)
+selectButton(RDIResource.HPopupTitle_CLOSE, (String) null); // k (RDIResource.HPopupTitle_CLOSE)
+selectButton(PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, "IlaProbeTablePanel_new"); // C (PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, IlaProbeTablePanel_new)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false, false, false, false, true, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE) - Popup Trigger
+// Elapsed time: 20 seconds
+setText("PAResourceOtoP.ProbesView_PROBES_TREE_SEARCH_FIELD", (String) null); // OverlayTextField (PAResourceOtoP.ProbesView_PROBES_TREE_SEARCH_FIELD)
+selectButton(RDIResource.HPopupTitle_CLOSE, (String) null); // k (RDIResource.HPopupTitle_CLOSE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "==  ", 1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "[H]  ", 2); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, null, -1, null, -1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "eq64'hXXXX_XXXX_XXXX_XXXX", 4); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, null, -1, null, -1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+// TclEventType: DEBUG_PROBE_CHANGE
+// Tcl Message: set_property TRIGGER_COMPARE_VALUE eq64'bXXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX [get_hw_probes u_ila_adc/probe -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7a35t_0] -filter {CELL_NAME=~"u_ila_adc/u_ila"}]] 
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [B]   ; XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX", 3); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, null, -1, null, -1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [B]   ; XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX", 3); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceOtoP.ProbeValueTablePanel_PROBE_BIT_POSITION_TABLE, "ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4a75b702,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=63,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@1e75a12f,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=62,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@39f0becd,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=61,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@5edac356,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=60,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@6d156d7b,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@af5d466,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=59,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@36cf1523,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=58,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@3e87b0df,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=57,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@78bf7cc1,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=56,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@5ccdc154,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@1265a1e3,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=55,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@1167fa38,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=54,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@12bdc5a1,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=53,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@204861c3,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=52,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@1f9db690,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@31852961,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=51,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4de9723d,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=50,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@2ecc543a,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=49,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@5c975e45,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=48,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4441aa97,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@42bf50b8,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=47,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@e1eb151,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=46,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@681db3a1,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=45,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@21c1a927,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=44,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@19430737,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@62acb977,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=43,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@67299e38,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=42,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4b8d9b6b,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=41,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4a764792,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=40,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4d9628aa,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@66e5b77e,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=39,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@41142e0a,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=38,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@39a6ab6d,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=37,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4509078b,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=36,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@e1c1613,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@6e180da4,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=35,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@62e93ec9,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=34,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@6fd15840,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=33,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@1937727,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=32,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@2f483f9c,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@47c53ca,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=31,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@618a185d,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=30,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@7bba6104,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=29,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@15601530,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=28,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@7364e655,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@429d5094,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=27,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@6a07bb82,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=26,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@7f5bfa67,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=25,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@2b59ed97,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=24,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@3680198,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@546471dc,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=23,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@744c21f5,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=22,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@109d4fbe,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=21,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@53baf8f4,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=20,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@24a799ce,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@31f15726,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=19,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4b6b0e19,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=18,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@4f1222d8,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=17,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@5763ab1d,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=16,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@6c908eb0,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@7f984efd,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=15,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@2142b734,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=14,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@6b33cb42,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=13,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@3be2d9a,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=12,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@3e6c64b6,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@aa38f58,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=11,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@7f3f3c95,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=10,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@d1f0c15,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=9,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@500b90d4,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=8,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@46c40cc2,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@40194b1b,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=7,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@359398a9,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=6,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@391233ff,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=5,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@5fd69a03,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=4,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@551d5371,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text= ,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@7c62dfab,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=3,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@54c79613,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=2,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@3faa180a,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=1,verticalAlignment=CENTER,verticalTextPosition=CENTER] ; ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@934255,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=0,verticalAlignment=CENTER,verticalTextPosition=CENTER]", 0, "ui.utils.swing.h.g[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=ui.utils.swing.a.e@36cf1523,flags=25165832,maximumSize=,minimumSize=,preferredSize=,defaultIcon=,disabledIcon=,horizontalAlignment=TRAILING,horizontalTextPosition=CENTER,iconTextGap=4,labelFor=,text=58,verticalAlignment=CENTER,verticalTextPosition=CENTER]", 6); // aM.a (PAResourceOtoP.ProbeValueTablePanel_PROBE_BIT_POSITION_TABLE)
+editTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX", 0, "Value", 3); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [B]   ; XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [B]   ; XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, false, true); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Double Click
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [B]   ; XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, true, false); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Popup Trigger
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+// Elapsed time: 18 seconds
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [B]   ; XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectButton(PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, "IlaProbeTablePanel_new"); // C (PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, IlaProbeTablePanel_new)
+// Elapsed time: 12 seconds
+setText("PAResourceOtoP.ProbesView_PROBES_TREE_SEARCH_FIELD", (String) null); // OverlayTextField (PAResourceOtoP.ProbesView_PROBES_TREE_SEARCH_FIELD)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false, false, false, false, true, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE) - Popup Trigger
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+/********** startDrag (1754, 818); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer) **********/
+/********** endDrag (1754, 818); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer) **********/
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H] ;  ; probe0[63:0] ; ", 1, "u_ila_adc/probe[63:0]", 0, false, false, false, true, false); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Popup Trigger
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+selectMenuItem(PAResourceItoN.IlaProbeTablePanel_REMOVE_SELECTED_PROBES, "Remove"); // ap (PAResourceItoN.IlaProbeTablePanel_REMOVE_SELECTED_PROBES)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [B]   ; XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, true, false); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Popup Trigger
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+selectMenuItem(PAResourceItoN.IlaProbeTablePanel_REMOVE_SELECTED_PROBES, "Remove"); // ap (PAResourceItoN.IlaProbeTablePanel_REMOVE_SELECTED_PROBES)
+// TclEventType: DEBUG_PROBE_CHANGE
+// Tcl Message: set_property TRIGGER_COMPARE_VALUE eq64'hXXXX_XXXX_XXXX_XXXX [get_hw_probes u_ila_adc/probe -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7a35t_0] -filter {CELL_NAME=~"u_ila_adc/u_ila"}]] 
+selectButton(PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, "IlaProbeTablePanel_new"); // C (PAResourceItoN.IlaProbeTablePanel_ADD_PROBE, IlaProbeTablePanel_new)
+selectTree(PAResourceOtoP.ProbesView_PROBES_TREE, "[root, u_ila_adc/probe[63:0]]", 0, false); // A (PAResourceOtoP.ProbesView_PROBES_TREE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, true, false); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Popup Trigger
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, false, true); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Double Click
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+// Elapsed time: 92 seconds
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, true, false); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Popup Trigger
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+selectMenuItem(PAResourceCommand.PACommandNames_DISABLE_AUTO_RETRIGGER, "Disable Auto Re-trigger"); // ap (PAResourceCommand.PACommandNames_DISABLE_AUTO_RETRIGGER, disable_auto_retrigger_menu)
+selectMenuItem(RDIResourceCommand.RDICommands_PROPERTIES, "Debug Probe Value Properties..."); // ap (RDIResourceCommand.RDICommands_PROPERTIES, edit_properties_menu)
+// Run Command: RDIResourceCommand.RDICommands_PROPERTIES
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, true, false); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Popup Trigger
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+selectMenuItem(RDIResource.AbstractSelectableTablePanel_EXPORT_TO_SPREADSHEET, "Export to Spreadsheet..."); // ap (RDIResource.AbstractSelectableTablePanel_EXPORT_TO_SPREADSHEET)
+dismissDialog("Export Table to Spreadsheet"); // z (dialog29)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "u_ila_adc/probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "u_ila_adc/probe[63:0]", 0, false, false, false, true, false); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE) - Popup Trigger
+selectMenu(PAResourceItoN.LabtoolsMenu_NAME, "Name"); // am (PAResourceItoN.LabtoolsMenu_NAME, Name)
+selectMenuItem(PAResourceItoN.LabtoolsMenu_SHORT, "Short"); // ax (PAResourceItoN.LabtoolsMenu_SHORT, Short)
+// Run Command: PAResourceCommand.PACommandNames_DISPLAY_PROBE_SHORT_NAME
+// TclEventType: DEBUG_PROBE_CHANGE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// Tcl Message: set_property NAME.SELECT short [get_hw_probes u_ila_adc/probe -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7a35t_0] -filter {CELL_NAME=~"u_ila_adc/u_ila"}]]  
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "==  ", 1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, null, -1, null, -1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "probe[63:0] ; ==   ; [H]   ; XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "[H]  ", 2); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, null, -1, null, -1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+// TclEventType: DEBUG_PROBE_CHANGE
+// Tcl Message: set_property TRIGGER_COMPARE_VALUE eq64'bXXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX [get_hw_probes u_ila_adc/probe -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7a35t_0] -filter {CELL_NAME=~"u_ila_adc/u_ila"}]] 
+// Elapsed time: 30 seconds
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, "probe[63:0] ; ==   ; [B]   ; XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX_XXXX ; probe0[63:0] ; ", 0, "==  ", 1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+selectTable(PAResourceTtoZ.TriggerSetupPanel_TABLE, null, -1, null, -1); // g.c (PAResourceTtoZ.TriggerSetupPanel_TABLE)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 171 MB. Current time: 6/26/26, 7:35:15 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 170 MB. Current time: 6/26/26, 7:35:15 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 170 MB. Current time: 6/26/26, 7:35:16 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 170 MB. Current time: 6/26/26, 7:35:16 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 170 MB. Current time: 6/26/26, 7:35:17 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 171 MB. Current time: 6/26/26, 7:35:17 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 171 MB. Current time: 6/26/26, 7:35:17 PM CST
+// Elapsed time: 129 seconds
+selectButton(RDIResource.HToolBar_SETTINGS, "Waveform View_settings"); // w (RDIResource.HToolBar_SETTINGS, Waveform View_settings): TRUE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 171 MB. Current time: 6/26/26, 7:35:19 PM CST
+selectButton(RDIResource.HViewWithOptionsDockableFrame_CLOSE, (String) null); // C (RDIResource.HViewWithOptionsDockableFrame_CLOSE)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 172 MB. Current time: 6/26/26, 7:35:23 PM CST
+selectButton(PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, "Waveform View_export_ila_data"); // C (PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, Waveform View_export_ila_data)
+// Run Command: PAResourceCommand.PACommandNames_EXPORT_ILA_DATA
+selectButton(RDIResource.BaseDialog_OK, "OK", "Export ILA Data"); // f (RDIResource.BaseDialog_OK)
+// Tcl Command: 'write_hw_ila_data {D:\pocketscope_sim\pocketscope_sim\iladata.ila} hw_ila_data_1'
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// 'B' command handler elapsed time: 3 seconds
+// Tcl Message: write_hw_ila_data {D:\pocketscope_sim\pocketscope_sim\iladata.ila} hw_ila_data_1 
+// Tcl Message: D:/pocketscope_sim/pocketscope_sim/iladata.ila 
+dismissDialog("Export ILA Data"); // i (dialog30)
+// Elapsed time: 15 seconds
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, 519, 415); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+/********** leftMouseClick (1812, 782, true); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer) **********/
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+selectButton(PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, "Waveform View_export_ila_data"); // C (PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, Waveform View_export_ila_data)
+// Run Command: PAResourceCommand.PACommandNames_EXPORT_ILA_DATA
+// 'B' command handler elapsed time: 5 seconds
+dismissDialog("Export ILA Data"); // i (dialog31)
+// Elapsed time: 19 seconds
+selectButton(PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, "Waveform View_export_ila_data"); // C (PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, Waveform View_export_ila_data)
+// Run Command: PAResourceCommand.PACommandNames_EXPORT_ILA_DATA
+// 'B' command handler elapsed time: 3 seconds
+dismissDialog("Export ILA Data"); // i (dialog32)
+// Elapsed time: 17 seconds
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, 781, 431); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+/********** leftMouseClick (1984, 793, true); // b (RDIResource.RDIViews_WAVEFORM_VIEWER, PlanAheadTabWaveform View_viewer) **********/
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_SELECTED_WAVE_OBJECT_NAMES
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_MOVE_CURSOR
+selectButton(PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, "Waveform View_export_ila_data"); // C (PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, Waveform View_export_ila_data)
+// Run Command: PAResourceCommand.PACommandNames_EXPORT_ILA_DATA
+setText(PAResourceEtoH.ExportIlaDataDialog_SPECIFY_FILE, "D:/pocketscope_sim/pocketscope_sim/iladata.ila"); // ac (PAResourceEtoH.ExportIlaDataDialog_SPECIFY_FILE)
+// Elapsed time: 28 seconds
+selectMoreButton(PAResourceEtoH.ExportIlaDataDialog_SPECIFY_FILE, (String) null, "Export ILA Data"); // s (PAResourceEtoH.ExportIlaDataDialog_SPECIFY_FILE)
+dismissFileChooser();
+// 'B' command handler elapsed time: 45 seconds
+dismissDialog("Export ILA Data"); // i (dialog33)
+// Elapsed time: 49 seconds
+selectButton(PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, "Waveform View_export_ila_data"); // C (PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, Waveform View_export_ila_data)
+// Run Command: PAResourceCommand.PACommandNames_EXPORT_ILA_DATA
+selectMoreButton(PAResourceEtoH.ExportIlaDataDialog_SPECIFY_FILE, (String) null, "Export ILA Data"); // s (PAResourceEtoH.ExportIlaDataDialog_SPECIFY_FILE)
+setFileChooser("D:/pocketscope_sim/pocketscope_sim/iladata.ila");
+selectButton("OptionPane.button", "OK", "Confirm Overwrite"); // JButton (OptionPane.button)
+selectButton(RDIResource.BaseDialog_OK, "OK", "Export ILA Data"); // f (RDIResource.BaseDialog_OK)
+// Tcl Command: 'write_hw_ila_data -force {D:\pocketscope_sim\pocketscope_sim\iladata.ila} hw_ila_data_1'
+// 'B' command handler elapsed time: 15 seconds
+selectButton("OptionPane.button", "Yes", "Export ILA Data"); // JButton (OptionPane.button)
+// Tcl Message: write_hw_ila_data -force {D:\pocketscope_sim\pocketscope_sim\iladata.ila} hw_ila_data_1 
+// Tcl Message: D:/pocketscope_sim/pocketscope_sim/iladata.ila 
+dismissDialog("Export ILA Data"); // i (dialog35)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 529, 121); // cE (RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 0, 117); // cE (RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 0, 117); // cE (RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR)
+typeControlKey(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, "RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR", 'c'); // cE (RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR)
+// Elapsed time: 67 seconds
+selectButton(PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, "Waveform View_export_ila_data"); // C (PAResourceEtoH.HardwareIlaWaveformView_EXPORT_ILA_WAVEFORM_DATA, Waveform View_export_ila_data)
+// Run Command: PAResourceCommand.PACommandNames_EXPORT_ILA_DATA
+selectMoreButton(PAResourceEtoH.ExportIlaDataDialog_SPECIFY_FILE, (String) null, "Export ILA Data"); // s (PAResourceEtoH.ExportIlaDataDialog_SPECIFY_FILE)
+selectButton((HResource) null, "FileChooser.homeFolderIcon", "Specify File"); // JButton (FileChooser.homeFolderIcon)
+setFileChooser("C:/Users/sgzmd/Desktop/pocketscope_sim2_0/iladata.ila");
+selectButton(RDIResource.BaseDialog_OK, "OK", "Export ILA Data"); // f (RDIResource.BaseDialog_OK)
+// Tcl Command: 'write_hw_ila_data {C:\Users\sgzmd\Desktop\pocketscope_sim2_0\iladata.ila} hw_ila_data_1'
+// 'B' command handler elapsed time: 13 seconds
+// Tcl Message: write_hw_ila_data {C:\Users\sgzmd\Desktop\pocketscope_sim2_0\iladata.ila} hw_ila_data_1 
+// Tcl Message: C:/Users/sgzmd/Desktop/pocketscope_sim2_0/iladata.ila 
+dismissDialog("Export ILA Data"); // i (dialog37)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 171 MB. Current time: 6/26/26, 7:52:18 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 172 MB. Current time: 6/26/26, 7:52:18 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 798 seconds
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 816, 5); // cE (RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 171 MB. Current time: 6/26/26, 8:06:24 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 849 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 21, false); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// Tcl Message: reset_run synth_1 
+// Tcl Message: INFO: [Project 1-1161] Replacing file C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/utils_1/imports/synth_1/top.dcp with file C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1/top.dcp 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 170 MB. Current time: 6/26/26, 8:07:27 PM CST
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// TclEventType: FILE_SET_CHANGE
+dismissDialog("Resetting Runs"); // bk (Resetting Runs Progress)
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: RUN_LAUNCH
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 172 MB. Current time: 6/26/26, 8:07:27 PM CST
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 16 
+// Tcl Message: [Fri Jun 26 20:07:28 2026] Launched synth_1... Run output will be captured here: C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1/runme.log [Fri Jun 26 20:07:28 2026] Launched impl_1... Run output will be captured here: C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/impl_1/runme.log 
+dismissDialog("Generate Bitstream"); // bk (Generate Bitstream Progress)
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 365 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK", "Synthesis Failed"); // f (RDIResource.BaseDialog_OK)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // W.a (dialog39)
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 275 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK", "Synthesis Completed"); // f (RDIResource.BaseDialog_OK)
+// Run Command: PAResourceCommand.PACommandNames_RUN_IMPLEMENTATION
+dismissDialog("Synthesis Completed"); // W.a (dialog40)
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: reset_run synth_1 
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// Tcl Message: INFO: [Project 1-1161] Replacing file C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/utils_1/imports/synth_1/top.dcp with file C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1/top.dcp 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 171 MB. Current time: 6/26/26, 8:18:10 PM CST
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: launch_runs impl_1 -jobs 16 
+// Tcl Message: [Fri Jun 26 20:18:10 2026] Launched synth_1... Run output will be captured here: C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1/runme.log [Fri Jun 26 20:18:10 2026] Launched impl_1... Run output will be captured here: C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+dismissDialog("Starting Design Runs"); // bk (Starting Design Runs Progress)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 21, false); // g (PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, Flow Navigator Tree)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 172 MB. Current time: 6/26/26, 8:18:13 PM CST
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: reset_run synth_1 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 171 MB. Current time: 6/26/26, 8:18:14 PM CST
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+dismissDialog("Resetting Runs"); // bk (Resetting Runs Progress)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: PAUSE_COMPOSITE_FILE_CHANGE_GUI
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 16 
+// Tcl Message: [Fri Jun 26 20:18:14 2026] Launched synth_1... Run output will be captured here: C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/synth_1/runme.log [Fri Jun 26 20:18:14 2026] Launched impl_1... Run output will be captured here: C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "pocketscope.xdc", 0); // o (PlanAheadTabBaseWorkspace_JideTabbedPane)

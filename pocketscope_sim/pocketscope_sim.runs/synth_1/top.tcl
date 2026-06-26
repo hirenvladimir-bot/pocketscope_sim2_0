@@ -56,7 +56,10 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param tcl.collectionResultDisplayLimit 0
+set_param chipscope.maxJobs 8
 set_param general.usePosixSpawnForFork 1
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcsg324-1
 
@@ -91,11 +94,11 @@ read_verilog -library xil_defaultlib {
   C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/xadc_reader.v
   C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/new/top.v
 }
-read_ip -quiet C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/ip/ila_adc/ila_adc.xci
-set_property used_in_synthesis false [get_files -all c:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/ila_adc_1/ila_v6_2/constraints/ila_impl.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/ila_adc_1/ila_v6_2/constraints/ila_impl.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/ila_adc_1/ila_v6_2/constraints/ila.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/ila_adc_1/ila_adc_ooc.xdc]
+read_ip -quiet C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/sources_1/ip/ila_adc_1/ila_adc.xci
+set_property used_in_synthesis false [get_files -all c:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/ila_adc_2/ila_v6_2/constraints/ila_impl.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/ila_adc_2/ila_v6_2/constraints/ila_impl.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/ila_adc_2/ila_v6_2/constraints/ila.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.gen/sources_1/ip/ila_adc_2/ila_adc_ooc.xdc]
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -108,9 +111,6 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 }
 read_xdc C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/constrs_1/new/pocketscope.xdc
 set_property used_in_implementation false [get_files C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/constrs_1/new/pocketscope.xdc]
-
-read_xdc C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/constrs_1/new/ila_adc.xdc
-set_property used_in_implementation false [get_files C:/Users/sgzmd/Desktop/pocketscope_sim2_0/pocketscope_sim/pocketscope_sim.srcs/constrs_1/new/ila_adc.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 

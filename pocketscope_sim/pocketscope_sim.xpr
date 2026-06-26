@@ -117,6 +117,13 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/new/ila_adc_debug.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/new/kaleidoscope.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -325,6 +332,19 @@
       </File>
       <Config>
         <Option Name="TopModule" Val="clk_wiz_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="ila_adc" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ila_adc" RelGenDir="$PGENDIR/ila_adc">
+      <File Path="$PSRCDIR/sources_1/ip/ila_adc_1/ila_adc.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="ila_adc"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>

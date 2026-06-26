@@ -1,15 +1,10 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="sgzmd" Host="MOSS550W" Pid="36068" HostCore="32" HostMemory="034070192128">
+    <Process Command="vivado.bat" Owner="sgzmd" Host="MOSS550W" Pid="9600" HostCore="32" HostMemory="034070192128">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="sgzmd" Host="MOSS550W" Pid="13776" HostCore="32" HostMemory="034070192128">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="sgzmd" Host="MOSS550W" Pid="44820" HostCore="32" HostMemory="034070192128">
+    <Process Command="vivado.bat" Owner="sgzmd" Host="MOSS550W" Pid="23120" HostCore="32" HostMemory="034070192128">
     </Process>
 </ProcessHandle>

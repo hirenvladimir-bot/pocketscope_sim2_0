@@ -53,7 +53,13 @@ module xadc_reader
     output wire          mux_sel,         // 0=CH1 routed to ADC, 1=CH2 routed to ADC
     // Sample rate measurement (debug)
     output reg  [15:0]   sample_rate_hz,  // CH1 samples per second
-    output reg           sample_rate_update // pulsed when sample_rate_hz updates
+    output reg           sample_rate_update, // pulsed when sample_rate_hz updates
+    // DRP handshake debug outputs (for ILA monitoring)
+    output wire          dbg_drp_drdy,    // DRP data-ready from XADC
+    output wire          dbg_drp_den,     // DRP enable to XADC
+    output wire          dbg_settling,    // 4053 settle wait state
+    output wire          dbg_den_pending, // DEN pending flag
+    output wire          dbg_startup_done // XADC post-reset calibration complete
 );
 
     generate
@@ -72,6 +78,12 @@ module xadc_reader
         assign ch2_data  = sim_ch2;
         assign ch2_valid = sim_vld2;
         assign mux_sel   = USE_4053 ? sim_mux_sel : 1'b0;
+        // Debug outputs: simulation mode has no real DRP, tie low
+        assign dbg_drp_drdy    = sim_vld1 | sim_vld2;  // emulate DRDY on valid
+        assign dbg_drp_den     = 1'b0;                  // no real DRP
+        assign dbg_settling    = 1'b0;
+        assign dbg_den_pending = 1'b0;
+        assign dbg_startup_done = 1'b1;                 // always ready in sim
 
         always @(posedge clk or negedge rst_n) begin
             if (!rst_n) begin
@@ -307,6 +319,13 @@ module xadc_reader
                 end
             end
         end
+
+        // Debug outputs: expose internal DRP handshake signals
+        assign dbg_drp_drdy    = drp_drdy;
+        assign dbg_drp_den     = drp_den;
+        assign dbg_settling    = settling;
+        assign dbg_den_pending = den_pending;
+        assign dbg_startup_done = startup_done;
 
     end
     endgenerate

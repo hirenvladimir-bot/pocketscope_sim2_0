@@ -413,6 +413,9 @@ assign xadc_vauxn = {12'd0, 1'b0, adc_vauxn2, 2'b0};
 wire [11:0] adc_ch1_raw, adc_ch2_raw;
 wire        adc_ch1_vld, adc_ch2_vld;
 
+// XADC DRP handshake debug signals (for ILA monitoring)
+wire        dbg_drp_drdy, dbg_drp_den, dbg_settling, dbg_den_pending, dbg_startup_done;
+
 xadc_reader #(
     .SIM_MODE(0),
     .USE_4053(1),           // 1 = single XADC channel + 4053 mux
@@ -426,7 +429,12 @@ xadc_reader #(
     .ch2_data(adc_ch2_raw), .ch2_valid(adc_ch2_vld),
     .mux_sel(mux_sel),
     .sample_rate_hz(sample_rate_hz_sys),
-    .sample_rate_update(sample_rate_update_sys)
+    .sample_rate_update(sample_rate_update_sys),
+    .dbg_drp_drdy(dbg_drp_drdy),
+    .dbg_drp_den(dbg_drp_den),
+    .dbg_settling(dbg_settling),
+    .dbg_den_pending(dbg_den_pending),
+    .dbg_startup_done(dbg_startup_done)
 );
 
 //=============================================================================
@@ -910,14 +918,14 @@ wire [63:0] ila_probe;
 assign ila_probe = {
     ila_mode_s2,          // [63:62] device_mode
     mux_sel,              // [61]    4053 channel select
-    ila_trig_fired_s2,    // [60]    scope trigger fired
-    ila_trig_armed_s2,    // [59]    scope trigger armed
-    ch1_valid_sys,        // [58]    CH1 valid stretched (sys_clk)
-    ch2_valid_sys,        // [57]    CH2 valid stretched (sys_clk)
-    adc_ch1_vld,          // [56]    CH1 valid raw (XADC)
-    adc_ch2_vld,          // [55]    CH2 valid raw (XADC)
-    ila_ch1_vld_25m_s2,   // [54]    CH1 valid (25MHz domain)
-    ila_ch2_vld_25m_s2,   // [53]    CH2 valid (25MHz domain)
+    adc_ch1_vld,          // [60]    CH1 valid raw (XADC)
+    adc_ch2_vld,          // [59]    CH2 valid raw (XADC)
+    dbg_drp_drdy,         // [58]    DRP data-ready from XADC
+    dbg_drp_den,          // [57]    DRP enable to XADC
+    dbg_settling,         // [56]    4053 settle wait state
+    dbg_den_pending,      // [55]    DEN pending flag
+    dbg_startup_done,     // [54]    XADC startup calibration done
+    ila_trig_fired_s2,    // [53]    scope trigger fired
     ila_wr_addr_s2,       // [52:43] sample write address
     adc_ch1_raw,          // [42:31] CH1 raw 12-bit XADC
     adc_ch2_raw,          // [30:19] CH2 raw 12-bit XADC

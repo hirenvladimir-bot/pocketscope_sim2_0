@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcsg324-1" LaunchTime="1782470541">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcsg324-1" LaunchTime="1782479575">
   <File Type="PA-TCL" Name="top.tcl"/>
   <File Type="REPORTS-TCL" Name="top_reports.tcl"/>
   <File Type="INIT-TIMING" Name="top_timing_summary_init.rpt"/>
@@ -141,6 +141,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/ila_adc_debug.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/kaleidoscope.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -269,4 +276,5 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="ila_adc"/>
 </GenRun>
