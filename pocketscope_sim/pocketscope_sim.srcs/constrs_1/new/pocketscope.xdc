@@ -83,21 +83,20 @@ set_property IOSTANDARD LVCMOS33 [get_ports dac_xfer_n]
 # NOTE: VP_0(J10) and VN_0(K9) are dedicated analog pins — Vivado handles
 # these automatically. Do NOT constrain adc_p_in / adc_n_in to regular I/O pins.
 
-# XADC Auxiliary Channel 0 — ADC_MUX_OUT (oscilloscope input, J5 pins 13-14)
+# XADC Auxiliary Channel 2 — ADC_MUX_OUT (oscilloscope input, J5 pins 9-10)
 # In 4053 mode, this single channel carries the time-multiplexed CH1+CH2 signal
 # from the 74HC4053D mux output (ADC_MUX_OUT).
-# J5 pin 13 = AD0P → FPGA D14 (VAUXP[0] on XC7A35T-CSG324)
-# J5 pin 14 = AD0N → FPGA C14 (VAUXN[0]) — tie to GND externally for single-ended
-set_property PACKAGE_PIN D14 [get_ports adc_vauxp0]
-set_property PACKAGE_PIN C14 [get_ports adc_vauxn0]
-set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxp0]
-set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxn0]
+# J5 pin 9  = AD2P → FPGA B16 (VAUXP[2] on XC7A35T-CSG324)
+# J5 pin 10 = AD2N → FPGA B17 (VAUXN[2]) — tie to GND externally for single-ended
+set_property PACKAGE_PIN B16 [get_ports adc_vauxp2]
+set_property PACKAGE_PIN B17 [get_ports adc_vauxn2]
+set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxp2]
+set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxn2]
 
-# XADC Auxiliary Channel 3 (J5 pins 5-6, AD3P/AD3N) — REMOVED
+# XADC Auxiliary Channel 3 (J5 pins 5-6, AD3P/AD3N) — unused
 # When USE_4053=1, VAUXP[3]/VAUXN[3] are unused and tied to GND in RTL.
-# Ports removed from top.v to avoid XADC shape placement conflicts
-# between VAUXP[0] (D14/C14) and VAUXP[3] (A13/A14).
 # Package pins A13/A14 = AD3P/AD3N (VAUXP[3]/VAUXN[3]) — available for future use.
+# XADC Auxiliary Channel 2 (B16/B17) is now used for ADC_MUX_OUT.
 
 #=============================================================================
 # 4053 Analog Switch Control (MUX_SEL)

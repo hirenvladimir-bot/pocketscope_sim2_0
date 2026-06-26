@@ -17,7 +17,7 @@ module top
     output wire          dac_ile, dac_cs_n, dac_wr1_n, dac_wr2_n, dac_xfer_n,
     // XADC analog inputs
     input  wire          adc_p_in, adc_n_in,
-    input  wire          adc_vauxp0, adc_vauxn0, // ADC_MUX_OUT J5 pins 13-14 (VAUXP[0]/N[0])
+    input  wire          adc_vauxp2, adc_vauxn2, // ADC_MUX_OUT J5 pins 9-10 (VAUXP[2]/N[2])
     // UI
     input  wire [4:0]    btn,
     input  wire [7:0]    sw_in,
@@ -70,6 +70,21 @@ ui_ctrl #(.PHASE_WIDTH(24)) u_ui (
 wire [23:0] dbg_freq_ftw  = frequency_ftw;
 wire [7:0]  dbg_amplitude = amplitude;
 
+// Recalculate frequency in Hz from switches (for signal gen display overlay)
+// Same formula as ui_ctrl — avoids adding output port to ui_ctrl interface
+wire [2:0]  sg_coarse = sw_in[7:5];
+wire [15:0] sg_freq_unclamped =
+    (sg_coarse == 3'd0) ? (16'd100  + {8'b0, sw_dip} * 16'd20) :
+    (sg_coarse == 3'd1) ? (16'd2000 + {8'b0, sw_dip} * 16'd20) :
+    (sg_coarse == 3'd2) ? (16'd4000 + {8'b0, sw_dip} * 16'd20) :
+    (sg_coarse == 3'd3) ? (16'd6000 + {8'b0, sw_dip} * 16'd20) :
+    (sg_coarse == 3'd4) ? (16'd8000 + {8'b0, sw_dip} * 16'd20) :
+    16'd1000;
+wire [15:0] freq_hz =
+    (sg_freq_unclamped < 16'd100)   ? 16'd100   :
+    (sg_freq_unclamped > 16'd10000) ? 16'd10000 :
+    sg_freq_unclamped;
+
 //=============================================================================
 // DDS Signal Generator
 //=============================================================================
@@ -78,7 +93,6 @@ assign dds_wave_type = sig_gen_submode[2] ? 2'b00 : sig_gen_submode[1:0];
 
 wire [7:0]  dds_wave_out;
 wire [23:0] dds_ftw_in;
-wire [9:0]  dds_y;
 
 // Modulation
 wire [23:0] fm_ftw;
@@ -137,15 +151,14 @@ assign dac_data_raw = mod_enable ? mod_signal_out : dds_wave_out;
 // dac_data_in = saturate(128 + (dac_data_raw - 128) * ampl_eff / 256, 0, 255)
 wire signed [8:0]  dac_dev   = $signed({1'b0, dac_data_raw}) - 9'sd128;
 wire signed [17:0] dac_prod  = dac_dev * $signed({1'b0, ampl_eff});
-wire signed [9:0]  dac_sum   = $signed({dac_prod[16], dac_prod[16:8]}) + 10'sd128;
+// Use dac_prod[17:8] — bit 17 is the true sign bit, avoids fragile
+// sign-extension that relied on bit[16]==bit[17] for limited amplitude range
+wire signed [9:0]  dac_sum   = $signed(dac_prod[17:8]) + 10'sd128;
 wire [7:0]         dac_data_in = dac_sum[9] ? 8'd0 :        // negative → clamp to 0
                                   dac_sum[8] ? 8'd255 :       // >255 → clamp to 255
                                                dac_sum[7:0]; // 0–255 pass through
 
 wire dac_update;
-
-// DDS Y for sig-gen preview
-assign dds_y = 10'd479 - (({2'b0, dds_wave_out} * 10'd479) >> 8);
 
 // DAC update rate divider (25MHz / 24 ≈ 1.04MHz)
 // 24-cycle period = 960ns, WR# pulse = 16 cycles (640ns), gives 320ns idle gap.
@@ -179,6 +192,206 @@ dac0832_ctrl u_dac (
 );
 
 //=============================================================================
+// Signal Generator Waveform Buffer (1024-sample ring buffer)
+// Captures DDS output at ~1.56MHz for stable, non-jumping VGA preview.
+// Same architecture as oscilloscope wave_ram — write pointer advances,
+// VGA reads from (wr_ptr - 640 + pixel_x) for a scrolling trace.
+//=============================================================================
+reg [7:0] sg_ram [0:1023];
+reg [9:0] sg_wr_ptr;
+reg [4:0] sg_sample_div;
+
+always @(posedge clk_25m or negedge rst_n) begin
+    if (!rst_n) begin
+        sg_wr_ptr     <= 10'd0;
+        sg_sample_div <= 5'd0;
+    end else if (device_mode == 2'b00) begin
+        if (sg_sample_div == 5'd15) begin
+            sg_sample_div <= 5'd0;
+            sg_ram[sg_wr_ptr] <= dds_wave_out;
+            sg_wr_ptr <= sg_wr_ptr + 1'b1;
+        end else begin
+            sg_sample_div <= sg_sample_div + 1'b1;
+        end
+    end else begin
+        sg_sample_div <= 5'd0;
+    end
+end
+
+// Ring-buffer read address: 640-sample window ending at current write position
+wire [9:0] sg_rd_addr = (sg_wr_ptr - 10'd640 + pixel_x);
+
+reg [7:0] sg_rd_data;
+always @(posedge clk_25m)
+    sg_rd_data <= sg_ram[sg_rd_addr];
+
+// Map 8-bit sample to Y coordinate (waveform area y=0..431)
+wire [9:0] sg_y = 10'd431 - ((sg_rd_data * 10'd431) >> 8);
+
+//=============================================================================
+// Signal Generator Parameter Text Overlay
+//=============================================================================
+// Simple 3-row text bar at y=456-479 (24 rows, 3 char-rows of 8px each)
+//   Row 0: "SG F:#####Hz A:### W:XXXX"
+//   Row 1: "   MOD:XX DEP:###"
+//   Row 2: "   PB0/1:Amp PB2/3:Dep"
+//=============================================================================
+wire sg_in_bar = (pixel_y >= 10'd456);
+
+// Character generator addressing (same scheme as waveform_display)
+wire [2:0] sg_char_row  = pixel_y[2:0];
+wire [2:0] sg_char_col  = pixel_x[2:0];
+wire [6:0] sg_char_cx   = pixel_x[9:3];
+wire [1:0] sg_char_cy   = (pixel_y - 10'd456) >> 3;  // char row 0..2
+
+// Frequency digits
+wire [3:0] sg_f_d5 = (freq_hz / 16'd10000) % 4'd10;
+wire [3:0] sg_f_d4 = (freq_hz / 16'd1000)  % 4'd10;
+wire [3:0] sg_f_d3 = (freq_hz / 16'd100)   % 4'd10;
+wire [3:0] sg_f_d2 = (freq_hz / 16'd10)    % 4'd10;
+wire [3:0] sg_f_d1 = (freq_hz)             % 4'd10;
+
+// Amplitude digits (0-255 range, display as raw for now)
+wire [3:0] sg_a_d3 = (amplitude / 8'd100) % 4'd10;
+wire [3:0] sg_a_d2 = (amplitude / 8'd10)  % 4'd10;
+wire [3:0] sg_a_d1 = (amplitude)          % 4'd10;
+
+// Mod depth digits
+wire [3:0] sg_md_d3 = (mod_depth / 8'd100) % 4'd10;
+wire [3:0] sg_md_d2 = (mod_depth / 8'd10)  % 4'd10;
+wire [3:0] sg_md_d1 = (mod_depth)          % 4'd10;
+
+function [7:0] sg_d2a;
+    input [3:0] d;
+    begin
+        sg_d2a = {4'h3, d};
+    end
+endfunction
+
+// Waveform type string
+function [7:0] sg_wave_char;
+    input [2:0] submode;
+    begin
+        case (submode[1:0])
+            2'b01:   sg_wave_char = 8'h53;  // 'S' = Square
+            2'b10:   sg_wave_char = 8'h54;  // 'T' = Triangle
+            default: sg_wave_char = 8'h4E;  // 'N' = siNe
+        endcase
+    end
+endfunction
+
+// Modulation type string
+function [7:0] sg_mod_char;
+    input [1:0] mt;
+    begin
+        case (mt)
+            2'b00: sg_mod_char = 8'h41;  // 'A' = AM
+            2'b01: sg_mod_char = 8'h46;  // 'F' = FM
+            2'b10: sg_mod_char = 8'h50;  // 'P' = SPWM
+            default: sg_mod_char = 8'h20; // space
+        endcase
+    end
+endfunction
+
+reg [7:0] sg_char;
+always @(*) begin
+    sg_char = 8'h20;  // default: space
+    case (sg_char_cy)
+        // Row 0: "SG F:#####Hz A:### W:X"
+        2'd0: begin
+            case (sg_char_cx)
+                7'd0:  sg_char = 8'h53;  // 'S'
+                7'd1:  sg_char = 8'h47;  // 'G'
+                7'd2:  sg_char = 8'h20;  // ' '
+                7'd3:  sg_char = 8'h46;  // 'F'
+                7'd4:  sg_char = 8'h3A;  // ':'
+                7'd5:  sg_char = sg_d2a(sg_f_d5);
+                7'd6:  sg_char = sg_d2a(sg_f_d4);
+                7'd7:  sg_char = sg_d2a(sg_f_d3);
+                7'd8:  sg_char = sg_d2a(sg_f_d2);
+                7'd9:  sg_char = sg_d2a(sg_f_d1);
+                7'd10: sg_char = 8'h48;  // 'H'
+                7'd11: sg_char = 8'h7A;  // 'z'
+                7'd12: sg_char = 8'h20;  // ' '
+                7'd13: sg_char = 8'h41;  // 'A'
+                7'd14: sg_char = 8'h3A;  // ':'
+                7'd15: sg_char = sg_d2a(sg_a_d3);
+                7'd16: sg_char = sg_d2a(sg_a_d2);
+                7'd17: sg_char = sg_d2a(sg_a_d1);
+                7'd18: sg_char = 8'h20;  // ' '
+                7'd19: sg_char = 8'h57;  // 'W'
+                7'd20: sg_char = 8'h3A;  // ':'
+                7'd21: sg_char = sg_wave_char(sig_gen_submode);
+                default: sg_char = 8'h20;
+            endcase
+        end
+        // Row 1: "   MOD:X DEP:###"
+        2'd1: begin
+            case (sg_char_cx)
+                7'd0:  sg_char = 8'h20;  // ' '
+                7'd1:  sg_char = 8'h20;  // ' '
+                7'd2:  sg_char = 8'h20;  // ' '
+                7'd3:  sg_char = 8'h4D;  // 'M'
+                7'd4:  sg_char = 8'h4F;  // 'O'
+                7'd5:  sg_char = 8'h44;  // 'D'
+                7'd6:  sg_char = 8'h3A;  // ':'
+                7'd7:  sg_char = mod_enable ? sg_mod_char(mod_type) : 8'h4F;  // 'O'=Off or A/F/P
+                7'd8:  sg_char = mod_enable ? 8'h20 : 8'h46;  // 'F'=ofF
+                7'd9:  sg_char = mod_enable ? 8'h20 : 8'h46;  // 'F'
+                7'd10: sg_char = 8'h20;  // ' '
+                7'd11: sg_char = 8'h44;  // 'D'
+                7'd12: sg_char = 8'h45;  // 'E'
+                7'd13: sg_char = 8'h50;  // 'P'
+                7'd14: sg_char = 8'h3A;  // ':'
+                7'd15: sg_char = sg_d2a(sg_md_d3);
+                7'd16: sg_char = sg_d2a(sg_md_d2);
+                7'd17: sg_char = sg_d2a(sg_md_d1);
+                default: sg_char = 8'h20;
+            endcase
+        end
+        // Row 2: "   PB0/1:+/-A PB2/3:+/-D"
+        2'd2: begin
+            case (sg_char_cx)
+                7'd0:  sg_char = 8'h20;  // ' '
+                7'd1:  sg_char = 8'h20;  // ' '
+                7'd2:  sg_char = 8'h20;  // ' '
+                7'd3:  sg_char = 8'h50;  // 'P'
+                7'd4:  sg_char = 8'h42;  // 'B'
+                7'd5:  sg_char = 8'h30;  // '0'
+                7'd6:  sg_char = 8'h2F;  // '/'
+                7'd7:  sg_char = 8'h31;  // '1'
+                7'd8:  sg_char = 8'h3A;  // ':'
+                7'd9:  sg_char = 8'h41;  // 'A'
+                7'd10: sg_char = 8'h6D;  // 'm'
+                7'd11: sg_char = 8'h70;  // 'p'
+                7'd12: sg_char = 8'h20;  // ' '
+                7'd13: sg_char = 8'h50;  // 'P'
+                7'd14: sg_char = 8'h42;  // 'B'
+                7'd15: sg_char = 8'h32;  // '2'
+                7'd16: sg_char = 8'h2F;  // '/'
+                7'd17: sg_char = 8'h33;  // '3'
+                7'd18: sg_char = 8'h3A;  // ':'
+                7'd19: sg_char = 8'h44;  // 'D'
+                7'd20: sg_char = 8'h65;  // 'e'
+                7'd21: sg_char = 8'h70;  // 'p'
+                default: sg_char = 8'h20;
+            endcase
+        end
+        default: sg_char = 8'h20;
+    endcase
+end
+
+// Char gen for signal generator overlay text
+wire sg_char_on;
+char_gen u_sg_char (
+    .clk(clk_25m),
+    .char_code(sg_char),
+    .char_row(sg_char_row),
+    .char_col(sg_char_col),
+    .pixel_on(sg_char_on)
+);
+
+//=============================================================================
 // XADC Dual-Channel Reader
 //=============================================================================
 // Pre-declare sample rate wires (before xadc_reader instantiation to avoid
@@ -190,12 +403,12 @@ wire        sample_rate_update_sys;
 wire [15:0] xadc_vauxp, xadc_vauxn;
 // VAUXP/VAUXN bus mapping to XADC auxiliary channels:
 //   [15:4] = unused
-//   [3]    = 0 (VAUXP[3]/VAUXN[3] unused — USE_4053=1, only VAUXP[0] needed)
-//   [2]    = unused
+//   [3]    = 0 (VAUXP[3]/VAUXN[3] unused — USE_4053=1, only VAUXP[2] needed)
+//   [2]    = adc_vauxp2/vauxn2  (AD2, auxiliary channel 2, DRP addr 0x12 — ADC_MUX_OUT)
 //   [1]    = unused
-//   [0]    = adc_vauxp0/vauxn0  (AD0, auxiliary channel 0, DRP addr 0x10 — ADC_MUX_OUT)
-assign xadc_vauxp = {12'd0, 1'b0, 3'b0, adc_vauxp0};
-assign xadc_vauxn = {12'd0, 1'b0, 3'b0, adc_vauxn0};
+//   [0]    = unused
+assign xadc_vauxp = {12'd0, 1'b0, adc_vauxp2, 2'b0};
+assign xadc_vauxn = {12'd0, 1'b0, adc_vauxn2, 2'b0};
 
 wire [11:0] adc_ch1_raw, adc_ch2_raw;
 wire        adc_ch1_vld, adc_ch2_vld;
@@ -203,7 +416,7 @@ wire        adc_ch1_vld, adc_ch2_vld;
 xadc_reader #(
     .SIM_MODE(0),
     .USE_4053(1),           // 1 = single XADC channel + 4053 mux
-    .SINGLE_CH_ADDR(7'h10), // VAUXP[0]/VAUXN[0] (AD0, J5 pins 13-14) carries the muxed signal
+    .SINGLE_CH_ADDR(7'h12), // VAUXP[2]/VAUXN[2] (AD2, J5 pins 9-10) carries the muxed signal
     .SETTLE_CYCLES(10)      // 100ns settle time at 100MHz (> 74HC4053 t_on=60ns)
 ) u_xadc (
     .clk(sys_clk), .rst_n(rst_n),
@@ -551,50 +764,84 @@ kaleidoscope u_kalei (
     .vga_r(kalei_r), .vga_g(kalei_g), .vga_b(kalei_b)
 );
 
-// 4) Signal Generator preview (simple inline display)
+// 4) Signal Generator preview — stable waveform from ring buffer + parameter overlay
 reg [3:0] sggen_r, sggen_g, sggen_b;
 
 always @(*) begin
+    sggen_r = 4'h0;
+    sggen_g = 4'h0;
+    sggen_b = 4'h0;
+
     if (de) begin
-        // Grid
-        if ((pixel_x % 80) == 0 || (pixel_y % 60) == 0) begin
-            sggen_r = 4'h2; sggen_g = 4'h2; sggen_b = 4'h2;
+        //---- Text overlay bar (y=456..479) ----
+        if (sg_in_bar) begin
+            // Dark background
+            sggen_r = 4'h1; sggen_g = 4'h1; sggen_b = 4'h1;
+
+            // Separator line at top of text bar
+            if (pixel_y == 456) begin
+                sggen_r = 4'h8; sggen_g = 4'h8; sggen_b = 4'h8;
+            end
+
+            // Row 0 background: warm tint
+            if (sg_char_cy == 2'd0) begin
+                sggen_r = 4'h2; sggen_g = 4'h1; sggen_b = 4'h0;
+            end
+            // Row 1 background: cool tint
+            if (sg_char_cy == 2'd1) begin
+                sggen_r = 4'h0; sggen_g = 4'h1; sggen_b = 4'h2;
+            end
+            // Row 2 background: dim
+            if (sg_char_cy == 2'd2) begin
+                sggen_r = 4'h1; sggen_g = 4'h1; sggen_b = 4'h1;
+            end
+
+            // Character pixels — bright green for rows 0-1, dim for row 2
+            if (sg_char_on) begin
+                if (sg_char_cy == 2'd0) begin
+                    sggen_r = 4'hF; sggen_g = 4'hF; sggen_b = 4'h0;  // yellow
+                end else if (sg_char_cy == 2'd1) begin
+                    sggen_r = 4'h0; sggen_g = 4'hF; sggen_b = 4'hF;  // cyan
+                end else begin
+                    sggen_r = 4'h8; sggen_g = 4'h8; sggen_b = 4'h8;  // gray
+                end
+            end
         end
-        // Center cross
-        else if (pixel_x == 320 || pixel_y == 240) begin
-            sggen_r = 4'h4; sggen_g = 4'h4; sggen_b = 4'h4;
-        end
-        // Waveform trace (green, 3-pixel wide)
-        else if (pixel_y >= ((dds_y > 2) ? dds_y - 2 : 0) &&
-                 pixel_y <= ((dds_y < 477) ? dds_y + 2 : 479)) begin
-            sggen_r = 4'h0; sggen_g = 4'hF; sggen_b = 4'h0;
-        end
-        // Modulation envelope indicator (dimmer)
-        else if (mod_enable && pixel_y >= ((dds_y > 3) ? dds_y - 3 : 0) &&
-                 pixel_y <= ((dds_y < 476) ? dds_y + 3 : 479) &&
-                 pixel_x[0]) begin
-            sggen_r = 4'h0; sggen_g = 4'h6; sggen_b = 4'h0;
-        end
+        //---- Waveform Area (y=0..455) ----
         else begin
-            sggen_r = 4'h0; sggen_g = 4'h0; sggen_b = 4'h0;
+            // Grid
+            if ((pixel_x % 80) == 0 || (pixel_y % 60) == 0) begin
+                sggen_r = 4'h2; sggen_g = 4'h2; sggen_b = 4'h2;
+            end
+            // Center cross
+            if (pixel_x == 320 || pixel_y == 228) begin
+                sggen_r = 4'h4; sggen_g = 4'h4; sggen_b = 4'h4;
+            end
+            // Waveform trace from RAM buffer — 3-pixel wide green line
+            // sg_rd_data has 1-cycle read latency, so trace lags 1 pixel
+            // behind sg_rd_addr — imperceptible on a 640-pixel scanline
+            if (pixel_y >= ((sg_y > 1) ? sg_y - 1 : 0) &&
+                pixel_y <= ((sg_y < 454) ? sg_y + 1 : 455)) begin
+                sggen_r = 4'h0; sggen_g = 4'hF; sggen_b = 4'h0;
+            end
         end
-    end else begin
-        sggen_r = 4'h0; sggen_g = 4'h0; sggen_b = 4'h0;
     end
 end
 
 //=============================================================================
 // Mode MUX — select which display drives VGA
 //=============================================================================
-assign vga_r = (device_mode == 2'b00) ? sggen_r :
+// Signal generator mode: DAC outputs the waveform directly — VGA stays blank.
+// Other modes drive VGA as before.
+assign vga_r = (device_mode == 2'b00) ? 4'h0 :
                (device_mode == 2'b10) ? liss_r   :
                (device_mode == 2'b11) ? kalei_r  : scope_r;
 
-assign vga_g = (device_mode == 2'b00) ? sggen_g :
+assign vga_g = (device_mode == 2'b00) ? 4'h0 :
                (device_mode == 2'b10) ? liss_g   :
                (device_mode == 2'b11) ? kalei_g  : scope_g;
 
-assign vga_b = (device_mode == 2'b00) ? sggen_b :
+assign vga_b = (device_mode == 2'b00) ? 4'h0 :
                (device_mode == 2'b10) ? liss_b   :
                (device_mode == 2'b11) ? kalei_b  : scope_b;
 

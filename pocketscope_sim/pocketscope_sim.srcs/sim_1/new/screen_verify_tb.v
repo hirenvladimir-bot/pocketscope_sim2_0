@@ -50,7 +50,7 @@ module screen_verify_tb;
         .dac_d(dac_d), .dac_ile(dac_ile), .dac_cs_n(dac_cs_n),
         .dac_wr1_n(dac_wr1_n), .dac_wr2_n(dac_wr2_n), .dac_xfer_n(dac_xfer_n),
         .adc_p_in(1'b0), .adc_n_in(1'b0),
-        .adc_vauxp0(1'b0), .adc_vauxn0(1'b0),
+        .adc_vauxp2(1'b0), .adc_vauxn2(1'b0),
         .btn(btn), .sw_in(sw_in), .sw_dip(sw_dip),
         .led_speed(led_speed), .loop_tx(loop_tx), .loop_rx(loop_rx)
     );

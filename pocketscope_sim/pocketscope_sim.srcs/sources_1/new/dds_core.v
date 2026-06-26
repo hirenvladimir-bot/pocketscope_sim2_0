@@ -19,7 +19,7 @@ module dds_core
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n)
             phase_acc <= 0;
-        else if (ftw !== {PHASE_WIDTH{1'bx}})
+        else
             phase_acc <= phase_acc + ftw;
     end
 

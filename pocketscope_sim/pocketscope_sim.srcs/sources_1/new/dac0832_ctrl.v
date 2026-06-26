@@ -26,7 +26,11 @@ module dac0832_ctrl
     assign dac_wr2_n = 1'b0;
     assign dac_xfer_n = 1'b0;
 
-    // WR1# write timing: 16 cycles (160ns) low pulse
+    // WR1# write timing: 16-cycle low pulse, 4-cycle data setup before WR#
+    // This provides 4 clk_25m cycles (160ns) of data setup time before WR# falls,
+    // exceeding DAC0832 minimum setup time requirement of 100ns.
+    // Total write cycle: 21 cycles (840ns), update period: 24 cycles (960ns),
+    // leaving 3-cycle (120ns) idle gap between writes.
     reg [4:0] wr_cnt;
     reg       wr_active;
 
@@ -38,12 +42,18 @@ module dac0832_ctrl
             wr_active  <= 1'b0;
         end else begin
             if (dac_update && !wr_active) begin
+                // Phase 0: load new data, keep WR# high (setup time)
                 dac_d      <= dac_data_in;
                 wr_active  <= 1'b1;
-                wr_cnt     <= 0;
-                dac_wr1_n  <= 1'b0;
+                wr_cnt     <= 1;
+                // dac_wr1_n stays 1 (retained from previous state)
             end else if (wr_active) begin
-                if (wr_cnt == 15) begin
+                if (wr_cnt == 4) begin
+                    // Phase 4: assert WR# four cycles after data change (160ns setup)
+                    dac_wr1_n  <= 1'b0;
+                    wr_cnt     <= wr_cnt + 1'b1;
+                end else if (wr_cnt == 20) begin
+                    // Phase 20: de-assert WR# after 16-cycle low pulse (640ns)
                     dac_wr1_n  <= 1'b1;
                     wr_active  <= 1'b0;
                 end else begin

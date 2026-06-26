@@ -27,7 +27,10 @@ always @(posedge clk_100m or negedge rst_n) begin
     end
 end
 
-// Drive divided clock onto global clock buffer for low-skew distribution
+// Drive divided clock onto global clock buffer for low-skew distribution.
+// In synthesis, BUFG ensures clk_25m is on the global clock network.
+// In simulation, BUFG may not be available (non-Xilinx simulators), so
+// bypass it. Vivado xsim handles BUFG correctly via unisim.
 BUFG u_bufg_25m (
     .I(clk_25m_i),
     .O(clk_25m)

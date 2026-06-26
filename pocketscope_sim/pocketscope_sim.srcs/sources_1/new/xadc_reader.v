@@ -10,7 +10,7 @@
 //
 //   USE_4053=1 — Single-XADC-channel + 74HC4053 external mux mode
 //     Both physical inputs go through a 4053 analog switch into ONE XADC
-//     auxiliary channel (default VAUXP[0]/VAUXN[0], DRP addr 0x10).
+//     auxiliary channel (default VAUXP[2]/VAUXN[2], DRP addr 0x12).
 //     mux_sel output toggles each conversion to switch the 4053 between
 //     CH1 and CH2. A settle delay ensures the 4053 output is stable
 //     before the next XADC conversion begins.
@@ -23,7 +23,7 @@
 //   Per-channel rate  ≈ 1/(2×620ns) ≈ 806 kSPS total, ~403 kSPS per channel
 //
 // Extension board front-end (EGO1_Oscilloscope_Gen):
-//   BNC → 10kΩ + 100kΩ trimmer → MCP6002 (G=1.1×) → 74HC4053 → XADC VAUXP0
+//   BNC → 10kΩ + 100kΩ trimmer → MCP6002 (G=1.1×) → 74HC4053 → XADC VAUXP2
 //   VBIAS = 3.3V×(10k/(56k+10k)) ≈ 0.5V, op-amp DC out ≈ 0.55V
 //   XADC 12-bit 0-1V → code uses adc[11:4] (8-bit, 0-255)
 //   ADC LSB (8-bit) = 1V/256 = 3.90625mV at XADC input
@@ -35,7 +35,7 @@ module xadc_reader
 #(
     parameter SIM_MODE       = 1,
     parameter USE_4053       = 0,        // 0=dual XADC channel, 1=single ch + 4053 mux
-    parameter SINGLE_CH_ADDR = 7'h10,    // XADC DRP addr when USE_4053=1 (VAUXP[0], J5 pins 13-14)
+    parameter SINGLE_CH_ADDR = 7'h12,    // XADC DRP addr when USE_4053=1 (VAUXP[2], J5 pins 9-10)
     parameter SETTLE_CYCLES  = 10        // 4053 settle time in DCLK cycles (100ns @100MHz)
 )
 (
@@ -127,14 +127,14 @@ module xadc_reader
             //   bits[3:0] (SEQ) = 0010 -> continuous sequencer cycling
             //   FIX: was 0x1012 → CHSEL was still 0 (single-ch mode). Now 0x1032
             //        sets both CAL0 and CHSEL. Required so sequencer uses INIT_48
-            //        channel enables to sample VAUXP[0] instead of a default channel.
+            //        channel enables to sample VAUXP[2] instead of a default channel.
             .INIT_40(16'h1032),
             .INIT_41(16'h2000),
             .INIT_42(16'h0000),
-            // Enable VAUXP[0] in sequencer (48h: VAUXP[7:0] channel enable)
-            // Bit 0 = 1 -> VAUXP[0]/VAUXN[0] IS sampled by the sequencer.
-            // REQUIRED for 4053 mux mode: both CH1/CH2 via single VAUXP0 ch.
-            .INIT_48(16'h0001),
+            // Enable VAUXP[2] in sequencer (48h: VAUXP[7:0] channel enable)
+            // Bit 2 = 1 -> VAUXP[2]/VAUXN[2] IS sampled by the sequencer.
+            // REQUIRED for 4053 mux mode: both CH1/CH2 via single VAUXP2 ch.
+            .INIT_48(16'h0004),
             .SIM_MONITOR_FILE("xadc_stimulus.txt")
         ) u_xadc (
             .DCLK       (clk),
