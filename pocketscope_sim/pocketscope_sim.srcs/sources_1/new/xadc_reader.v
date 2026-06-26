@@ -10,10 +10,24 @@
 //
 //   USE_4053=1 — Single-XADC-channel + 74HC4053 external mux mode
 //     Both physical inputs go through a 4053 analog switch into ONE XADC
-//     auxiliary channel (default VAUXP[2]/VAUXN[2], DRP addr 0x12).
+//     auxiliary channel (default VAUXP[0]/VAUXN[0], DRP addr 0x10).
 //     mux_sel output toggles each conversion to switch the 4053 between
 //     CH1 and CH2. A settle delay ensures the 4053 output is stable
 //     before the next XADC conversion begins.
+//
+// XADC Timing (XC7A35T, 100MHz DCLK, continuous mode):
+//   ADCCLK = DCLK/2 = 50MHz (20ns period)
+//   Conversion time = ~26 ADCCLK cycles ≈ 520ns  (UG480: 22-26 cycles)
+//   4053 t_on(max) = 60ns, settle margin = 100ns (10 DCLK cycles)
+//   Total per-sample = 520ns + 100ns settle = 620ns
+//   Per-channel rate  ≈ 1/(2×620ns) ≈ 806 kSPS total, ~403 kSPS per channel
+//
+// Extension board front-end (EGO1_Oscilloscope_Gen):
+//   BNC → 10kΩ + 100kΩ trimmer → MCP6002 (G=1.1×) → 74HC4053 → XADC VAUXP0
+//   VBIAS = 3.3V×(10k/(56k+10k)) ≈ 0.5V, op-amp DC out ≈ 0.55V
+//   XADC 12-bit 0-1V → code uses adc[11:4] (8-bit, 0-255)
+//   ADC LSB (8-bit) = 1V/256 = 3.90625mV at XADC input
+//   Front-end gain ≈ 0.909×1.1 ≈ 1.0 at max trimmer → ~3.91mV/LSB at BNC
 //
 // SIM_MODE=1 bypasses XADC for pure-digital simulation.
 
@@ -21,7 +35,7 @@ module xadc_reader
 #(
     parameter SIM_MODE       = 1,
     parameter USE_4053       = 0,        // 0=dual XADC channel, 1=single ch + 4053 mux
-    parameter SINGLE_CH_ADDR = 7'h12,    // XADC DRP addr when USE_4053=1 (VAUXP[2])
+    parameter SINGLE_CH_ADDR = 7'h10,    // XADC DRP addr when USE_4053=1 (VAUXP[0], J5 pins 13-14)
     parameter SETTLE_CYCLES  = 10        // 4053 settle time in DCLK cycles (100ns @100MHz)
 )
 (
@@ -36,7 +50,10 @@ module xadc_reader
     output wire [11:0]   ch2_data,
     output wire          ch2_valid,
     // 4053 control (only used when USE_4053=1)
-    output wire          mux_sel         // 0=CH1 routed to ADC, 1=CH2 routed to ADC
+    output wire          mux_sel,         // 0=CH1 routed to ADC, 1=CH2 routed to ADC
+    // Sample rate measurement (debug)
+    output reg  [15:0]   sample_rate_hz,  // CH1 samples per second
+    output reg           sample_rate_update // pulsed when sample_rate_hz updates
 );
 
     generate
@@ -103,9 +120,21 @@ module xadc_reader
         wire        drp_den;
 
         XADC #(
-            .INIT_40(16'h1000),
+            // INIT_40: Configuration Register #0
+            //   bit12 (CAL1)  = 1 -> enable offset calibration
+            //   bit5  (CAL0)  = 1 -> enable gain calibration
+            //   bit4  (CHSEL) = 1 -> enable sequencer mode (required for VAUXP sampling)
+            //   bits[3:0] (SEQ) = 0010 -> continuous sequencer cycling
+            //   FIX: was 0x1012 → CHSEL was still 0 (single-ch mode). Now 0x1032
+            //        sets both CAL0 and CHSEL. Required so sequencer uses INIT_48
+            //        channel enables to sample VAUXP[0] instead of a default channel.
+            .INIT_40(16'h1032),
             .INIT_41(16'h2000),
-            .INIT_42(16'h0800),
+            .INIT_42(16'h0000),
+            // Enable VAUXP[0] in sequencer (48h: VAUXP[7:0] channel enable)
+            // Bit 0 = 1 -> VAUXP[0]/VAUXN[0] IS sampled by the sequencer.
+            // REQUIRED for 4053 mux mode: both CH1/CH2 via single VAUXP0 ch.
+            .INIT_48(16'h0001),
             .SIM_MONITOR_FILE("xadc_stimulus.txt")
         ) u_xadc (
             .DCLK       (clk),
@@ -150,10 +179,25 @@ module xadc_reader
         // When USE_4053=0: alternate DRP addresses between 0x12 and 0x13
         reg         active_ch;          // only used in dual-channel mode
 
+        // Startup delay: XADC needs ~4ms at 100MHz for post-reset auto-calibration
+        // (UG480: calibration completes ~4ms after DCLK stable).
+        // 500,000 cycles = 5ms at 100MHz — provides safe margin.
+        // If DEN is sent during calibration, DRDY never asserts and the FSM hangs
+        // permanently. This extended delay prevents that lockup.
+        localparam STARTUP_MAX = 19'd500_000;
+        reg [18:0]  startup_cnt;
+        wire        startup_done = (startup_cnt == STARTUP_MAX);
+
+        // DRDY timeout watchdog: if DRDY doesn't arrive within ~10µs after DEN,
+        // re-trigger DEN. Prevents permanent FSM hang if XADC misses a DEN pulse.
+        localparam DRDY_TIMEOUT = 10'd1000;   // 1000 cycles = 10µs at 100MHz
+        reg [9:0]   drdy_timeout_cnt;
+        reg         den_sent;                 // flag: DEN was issued, waiting for DRDY
+
         wire [6:0]  ch_addr_dual = active_ch ? 7'h13 : 7'h12;
 
         assign drp_daddr = USE_4053 ? SINGLE_CH_ADDR : ch_addr_dual;
-        assign drp_den   = USE_4053 ? (den_pending && !settling) : den_pending;
+        assign drp_den   = USE_4053 ? (den_pending && !settling && startup_done) : (den_pending && startup_done);
 
         assign ch1_data  = ch1_hold[15:4];
         assign ch1_valid = ch1_vld;
@@ -163,18 +207,33 @@ module xadc_reader
 
         always @(posedge clk or negedge rst_n) begin
             if (!rst_n) begin
-                active_ch    <= 1'b0;
-                mux_sel_reg  <= 1'b0;
-                settle_cnt   <= 0;
-                settling     <= 1'b0;
-                ch1_hold     <= 16'h0800;
-                ch2_hold     <= 16'h0800;
-                ch1_vld      <= 1'b0;
-                ch2_vld      <= 1'b0;
-                den_pending  <= 1'b1;
+                active_ch        <= 1'b0;
+                mux_sel_reg      <= 1'b0;  // mux forced LOW → CH1 selected
+                settle_cnt       <= 0;
+                settling         <= 1'b0;
+                ch1_hold         <= 16'h0800;
+                ch2_hold         <= 16'h0800;
+                ch1_vld          <= 1'b0;
+                ch2_vld          <= 1'b0;
+                den_pending      <= 1'b0;
+                den_sent         <= 1'b0;
+                startup_cnt      <= 0;
+                drdy_timeout_cnt <= 0;
             end else begin
                 ch1_vld <= 1'b0;
                 ch2_vld <= 1'b0;
+
+                // --- Startup delay: count up to STARTUP_MAX (~5ms) before DRP access ---
+                // XADC needs ~4ms post-reset calibration. During calibration,
+                // DRDY does NOT assert, so we must wait before first DEN.
+                if (!startup_done) begin
+                    startup_cnt <= startup_cnt + 1'b1;
+                    if (startup_cnt == STARTUP_MAX - 1) begin
+                        // Startup complete — trigger first DRP read
+                        den_pending <= 1'b1;
+                        den_sent    <= 1'b0;
+                    end
+                end
 
                 // --- Settle countdown for 4053 mode ---
                 if (USE_4053 && settling) begin
@@ -183,18 +242,37 @@ module xadc_reader
                         settle_cnt  <= 0;
                         // Now safe to start next conversion
                         den_pending <= 1'b1;
+                        den_sent    <= 1'b0;
                     end else begin
                         settle_cnt <= settle_cnt + 1'b1;
                     end
                 end
 
-                // --- DEN: clear pending when asserted ---
+                // --- DEN: assert pending, track when sent ---
                 if (den_pending && drp_den) begin
                     den_pending <= 1'b0;
+                    den_sent    <= 1'b1;
+                    drdy_timeout_cnt <= 0;
+                end
+
+                // --- DRDY timeout watchdog: re-issue DEN if no response ---
+                // When DEN was sent but DRDY never comes (e.g., XADC still
+                // calibrating, missed DEN pulse), retry after timeout.
+                // This prevents permanent FSM hang.
+                if (den_sent && !drp_drdy) begin
+                    if (drdy_timeout_cnt == DRDY_TIMEOUT - 1) begin
+                        // Timeout: DRDY never responded — re-trigger DEN
+                        den_pending      <= 1'b1;
+                        den_sent         <= 1'b0;
+                        drdy_timeout_cnt <= 0;
+                    end else begin
+                        drdy_timeout_cnt <= drdy_timeout_cnt + 1'b1;
+                    end
                 end
 
                 // --- DRDY: latch data and set up next conversion ---
                 if (drp_drdy) begin
+                    den_sent <= 1'b0;  // clear sent flag, response received
                     if (USE_4053) begin
                         // Route data to correct channel based on mux_sel
                         if (mux_sel_reg) begin
@@ -205,7 +283,7 @@ module xadc_reader
                             ch1_vld  <= 1'b1;
                         end
 
-                        // Toggle mux_sel for next channel
+                        // Toggle mux_sel for next channel (CH1↔CH2 alternating)
                         mux_sel_reg <= ~mux_sel_reg;
 
                         // Begin settle period before next DEN
@@ -224,6 +302,7 @@ module xadc_reader
                         end
                         active_ch    <= ~active_ch;
                         den_pending  <= 1'b1;
+                        den_sent     <= 1'b0;
                     end
                 end
             end
@@ -231,5 +310,52 @@ module xadc_reader
 
     end
     endgenerate
+
+    //=========================================================================
+    // Sample Rate Counter (common to both sim_mode and hw_mode)
+    // Counts ch1_valid pulses over a 1-second gate at 100MHz.
+    // Result = effective CH1 sampling rate in Hz.
+    //=========================================================================
+    localparam GATE_1SEC = 27'd100_000_000;  // 1 second at 100MHz
+
+    reg [26:0] sr_gate_cnt;        // 1-second gate counter
+    reg [31:0] sr_pulse_cnt;       // CH1 valid pulse counter
+    reg [3:0]  sr_update_stretch;  // update flag stretch counter
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            sr_gate_cnt         <= 0;
+            sr_pulse_cnt        <= 0;
+            sample_rate_hz      <= 0;
+            sample_rate_update  <= 1'b0;
+            sr_update_stretch   <= 0;
+        end else begin
+            // Default: deassert update after stretch completes
+            if (sample_rate_update) begin
+                if (sr_update_stretch == 4'd14) begin
+                    sample_rate_update <= 1'b0;
+                    sr_update_stretch  <= 0;
+                end else begin
+                    sr_update_stretch <= sr_update_stretch + 1'b1;
+                end
+            end
+
+            // Count ch1_valid pulses
+            if (ch1_valid)
+                sr_pulse_cnt <= sr_pulse_cnt + 1'b1;
+
+            // 1-second gate
+            if (sr_gate_cnt == GATE_1SEC - 1) begin
+                sr_gate_cnt    <= 0;
+                sample_rate_hz <= sr_pulse_cnt[15:0];
+                sr_pulse_cnt   <= 0;
+                // Strobe update (stretched to ~15 cycles = 150ns > 2x 25MHz period)
+                sample_rate_update <= 1'b1;
+                sr_update_stretch  <= 0;
+            end else begin
+                sr_gate_cnt <= sr_gate_cnt + 1'b1;
+            end
+        end
+    end
 
 endmodule

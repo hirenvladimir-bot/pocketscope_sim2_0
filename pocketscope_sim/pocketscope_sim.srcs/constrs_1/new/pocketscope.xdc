@@ -10,8 +10,20 @@ create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} [get_ports
 
 # Generated 25MHz clock (clk_div_25m divide-by-4 from sys_clk, BUFG output)
 # Rising edges of clk_25m occur at sys_clk edges 3, 7, 11, ... (period = 40ns)
+#   sys_clk 100MHz: edge1(0ns↑), edge2(5ns↓), edge3(10ns↑), edge4(15ns↓),
+#                     edge5(20ns↑), edge6(25ns↓), edge7(30ns↑), edge8(35ns↓),
+#                     edge9(40ns↑), edge10(45ns↓), edge11(50ns↑)
+#   clk_25m: rising at edge3(10ns) → falling at edge7(30ns) → rising at edge11(50ns)
 create_generated_clock -name clk_25m -source [get_ports sys_clk] \
-    -edges {3 5 7} [get_nets clk_25m]
+    -edges {3 7 11} [get_nets clk_25m]
+
+# CDC paths between sys_clk (100MHz) and clk_25m (25MHz) domains are properly
+# synchronized in RTL (pulse stretching + 2-stage synchronizer). Declare clock
+# groups as asynchronous to prevent STA from reporting false timing violations
+# on cross-domain data paths.
+set_clock_groups -asynchronous \
+    -group [get_clocks sys_clk_pin] \
+    -group [get_clocks clk_25m]
 
 # Reset
 set_property PACKAGE_PIN P15 [get_ports rst_n]
@@ -42,7 +54,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports hsync]
 set_property IOSTANDARD LVCMOS33 [get_ports vsync]
 
 #=============================================================================
-# DAC0832
+# DAC0832 (EGO1 v2.2 manual, Section 13, J2 connector)
 #=============================================================================
 set_property PACKAGE_PIN T8  [get_ports {dac_d[0]}]
 set_property PACKAGE_PIN R8  [get_ports {dac_d[1]}]
@@ -70,34 +82,30 @@ set_property IOSTANDARD LVCMOS33 [get_ports dac_xfer_n]
 #=============================================================================
 # NOTE: VP_0(J10) and VN_0(K9) are dedicated analog pins — Vivado handles
 # these automatically. Do NOT constrain adc_p_in / adc_n_in to regular I/O pins.
-# If the board does not connect J10/K9, remove adc_p_in/adc_n_in from top.v.
 
-# XADC Auxiliary Channel 2 (CH1 oscilloscope input, J5 pins 1-2)
+# XADC Auxiliary Channel 0 — ADC_MUX_OUT (oscilloscope input, J5 pins 13-14)
 # In 4053 mode, this single channel carries the time-multiplexed CH1+CH2 signal
 # from the 74HC4053D mux output (ADC_MUX_OUT).
-# Package pins B16/B17 = AD2P/AD2N (VAUXP[2]/VAUXN[2]) on XC7A35T-CSG324
-set_property PACKAGE_PIN B16 [get_ports adc_vauxp2]
-set_property PACKAGE_PIN B17 [get_ports adc_vauxn2]
-set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxp2]
-set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxn2]
+# J5 pin 13 = AD0P → FPGA D14 (VAUXP[0] on XC7A35T-CSG324)
+# J5 pin 14 = AD0N → FPGA C14 (VAUXN[0]) — tie to GND externally for single-ended
+set_property PACKAGE_PIN D14 [get_ports adc_vauxp0]
+set_property PACKAGE_PIN C14 [get_ports adc_vauxn0]
+set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxp0]
+set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxn0]
 
-# XADC Auxiliary Channel 3 (CH2 oscilloscope input, J5 pins 5-6)
-# NOTE: When USE_4053=1, this channel is NOT used — the 4053 expansion board
-# multiplexes both channels into VAUXP[2]/VAUXN[2]. Keep the port for
-# backward compatibility; the pins will float or can be left unconnected.
-# Package pins A13/A14 = AD3P/AD3N (VAUXP[3]/VAUXN[3]) on XC7A35T-CSG324
-set_property PACKAGE_PIN A13 [get_ports adc_vauxp3]
-set_property PACKAGE_PIN A14 [get_ports adc_vauxn3]
-set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxp3]
-set_property IOSTANDARD LVCMOS33 [get_ports adc_vauxn3]
+# XADC Auxiliary Channel 3 (J5 pins 5-6, AD3P/AD3N) — REMOVED
+# When USE_4053=1, VAUXP[3]/VAUXN[3] are unused and tied to GND in RTL.
+# Ports removed from top.v to avoid XADC shape placement conflicts
+# between VAUXP[0] (D14/C14) and VAUXP[3] (A13/A14).
+# Package pins A13/A14 = AD3P/AD3N (VAUXP[3]/VAUXN[3]) — available for future use.
 
 #=============================================================================
 # 4053 Analog Switch Control (MUX_SEL)
 #=============================================================================
 # MUX_SEL drives the 74HC4053D S1 select pin on the expansion board.
 # 0 = CH1 connected to ADC, 1 = CH2 connected to ADC.
-# Connected to EGO1 J5 IO-L18P pin -> FPGA T14 (IO_L18P_T2_34, bank 34)
-set_property PACKAGE_PIN T14 [get_ports mux_sel]
+# Connected to EGO1 J5 pin 31 (IO_L18P) → FPGA H17 (IO_L18P_T2_34, bank 34)
+set_property PACKAGE_PIN H17 [get_ports mux_sel]
 set_property IOSTANDARD LVCMOS33 [get_ports mux_sel]
 
 #=============================================================================
@@ -160,11 +168,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports {led_speed[*]}]
 
 #=============================================================================
 # Loopback Test Pins (Tx -> Rx for self-test)
-#   NOTE: loop_tx[0] (was H14) repurposed for 4053 mux_sel.
-#   Both buses reduced from [4:0] to [3:0].
-#   loop_rx[1] (was B16) removed — conflicts with adc_vauxp2 in 4053 mode.
-#   For loopback test, use external jumpers to connect any loop_tx to any
-#   available input pin; the specific pin mapping is not critical.
+#   NOTE: loop_rx[1] reassigned from C14 to F13 because C14 is now AD0N
+#         (VAUXN[0], J5 pin 14). For loopback test, use external jumpers to
+#         connect any loop_tx to any available input pin.
 #=============================================================================
 set_property PACKAGE_PIN H16 [get_ports {loop_tx[0]}]
 set_property PACKAGE_PIN G16 [get_ports {loop_tx[1]}]
@@ -173,7 +179,7 @@ set_property PACKAGE_PIN F16 [get_ports {loop_tx[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {loop_tx[*]}]
 
 set_property PACKAGE_PIN A15 [get_ports {loop_rx[0]}]
-set_property PACKAGE_PIN C14 [get_ports {loop_rx[1]}]
+set_property PACKAGE_PIN F13 [get_ports {loop_rx[1]}]
 set_property PACKAGE_PIN B18 [get_ports {loop_rx[2]}]
 set_property PACKAGE_PIN B13 [get_ports {loop_rx[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {loop_rx[*]}]

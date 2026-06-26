@@ -17,8 +17,7 @@ module top
     output wire          dac_ile, dac_cs_n, dac_wr1_n, dac_wr2_n, dac_xfer_n,
     // XADC analog inputs
     input  wire          adc_p_in, adc_n_in,
-    input  wire          adc_vauxp2, adc_vauxn2,
-    input  wire          adc_vauxp3, adc_vauxn3,
+    input  wire          adc_vauxp0, adc_vauxn0, // ADC_MUX_OUT J5 pins 13-14 (VAUXP[0]/N[0])
     // UI
     input  wire [4:0]    btn,
     input  wire [7:0]    sw_in,
@@ -28,7 +27,7 @@ module top
     output wire [3:0]    loop_tx,       // loop_tx[0] repurposed as mux_sel
     input  wire [3:0]    loop_rx,
     // 4053 analog switch control (expansion board)
-    output wire          mux_sel        // 0=CH1, 1=CH2
+    output wire          mux_sel        // 0=CH1, 1=CH2 (toggled each sample)
 );
 
 //=============================================================================
@@ -148,8 +147,11 @@ wire dac_update;
 // DDS Y for sig-gen preview
 assign dds_y = 10'd479 - (({2'b0, dds_wave_out} * 10'd479) >> 8);
 
-// DAC update rate divider (25MHz / 64 ≈ 390kHz)
-reg [5:0]  dac_rate_cnt;
+// DAC update rate divider (25MHz / 24 ≈ 1.04MHz)
+// 24-cycle period = 960ns, WR# pulse = 16 cycles (640ns), gives 320ns idle gap.
+// Increased from 64 (390kHz) to reduce square-wave edge jitter and improve
+// waveform fidelity. DAC0832 settling time ~1µs limits useful update rate.
+reg [4:0]  dac_rate_cnt;
 reg        dac_update_trig;
 
 always @(posedge clk_25m or negedge rst_n) begin
@@ -158,7 +160,7 @@ always @(posedge clk_25m or negedge rst_n) begin
         dac_update_trig <= 0;
     end else begin
         dac_update_trig <= 0;
-        if (dac_rate_cnt == 63) begin
+        if (dac_rate_cnt == 23) begin
             dac_rate_cnt <= 0;
             dac_update_trig <= 1;
         end else begin
@@ -179,15 +181,21 @@ dac0832_ctrl u_dac (
 //=============================================================================
 // XADC Dual-Channel Reader
 //=============================================================================
+// Pre-declare sample rate wires (before xadc_reader instantiation to avoid
+// implicit wire declaration warnings).
+wire [15:0] sample_rate_hz_sys;
+wire        sample_rate_update_sys;
+
 // Map physical ADC inputs to XADC VAUXP/VAUXN buses
 wire [15:0] xadc_vauxp, xadc_vauxn;
 // VAUXP/VAUXN bus mapping to XADC auxiliary channels:
 //   [15:4] = unused
-//   [3]    = adc_vauxp3/vauxn3  (AD3, auxiliary channel 3, DRP addr 0x13)
-//   [2]    = adc_vauxp2/vauxn2  (AD2, auxiliary channel 2, DRP addr 0x12)
-//   [1:0]  = unused
-assign xadc_vauxp = {12'd0, adc_vauxp3, adc_vauxp2, 2'b00};
-assign xadc_vauxn = {12'd0, adc_vauxn3, adc_vauxn2, 2'b00};
+//   [3]    = 0 (VAUXP[3]/VAUXN[3] unused — USE_4053=1, only VAUXP[0] needed)
+//   [2]    = unused
+//   [1]    = unused
+//   [0]    = adc_vauxp0/vauxn0  (AD0, auxiliary channel 0, DRP addr 0x10 — ADC_MUX_OUT)
+assign xadc_vauxp = {12'd0, 1'b0, 3'b0, adc_vauxp0};
+assign xadc_vauxn = {12'd0, 1'b0, 3'b0, adc_vauxn0};
 
 wire [11:0] adc_ch1_raw, adc_ch2_raw;
 wire        adc_ch1_vld, adc_ch2_vld;
@@ -195,7 +203,7 @@ wire        adc_ch1_vld, adc_ch2_vld;
 xadc_reader #(
     .SIM_MODE(0),
     .USE_4053(1),           // 1 = single XADC channel + 4053 mux
-    .SINGLE_CH_ADDR(7'h12), // VAUXP[2]/VAUXN[2] carries the muxed signal
+    .SINGLE_CH_ADDR(7'h10), // VAUXP[0]/VAUXN[0] (AD0, J5 pins 13-14) carries the muxed signal
     .SETTLE_CYCLES(10)      // 100ns settle time at 100MHz (> 74HC4053 t_on=60ns)
 ) u_xadc (
     .clk(sys_clk), .rst_n(rst_n),
@@ -203,41 +211,228 @@ xadc_reader #(
     .vauxp(xadc_vauxp), .vauxn(xadc_vauxn),
     .ch1_data(adc_ch1_raw), .ch1_valid(adc_ch1_vld),
     .ch2_data(adc_ch2_raw), .ch2_valid(adc_ch2_vld),
-    .mux_sel(mux_sel)
+    .mux_sel(mux_sel),
+    .sample_rate_hz(sample_rate_hz_sys),
+    .sample_rate_update(sample_rate_update_sys)
 );
 
-// 12-bit to 8-bit conversion
-wire [7:0] adc_ch1_8b, adc_ch2_8b;
-assign adc_ch1_8b = adc_ch1_raw[11:4];
-assign adc_ch2_8b = adc_ch2_raw[11:4];
+//=============================================================================
+// CDC Bridge: 100MHz (sys_clk) → 25MHz (clk_25m)
+// XADC valid pulses are 1 cycle wide at 100MHz (10ns) — too narrow for
+// 25MHz logic (40ns period). Pulse stretching in the source domain +
+// 2-stage synchronizer in the destination domain ensures safe capture.
+// Sample rate ~403kSPS per ch → one sample every ~62 clk_25m cycles → safe.
+//=============================================================================
+
+// --- 100MHz domain: pulse stretching + data hold ---
+reg [3:0]  ch1_stretch_cnt, ch2_stretch_cnt;
+reg        ch1_valid_sys, ch2_valid_sys;
+reg [11:0] ch1_data_sys, ch2_data_sys;
+
+always @(posedge sys_clk or negedge rst_n) begin
+    if (!rst_n) begin
+        ch1_stretch_cnt <= 0;
+        ch2_stretch_cnt <= 0;
+        ch1_valid_sys   <= 0;
+        ch2_valid_sys   <= 0;
+        ch1_data_sys    <= 12'h800;
+        ch2_data_sys    <= 12'h800;
+    end else begin
+        // CH1: stretch valid pulse to 8 sys_clk cycles (80ns > 40ns clk_25m period)
+        if (adc_ch1_vld) begin
+            ch1_valid_sys   <= 1'b1;
+            ch1_stretch_cnt <= 0;
+            ch1_data_sys    <= adc_ch1_raw;
+        end else if (ch1_valid_sys) begin
+            if (ch1_stretch_cnt == 4'd7) begin
+                ch1_valid_sys   <= 1'b0;
+                ch1_stretch_cnt <= 0;
+            end else begin
+                ch1_stretch_cnt <= ch1_stretch_cnt + 1'b1;
+            end
+        end
+
+        // CH2: same stretching logic
+        if (adc_ch2_vld) begin
+            ch2_valid_sys   <= 1'b1;
+            ch2_stretch_cnt <= 0;
+            ch2_data_sys    <= adc_ch2_raw;
+        end else if (ch2_valid_sys) begin
+            if (ch2_stretch_cnt == 4'd7) begin
+                ch2_valid_sys   <= 1'b0;
+                ch2_stretch_cnt <= 0;
+            end else begin
+                ch2_stretch_cnt <= ch2_stretch_cnt + 1'b1;
+            end
+        end
+    end
+end
+
+// --- 25MHz domain: 2-stage sync + edge detect + data capture ---
+reg        ch1_v_s25_1, ch1_v_s25_2, ch1_v_s25_prev;
+reg [11:0] adc_ch1_synced;
+reg        ch2_v_s25_1, ch2_v_s25_2, ch2_v_s25_prev;
+reg [11:0] adc_ch2_synced;
+
+always @(posedge clk_25m or negedge rst_n) begin
+    if (!rst_n) begin
+        ch1_v_s25_1    <= 0;
+        ch1_v_s25_2    <= 0;
+        ch1_v_s25_prev <= 0;
+        adc_ch1_synced <= 12'h800;
+        ch2_v_s25_1    <= 0;
+        ch2_v_s25_2    <= 0;
+        ch2_v_s25_prev <= 0;
+        adc_ch2_synced <= 12'h800;
+    end else begin
+        // 2-stage synchronizer
+        ch1_v_s25_1 <= ch1_valid_sys;
+        ch1_v_s25_2 <= ch1_v_s25_1;
+        ch1_v_s25_prev <= ch1_v_s25_2;
+
+        ch2_v_s25_1 <= ch2_valid_sys;
+        ch2_v_s25_2 <= ch2_v_s25_1;
+        ch2_v_s25_prev <= ch2_v_s25_2;
+
+        // Rising-edge detect + data capture
+        if (ch1_v_s25_2 && !ch1_v_s25_prev)
+            adc_ch1_synced <= ch1_data_sys;
+        if (ch2_v_s25_2 && !ch2_v_s25_prev)
+            adc_ch2_synced <= ch2_data_sys;
+    end
+end
+
+// Synchronized valid flags and 8-bit data in 25MHz domain
+wire adc_ch1_vld_25m = ch1_v_s25_2 && !ch1_v_s25_prev;
+wire adc_ch2_vld_25m = ch2_v_s25_2 && !ch2_v_s25_prev;
+wire [7:0] adc_ch1_8b = adc_ch1_synced[11:4];
+wire [7:0] adc_ch2_8b = adc_ch2_synced[11:4];
+
+//=============================================================================
+// CDC: Sample rate from 100MHz sys_clk domain to 25MHz clk_25m domain
+// Data updates once per second, stretched update flag ensures safe capture.
+//=============================================================================
+
+// 2-stage synchronizer for update flag (100MHz -> 25MHz)
+reg sample_rate_update_sync1, sample_rate_update_sync2, sample_rate_update_prev;
+// Captured sample rate in 25MHz domain
+reg [15:0] sample_rate_disp;
+
+always @(posedge clk_25m or negedge rst_n) begin
+    if (!rst_n) begin
+        sample_rate_update_sync1 <= 1'b0;
+        sample_rate_update_sync2 <= 1'b0;
+        sample_rate_update_prev  <= 1'b0;
+        sample_rate_disp         <= 16'd0;
+    end else begin
+        // Synchronize update flag
+        sample_rate_update_sync1 <= sample_rate_update_sys;
+        sample_rate_update_sync2 <= sample_rate_update_sync1;
+        sample_rate_update_prev  <= sample_rate_update_sync2;
+        // Capture data on rising edge of synchronized update
+        if (sample_rate_update_sync2 && !sample_rate_update_prev) begin
+            sample_rate_disp <= sample_rate_hz_sys;
+        end
+    end
+end
+
+//=============================================================================
+// Oscilloscope Trigger
+// Rising-edge trigger on CH1: when adc_ch1_8b crosses above
+// scope_trigger_level, the trigger fires and resets the write address
+// to align the trigger event with the screen center.
+//=============================================================================
+reg        trigger_armed;
+reg [7:0]  ch1_prev;
+reg [15:0] trigger_holdoff_cnt;   // hold-off counter (~10ms at 25MHz = 250000)
+wire       trigger_event;
+reg        trigger_fired;
+
+localparam TRIGGER_HOLDOFF = 16'd50000;  // ~2ms hold-off at 25MHz
+
+always @(posedge clk_25m or negedge rst_n) begin
+    if (!rst_n) begin
+        trigger_armed      <= 1'b0;
+        ch1_prev           <= 8'd128;
+        trigger_holdoff_cnt <= 0;
+        trigger_fired      <= 1'b0;
+    end else begin
+        trigger_fired <= 1'b0;
+
+        // Track previous CH1 value for edge detection
+        if (adc_ch1_vld_25m)
+            ch1_prev <= adc_ch1_8b;
+
+        // Hold-off countdown
+        if (trigger_holdoff_cnt > 0)
+            trigger_holdoff_cnt <= trigger_holdoff_cnt - 1'b1;
+
+        // Trigger FSM
+        if (device_mode == 2'b01) begin  // scope mode only
+            if (!trigger_armed) begin
+                // Arm when signal goes below trigger level (wait for rising edge)
+                if (adc_ch1_vld_25m && adc_ch1_8b < scope_trigger_level)
+                    trigger_armed <= 1'b1;
+            end else begin
+                // Fire on rising edge crossing + hold-off expired
+                if (adc_ch1_vld_25m &&
+                    ch1_prev < scope_trigger_level &&
+                    adc_ch1_8b >= scope_trigger_level &&
+                    trigger_holdoff_cnt == 0) begin
+                    trigger_fired      <= 1'b1;
+                    trigger_armed      <= 1'b0;
+                    trigger_holdoff_cnt <= TRIGGER_HOLDOFF;
+                end
+            end
+        end else begin
+            trigger_armed <= 1'b0;
+        end
+    end
+end
+
+assign trigger_event = trigger_fired;
 
 //=============================================================================
 // Waveform Storage (Dual Channel RAM)
 //=============================================================================
-wire [9:0] wr_addr;
-wire [9:0] scroll_shift;
 wire       de;
 wire [9:0] pixel_x, pixel_y;
 
-scroll_addr_gen u_scroll (
-    .clk(clk_25m), .rst_n(rst_n),
-    .pixel_x(pixel_x),
-    .display_addr(wr_addr),
-    .shift(scroll_shift)
-);
+// Trigger resets the write address to align trigger point with screen center
+// (center = 512 pixels into the 1024-sample buffer)
+wire trigger_reset;
+assign trigger_reset = trigger_event && (device_mode == 2'b01);
+
+// Sequential write address: increments on each CH2 valid (CH1+CH2 pair
+// complete in 4053 mux mode). CH1 and CH2 write to the SAME address so
+// they share the same horizontal position on screen.
+reg [9:0] sample_wr_addr;
+
+always @(posedge clk_25m or negedge rst_n) begin
+    if (!rst_n)
+        sample_wr_addr <= 10'd0;
+    else if (trigger_reset)
+        sample_wr_addr <= 10'd512;  // align trigger point to buffer center
+    else if (adc_ch2_vld_25m)
+        sample_wr_addr <= sample_wr_addr + 1'b1;
+end
+
+// Display read address: show the last 640 samples before current write pos.
+// pixel_x=0 → oldest visible sample; pixel_x=639 → newest visible sample.
+// 10-bit unsigned underflow naturally implements modulo-1024 wrap.
+wire [9:0] display_addr = (sample_wr_addr - 10'd640 + pixel_x);
 
 wire [7:0] wave_ch1, wave_ch2;
-wire [9:0] display_addr = wr_addr;
 
 wave_ram_ch1 u_ram_ch1 (
     .clk(clk_25m),
-    .we(adc_ch1_vld), .wr_addr(wr_addr), .din(adc_ch1_8b),
+    .we(adc_ch1_vld_25m), .wr_addr(sample_wr_addr), .din(adc_ch1_8b),
     .rd_addr(display_addr), .dout(wave_ch1)
 );
 
 wave_ram_ch2 u_ram_ch2 (
     .clk(clk_25m),
-    .we(adc_ch2_vld), .wr_addr(wr_addr), .din(adc_ch2_8b),
+    .we(adc_ch2_vld_25m), .wr_addr(sample_wr_addr), .din(adc_ch2_8b),
     .rd_addr(display_addr), .dout(wave_ch2)
 );
 
@@ -251,25 +446,61 @@ vga_ctrl u_vga (
 );
 
 //=============================================================================
-// Waveform Analyzers (Frequency, Vpp, Type)
+// Waveform Analyzers (Frequency, Vpp, Type, RMS, Avg, Max)
+//
+// Calibration based on EGO1_Oscilloscope_Gen extension board:
+//   Signal chain: BNC → 10kΩ + 100kΩ trimmer → MCP6002 (G=1.1×) → 74HC4053 → XADC VAUXP0 (J5 pin 13)
+//   XADC: 12-bit 0-1V, code uses adc[11:4] (8-bit, 0-255)
+//   ADC LSB (8-bit) = 1V/256 = 3.90625mV at XADC input
+//   Front-end gain at max trimmer: 100k/(10k+100k) × 1.1 ≈ 1.0
+//   → BNC mV ≈ ADC_count × 3.906 → CAL_MV_X1024 = round(3.90625×1024) = 4000
+//
+// Frequency calibration (4053 mux mode, ~403kSPS per ch):
+//   GATE_MAX = 10000 samples, sample_rate ≈ 403000 SPS
+//   Gate time = 10000/403000 ≈ 24.8ms
+//   FREQ_CAL_X10 = sample_rate × 10 / GATE_MAX = 403 (for 403kSPS)
+//   → freq_hz = zc_count × 403 / 10
+//   For simulation: sample_rate ≈ 100000 → FREQ_CAL_X10 = 100
 //=============================================================================
+localparam FREQ_CAL_X10_CH = 403;   // frequency cal (×10): 403 for 403kSPS
+localparam CAL_MV_X1024_VAL = 4000; // mV cal (×1024): 4000 → 3.90625 mV/LSB
+
 wire [15:0] freq_ch1, freq_ch2;
 wire [7:0]  vpp_ch1, vpp_ch2;
 wire [1:0]  type_ch1, type_ch2;
 wire        meas_valid_ch1, meas_valid_ch2;
+wire [7:0]  rms_ch1, rms_ch2;
+wire [7:0]  avg_ch1, avg_ch2;
+wire [7:0]  max_ch1, max_ch2;
+wire [15:0] vpp_mv_ch1, vpp_mv_ch2;
+wire [15:0] rms_mv_ch1, rms_mv_ch2;
+wire [15:0] avg_mv_ch1, avg_mv_ch2;
+wire [15:0] max_mv_ch1, max_mv_ch2;
 
-wave_analyzer u_analyzer_ch1 (
+wave_analyzer #(
+    .FREQ_CAL_X10(FREQ_CAL_X10_CH),
+    .CAL_MV_X1024(CAL_MV_X1024_VAL)
+) u_analyzer_ch1 (
     .clk(clk_25m), .rst_n(rst_n),
-    .wave_data(adc_ch1_8b), .wave_valid(adc_ch1_vld),
+    .wave_data(adc_ch1_8b), .wave_valid(adc_ch1_vld_25m),
     .frequency_hz(freq_ch1), .vpp(vpp_ch1),
-    .wave_type_det(type_ch1), .meas_valid(meas_valid_ch1)
+    .wave_type_det(type_ch1), .meas_valid(meas_valid_ch1),
+    .rms(rms_ch1), .avg_val(avg_ch1), .max_val(max_ch1),
+    .vpp_mv(vpp_mv_ch1), .rms_mv(rms_mv_ch1),
+    .avg_mv(avg_mv_ch1), .max_mv(max_mv_ch1)
 );
 
-wave_analyzer u_analyzer_ch2 (
+wave_analyzer #(
+    .FREQ_CAL_X10(FREQ_CAL_X10_CH),
+    .CAL_MV_X1024(CAL_MV_X1024_VAL)
+) u_analyzer_ch2 (
     .clk(clk_25m), .rst_n(rst_n),
-    .wave_data(adc_ch2_8b), .wave_valid(adc_ch2_vld),
+    .wave_data(adc_ch2_8b), .wave_valid(adc_ch2_vld_25m),
     .frequency_hz(freq_ch2), .vpp(vpp_ch2),
-    .wave_type_det(type_ch2), .meas_valid(meas_valid_ch2)
+    .wave_type_det(type_ch2), .meas_valid(meas_valid_ch2),
+    .rms(rms_ch2), .avg_val(avg_ch2), .max_val(max_ch2),
+    .vpp_mv(vpp_mv_ch2), .rms_mv(rms_mv_ch2),
+    .avg_mv(avg_mv_ch2), .max_mv(max_mv_ch2)
 );
 
 //=============================================================================
@@ -286,6 +517,15 @@ waveform_display u_scope_display (
     .freq_ch1(freq_ch1), .vpp_ch1(vpp_ch1), .type_ch1(type_ch1),
     .freq_ch2(freq_ch2), .vpp_ch2(vpp_ch2), .type_ch2(type_ch2),
     .meas_valid(meas_valid_ch1),
+    .rms_ch1(rms_ch1), .avg_ch1(avg_ch1), .max_ch1(max_ch1),
+    .rms_ch2(rms_ch2), .avg_ch2(avg_ch2), .max_ch2(max_ch2),
+    .vpp_mv_ch1(vpp_mv_ch1), .rms_mv_ch1(rms_mv_ch1),
+    .avg_mv_ch1(avg_mv_ch1), .max_mv_ch1(max_mv_ch1),
+    .vpp_mv_ch2(vpp_mv_ch2), .rms_mv_ch2(rms_mv_ch2),
+    .avg_mv_ch2(avg_mv_ch2), .max_mv_ch2(max_mv_ch2),
+    .sample_rate_hz(sample_rate_disp),
+    .trigger_armed(trigger_armed),
+    .trigger_level(scope_trigger_level),
     .vga_r(scope_r), .vga_g(scope_g), .vga_b(scope_b)
 );
 
@@ -296,7 +536,7 @@ lissajous_display u_liss (
     .clk(clk_25m), .rst_n(rst_n), .de(de),
     .pixel_x(pixel_x), .pixel_y(pixel_y),
     .ch1_data(adc_ch1_8b), .ch2_data(adc_ch2_8b),
-    .ch1_valid(adc_ch1_vld), .ch2_valid(adc_ch2_vld),
+    .ch1_valid(adc_ch1_vld_25m), .ch2_valid(adc_ch2_vld_25m),
     .vga_r(liss_r), .vga_g(liss_g), .vga_b(liss_b)
 );
 
@@ -307,7 +547,7 @@ kaleidoscope u_kalei (
     .clk(clk_25m), .rst_n(rst_n), .de(de),
     .pixel_x(pixel_x), .pixel_y(pixel_y),
     .ch1_data(adc_ch1_8b), .ch2_data(adc_ch2_8b),
-    .ch1_valid(adc_ch1_vld), .ch2_valid(adc_ch2_vld),
+    .ch1_valid(adc_ch1_vld_25m), .ch2_valid(adc_ch2_vld_25m),
     .vga_r(kalei_r), .vga_g(kalei_g), .vga_b(kalei_b)
 );
 
@@ -366,6 +606,7 @@ assign led_speed[1] = (device_mode == 2'b01);   // Scope
 assign led_speed[2] = (device_mode == 2'b10 || device_mode == 2'b11);  // XY modes
 
 // Loopback: echo rx to tx for self-test
-assign loop_tx = loop_rx;
+// loop_tx[0] carries mux_sel for 74HC4053 analog switch control
+assign loop_tx = {loop_rx[3:1], mux_sel};
 
 endmodule
